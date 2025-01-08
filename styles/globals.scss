@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "components/layout/sidebar";
+@import "global-style";
+@import "global-dark-style";
+@import "global-rtl-style";
+@import "pages/login";
+
+@layer utilities {
+    .remain-height {
+        min-height: calc(100vh - 4rem);
+    }
+}
+
+@layer base {
+    .test {
+        @apply block border-b-2 px-3 py-2 text-base font-medium dark:rounded-md;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply rounded-lg text-base font-medium  py-2 px-4 disabled:cursor-not-allowed disabled:opacity-50;
+    }
+    .btn--primary {
+        @apply bg-primary text-white hover:bg-hoverPrimary disabled:hover:bg-hoverPrimary;
+    }
+    .btn--secondary {
+        @apply border border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900  text-primary dark:text-white;
+    }
+}

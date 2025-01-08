@@ -1,0 +1,20 @@
+{
+    "sign_in": "Sign in",
+    "loading": "Loading",
+    "name": "Name",
+    "role": "Role",
+    "phone": "Phone",
+    "created_at": "Created At",
+    "updated_at": "Updated At",
+    "actions": "Actions",
+    "users": "Users",
+    "add": "Add",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "profile": "Profile",
+    "sign_out": "Sign Out",
+    "password": "Password",
+    "edit": "Edit"
+}

@@ -1,0 +1,33 @@
+$bgLoginImage: url("/images/bg-login.jpg");
+$gradientColor: rgba(21, 170, 190, 0.4);
+
+// Mixin for small screen media queries
+@mixin smallScreenMedia($color) {
+    @media only screen and (max-width: 768px) {
+        background-image: linear-gradient(
+                to right,
+                rgba($color, 0.9),
+                rgba($color, 0.9)
+            ),
+            $bgLoginImage;
+    }
+}
+
+// Main login styles
+.login {
+    background-image: linear-gradient(
+            to right,
+            $gradientColor 0%,
+            $gradientColor 100%,
+            transparent 10%
+        ),
+        $bgLoginImage;
+
+    // Include the small screen styles
+    @include smallScreenMedia($gradientColor);
+
+    // Additional styles for better responsiveness
+    background-size: cover; // Ensure the background image covers the element
+    background-position: center; // Center the background image
+    height: 100vh; // Full viewport height for better visual impact
+}

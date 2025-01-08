@@ -1,0 +1,21 @@
+html[lang="ar"] {
+    font-family: "Cairo", Cambria, Cochin, Georgia, Times, "Times New Roman",
+        serif;
+
+    body {
+        .date_picker_icon::after {
+            right: auto;
+            left: 2%;
+        }
+
+        .sidebar {
+            .tab_link:hover .sub-menu-icon {
+                transform: translateX(-15px);
+                -webkit-transform: translateX(-15px);
+                -moz-transform: translateX(-15px);
+                -ms-transform: translateX(-15px);
+                -o-transform: translateX(-15px);
+            }
+        }
+    }
+}

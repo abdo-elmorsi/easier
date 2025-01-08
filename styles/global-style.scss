@@ -1,0 +1,88 @@
+html {
+    font-family: "Inter", sans-serif, Cambria, Cochin, Georgia, Times,
+        "Times New Roman", serif;
+    scroll-behavior: smooth; /* Enables smooth scrolling for the whole app */
+
+    /* For WebKit browsers (Chrome, Safari, Edge) */
+    ::-webkit-scrollbar {
+        width: 5px; /* Width of the scrollbar */
+        height: 5px; /* Height of the horizontal scrollbar */
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #e2e8f0;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #718096;
+        border-radius: 10px;
+        border: 2px solid #e2e8f0;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #4a5568;
+    }
+    body {
+        .print-view {
+            display: none;
+        }
+
+        /* date picker */
+        .react-date-picker__wrapper {
+            width: 100%;
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
+            padding-left: 0.7rem;
+            padding-right: 0.7rem;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+        }
+
+        .react-date-picker__calendar {
+            z-index: 150 !important;
+            inset: auto !important;
+        }
+
+        // for text in table
+        .hmdZnu,//products
+        .krVTia div:first-child,//products
+        
+        .hgByPU div:first-child,//development
+        .brFloq {
+            //development
+            white-space: pre-wrap !important;
+        }
+
+        .rdt_TableHeadRow {
+            background-color: #f3f4f6 !important;
+            box-shadow: 0px -1px 0px 0px #edf2f7 inset;
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .react-date-picker__calendar {
+        width: 290px;
+    }
+}

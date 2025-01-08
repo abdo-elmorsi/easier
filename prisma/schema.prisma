@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_name  String   @unique
+  password   String
+  role       String   @default("user")
+  img        String?
+  phone      String?
+  created_at DateTime @default(now()) @db.Date
+  updated_at DateTime @updatedAt @db.Date
+
+  // Relations
+  towers Tower[] // A user can manage multiple towers
+}
+
+model Tower {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  address       String
+  num_of_floors Int
+  created_at    DateTime @default(now()) @db.Date
+  updated_at    DateTime @updatedAt @db.Date
+
+  // Relations
+  user_id String @db.ObjectId
+  user    User   @relation(fields: [user_id], references: [id])
+  flats   Flat[] // A tower can have multiple flats
+}
+
+model Flat {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  number     String   @unique
+  floor      Int
+  password   String // Authentication field
+  created_at DateTime @default(now()) @db.Date
+  updated_at DateTime @updatedAt @db.Date
+
+  // Relations
+  tower_id String @db.ObjectId
+  tower    Tower  @relation(fields: [tower_id], references: [id])
+}

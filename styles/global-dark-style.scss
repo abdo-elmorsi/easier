@@ -1,0 +1,54 @@
+// Define color variables
+$dark-bg-color: #1f2937;
+$hover-color: #336a86;
+$disabled-color: #757575;
+$text-light-color: #fff;
+
+html.dark {
+    // General background colors for various components
+    .rdt_TableRow,
+  .rdt_TableHeadRow,
+  .rdt_Pagination,
+  .hhVXlv, // no data
+  .hPBDAo, // no data
+  .iPHJDD, // loading
+  .kHgwFT {
+        // loading
+        background-color: $dark-bg-color !important;
+    }
+
+    // Date Picker Styles
+    .react-date-picker__clear-button,
+    .react-date-picker__calendar-button {
+        svg {
+            stroke: $text-light-color; // Change SVG icon color
+        }
+    }
+
+    // Calendar Component Styling
+    .react-calendar {
+        background-color: $dark-bg-color;
+
+        // Calendar tiles hover state
+        .react-calendar__tile:hover {
+            color: $hover-color;
+        }
+
+        // Disabled tile styling
+        .react-calendar__tile:disabled {
+            background-color: $disabled-color;
+            color: $text-light-color;
+        }
+
+        // Highlight today's date
+        .react-calendar__tile--now {
+            background-color: $hover-color;
+        }
+
+        // Disabled navigation buttons
+        .react-calendar__navigation button:disabled {
+            background-color: $disabled-color;
+            color: $text-light-color;
+        }
+    }
+}
