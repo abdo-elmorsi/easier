@@ -30,9 +30,9 @@ class MyDocument extends Document {
           />
 
           {/* Primary Meta Tags */}
-          <meta name="application-name" content="Army | Store Market" />
-          <meta name="description" content="Best Army Store Market App in the world" />
-          <meta name="keywords" content="army, store, military, market, best army store, supplies" />
+          <meta name="application-name" content="Easier 2" />
+          <meta name="description" content="Make yor life easier" />
+          <meta name="keywords" content="easier" />
           <meta name="author" content="Abdo Elmorsi" />
           <meta name="format-detection" content="telephone=no" />
           <meta charSet="UTF-8" />
@@ -40,7 +40,7 @@ class MyDocument extends Document {
           {/* PWA and Apple Touch Meta */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <meta name="apple-mobile-web-app-title" content="Army | Store Market" />
+          <meta name="apple-mobile-web-app-title" content="Easier 2" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="msapplication-TileColor" content="#336a86" />
           <meta name="msapplication-tap-highlight" content="no" />
@@ -63,27 +63,21 @@ class MyDocument extends Document {
 
           {/* Social Media Meta Tags */}
           <meta name="twitter:card" content="summary" />
-          <meta name="twitter:url" content="https://army-web-store-market.vercel.app" />
-          <meta name="twitter:title" content="Army | Store Market" />
-          <meta name="twitter:description" content="Best Army Store Market App in the world" />
+          <meta name="twitter:url" content="https://easier-2.vercel.app" />
+          <meta name="twitter:title" content="Easier 2" />
+          <meta name="twitter:description" content="Make yor life easier" />
           <meta name="twitter:image" content="/icon-192x192.png" />
           <meta name="twitter:creator" content="@Abdo_Elmorsi" />
 
           <meta property="og:type" content="website" />
-          <meta property="og:title" content="Army | Store Market" />
-          <meta property="og:description" content="Best Army Store Market App in the world" />
-          <meta property="og:site_name" content="Army | Store Market" />
-          <meta property="og:url" content="https://army-web-store-market.vercel.app" />
-          <meta property="og:image" content="https://army-web-store-market.vercel.app/apple-touch-icon.png" />
+          <meta property="og:title" content="Easier 2" />
+          <meta property="og:description" content="Make yor life easier" />
+          <meta property="og:site_name" content="Easier 2" />
+          <meta property="og:url" content="https://easier-2.vercel.app" />
+          <meta property="og:image" content="https://easier-2.vercel.app/apple-touch-icon.png" />
 
           {/* Language Support */}
           <meta httpEquiv="content-language" content="ar, en" />
-
-          {/* Arabic Version (Primary) */}
-          <meta name="application-name" content="سوق المخازن العسكرية" />
-          <meta name="description" content="أفضل تطبيق سوق المخازن العسكرية في العالم" />
-          <meta property="og:title" content="سوق المخازن العسكرية" />
-          <meta property="og:description" content="أفضل تطبيق سوق المخازن العسكرية في العالم" />
         </Head>
 
         <body>

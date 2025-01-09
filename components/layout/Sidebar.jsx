@@ -32,7 +32,7 @@ const Sidebar = React.memo(() => {
   // const market = getRole(session, "market")
   const router = useRouter();
   const [activeAdminSubMenu, setActiveAdminSubMenu] = useState(null);
-  const [fixedSideBar, setFixedSideBar] = useSavedState(true, "store-market-fixed-side-barr-cache")
+  const [fixedSideBar, setFixedSideBar] = useSavedState(true, "easier-2-fixed-side-barr-cache")
 
 
   const Links = useMemo(() => [
