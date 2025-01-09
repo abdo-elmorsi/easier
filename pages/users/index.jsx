@@ -16,6 +16,7 @@ import { useApi, useApiMutation } from "hooks/useApi";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import moment from 'moment-timezone';
+import { imageUrl } from "utils/utils";
 
 const Index = () => {
     const router = useRouter();
@@ -27,8 +28,11 @@ const Index = () => {
     const printViewRef = useRef(null);
 
 
+    const { queryString } = useQueryString();
+
+
     // Fetch data using the API
-    const { data: tableData, isLoading, mutate } = useApi(`/users`);
+    const { data: tableData, isLoading, mutate } = useApi(`/users?${queryString}`);
 
 
     // ================== Delete Logic ==================
@@ -69,7 +73,7 @@ const Index = () => {
                         width={40}
                         height={40}
                         className="rounded"
-                        src={row?.img}
+                        src={imageUrl(row.img)}
                         alt={row.user_name}
                     /> : null
                 ),
@@ -79,7 +83,8 @@ const Index = () => {
             {
                 name: t("name_key"),
                 selector: (row) => row?.user_name,
-                sortable: true
+                sortable: true,
+                width: "200px"
             },
             // {
             //     name: t("role_key"),
@@ -90,21 +95,22 @@ const Index = () => {
             {
                 name: t("phone_key"),
                 selector: (row) => row?.phone,
-                sortable: true
+                sortable: true,
+                width: "180px"
             },
             {
                 name: t("created_at_key"),
                 selector: (row) => row?.createdAt,
                 cell: (row) => moment(row?.createdAt).format(date_format),
                 sortable: true,
-                width: "130px"
+                width: "200px"
             },
             {
                 name: t("updated_at_key"),
                 selector: (row) => row?.updatedAt,
                 cell: (row) => moment(row?.updatedAt).format(date_format),
                 sortable: true,
-                width: "130px"
+                width: "200px"
             },
             {
                 name: t("actions_key"),

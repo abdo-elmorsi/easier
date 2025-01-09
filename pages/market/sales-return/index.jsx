@@ -83,14 +83,14 @@ const Index = () => {
                 selector: (row) => row?.createdAt,
                 cell: (row) => moment(row?.createdAt).format(date_format),
                 sortable: true,
-                width: "130px"
+                width: "200px"
             },
             {
                 name: t("updated_at_key"),
                 selector: (row) => row?.updatedAt,
                 cell: (row) => moment(row?.updatedAt).format(date_format),
                 sortable: true,
-                width: "130px"
+                width: "200px"
             },
             {
                 name: t("description_key"), // Translate key for description

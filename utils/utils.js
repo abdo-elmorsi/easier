@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import bcrypt from "bcryptjs";
 
 
 export function formatComma(value, minimumFractionDigits = 2) {
@@ -56,6 +57,12 @@ export function convertImageToBase64(file) {
 export const isValidString = (value) => typeof value === 'string' && value.trim() !== '';
 
 
+export const validateAndHashPassword = async (password) => {
+    if (!isValidString(password)) return null;
+    return await bcrypt.hash(password, 10); // Hash the password
+};
+
+
 export function groupBy(arr = [], groupByProperty, sumByProperty) {
     let helper = {};
     let result = arr.reduce(function (r, o) {
@@ -72,4 +79,9 @@ export function groupBy(arr = [], groupByProperty, sumByProperty) {
     }, []);
 
     return result;
+}
+
+
+export const imageUrl = (public_id) => {
+    return `https://res.cloudinary.com/dwzymxb27/image/upload/${public_id}.jpg`
 }

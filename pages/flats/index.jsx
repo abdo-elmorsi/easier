@@ -1,21 +1,21 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getSession } from "next-auth/react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
-import moment from 'moment-timezone';
 
 // Custom imports
 import { Layout, LayoutWithSidebar } from "components/layout";
-import { Header, ServerTable, PrintView } from "components/global";
-import { Actions, Button, MinimizedBox } from "components/UI";
-import { Filter } from "components/pages/transactions";
+import { DeleteModal, Header, Table, PrintView } from "components/global";
+import { Actions, Button, MinimizedBox, Modal } from "components/UI";
 import { exportExcel } from "utils";
 import { useHandleMessage, useQueryString } from "hooks";
-import { useApi } from "hooks/useApi";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { formatComma } from "utils/utils";
+import { useApi, useApiMutation } from "hooks/useApi";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import moment from 'moment-timezone';
+import { payPercentageOptions } from "assets";
+import { Filter } from "components/pages/flats";
 
 const Index = () => {
     const router = useRouter();
@@ -27,63 +27,63 @@ const Index = () => {
     const printViewRef = useRef(null);
 
 
-    // ================== Query String ==================
-    const page = Number(router.query.page) || 1; // Default to page 1
-    const limit = Number(router.query.limit) || 10; // Default limit
-    const startDate = router.query.startDate || moment().subtract(0, 'days').format("YYYY-MM-DD"); // Default start date
 
-    const { queryString, updateQuery } = useQueryString({
-        page,
-        limit,
-        startDate,
-        type: "marketOut"
+    const { queryString } = useQueryString({});
+    // Fetch data using the API
+    const { data: tableData, isLoading, mutate } = useApi(`/flats?${queryString}`);
+
+    // ================== Delete Logic ==================
+
+    const [showDeleteModal, setShowDeleteModal] = useState({
+        loading: false,
+        isOpen: false,
+        id: null
     });
+    const { executeMutation } = useApiMutation(`/flats`);
 
-
-    // ================== Handlers for Pagination ==================
-    const handlePageChange = (newPage) => {
-        updateQuery("page", newPage);
+    const closeDeleteModal = () => {
+        setShowDeleteModal({});
     };
 
-    const handlePerRowsChange = (rowsPerPage) => {
-        updateQuery({ page: 1, limit: rowsPerPage });
+    const handleDelete = async () => {
+        setShowDeleteModal((prev) => ({ ...prev, loading: true }));
+        try {
+            await executeMutation("DELETE", { id: showDeleteModal.id });
+            mutate();
+            closeDeleteModal();
+        } catch (error) {
+            handleMessage(error);
+        } finally {
+            setShowDeleteModal((prev) => ({ ...prev, loading: false }));
+        }
     };
-
-    // ================== Fetch Data ==================
-    const { data = {}, isLoading } = useApi(`/transactions?${queryString}`);
-    const { transactions: tableData = [], totalTransactions } = data;
-
-
-    // useEffect(() => {
-    //     const time = setTimeout(() => {
-    //         router.push(`/market/sales/add-update`)
-    //     }, 500);
-    //     return () => clearTimeout(time);
-    // }, [])
 
     // ================== Table Columns ==================
     const columns = useMemo(
         () => [
             {
-                name: t("product_name_key"), // Translate key for product name
-                selector: (row) => row?.product?.name, // Access product name
-                sortable: true
+                name: t("tower_key"),
+                selector: (row) => row?.tower?.name,
+                sortable: true,
+                width: "150px"
             },
             {
-                name: t("quantity_key"), // Translate key for quantity
-                selector: (row) => row?.quantity, // Access quantity
-                cell: (row) => formatComma(row?.quantity), // Access quantity
-                sortable: true
+                name: t("number_key"),
+                selector: (row) => row?.number,
+                sortable: true,
+                width: "150px"
             },
             {
-                name: t("created_by_key"),
-                selector: (row) => row?.createdBy?.user_name,
-                sortable: true
+                name: t("floor_key"),
+                selector: (row) => row?.floor,
+                sortable: true,
+                width: "150px"
             },
             {
-                name: t("updated_by_key"),
-                selector: (row) => row?.lastUpdatedBy?.user_name,
-                sortable: true
+                name: t("pay_percentage_key"),
+                selector: (row) => payPercentageOptions.find(item => item.value == row?.pay_percentage)?.label,
+                sortable: true,
+                width: "180px"
             },
             {
                 name: t("created_at_key"),
@@ -100,31 +100,26 @@ const Index = () => {
                 width: "200px"
             },
             {
-                name: t("description_key"), // Translate key for description
-                selector: (row) => row?.description, // Access description
-                sortable: true
-            },
-            {
-                name: t("actions_key"), // Translate key for actions
+                name: t("actions_key"),
                 selector: (row) => row?.id,
                 noExport: true,
                 noPrint: true,
                 cell: (row) => (
                     <div className="flex gap-2">
                         <Button
-                            onClick={() => router.push(`/market/sales/add-update?id=${row?.id}`)}
+                            onClick={() => router.push(`/flats/add-update?id=${row?.id}`)}
                             className="px-3 py-2 cursor-pointer btn--primary"
                         >
                             <PencilSquareIcon width={22} />
                         </Button>
-                        {/* <Button
+                        <Button
                             onClick={() =>
                                 setShowDeleteModal({ isOpen: true, id: row?.id })
                             }
                             className="px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600"
                         >
                             <TrashIcon width={22} />
-                        </Button> */}
+                        </Button>
                     </div>
                 ),
                 sortable: false
@@ -133,11 +128,10 @@ const Index = () => {
         [date_format, router, t]
     );
 
-
     // ================== Export Functions ==================
     const handleExportExcel = async () => {
         setExportingExcel(true);
-        await exportExcel(tableData, columns, t("sales_key"), handleMessage);
+        await exportExcel(tableData, columns, t("flats_key"), handleMessage);
         setTimeout(() => {
             setExportingExcel(false);
         }, 1000);
@@ -153,26 +147,23 @@ const Index = () => {
         <>
             <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
                 <Header
-                    title={t("sales_key")}
-                    path="/market/sales"
+                    title={t("flats_key")}
+                    path="/flats"
                     classes="bg-gray-100 dark:bg-gray-700 border-none"
                 />
-                <MinimizedBox>
+                <MinimizedBox minimized={false}>
                     <Filter />
                 </MinimizedBox>
-                <ServerTable
+                <Table
                     columns={columns}
                     data={tableData || []}
-                    handlePageChange={handlePageChange}
-                    handlePerRowsChange={handlePerRowsChange}
-                    progressPending={isLoading}
-                    paginationTotalRows={totalTransactions}
-                    paginationPerPage={limit} // Use limit from router query
-                    paginationDefaultPage={page} // Use page from router query
+                    loading={isLoading}
+                    searchAble={false}
                     actions={
                         <Actions
+                            disableSearch={false}
                             addMsg={t("add_key")}
-                            onClickAdd={() => router.push("/market/sales/add-update")}
+                            onClickAdd={() => router.push("/flats/add-update")}
                             onClickPrint={exportPDF}
                             isDisabledPrint={!tableData?.length}
                             onClickExport={handleExportExcel}
@@ -182,11 +173,25 @@ const Index = () => {
                 />
             </div>
             {tableData?.length && <PrintView
-                title={t("sales_key")}
+                title={t("flats_key")}
                 ref={printViewRef}
                 data={tableData}
                 columns={columns}
             />}
+            {showDeleteModal?.isOpen && (
+                <Modal
+                    title={t("delete_key")}
+                    show={showDeleteModal?.isOpen}
+                    footer={false}
+                    onClose={closeDeleteModal}
+                >
+                    <DeleteModal
+                        showDeleteModal={showDeleteModal}
+                        handleClose={closeDeleteModal}
+                        handleDelete={handleDelete}
+                    />
+                </Modal>
+            )}
         </>
     );
 };

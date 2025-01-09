@@ -1,3 +1,4 @@
+// npx prisma generate to update the modals
 generator client {
   provider = "prisma-client-js"
 }
@@ -23,7 +24,7 @@ model User {
 
 model Tower {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
+  name          String   @unique
   address       String
   num_of_floors Int
   created_at    DateTime @default(now()) @db.Date
@@ -36,14 +37,22 @@ model Tower {
 }
 
 model Flat {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  number     String   @unique
-  floor      Int
-  password   String // Authentication field
-  created_at DateTime @default(now()) @db.Date
-  updated_at DateTime @updatedAt @db.Date
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  number         String
+  floor          Int
+  password       String // Authentication field
+  electricity    Boolean  @default(false) // Electricity availability
+  water          Boolean  @default(false) // Water availability
+  waste          Boolean  @default(false) // Waste availability
+  guard          Boolean  @default(false) // Guard availability
+  elevator       Boolean  @default(false) // Elevator availability
+  pay_percentage Int      @default(100) // Pay percentage, can be 0, 50, or 100
+  created_at     DateTime @default(now()) @db.Date
+  updated_at     DateTime @updatedAt @db.Date
 
   // Relations
   tower_id String @db.ObjectId
   tower    Tower  @relation(fields: [tower_id], references: [id])
+
+  @@unique([number, floor, tower_id])
 }

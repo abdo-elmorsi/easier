@@ -17,16 +17,28 @@ const mutationHandler = async (url, { arg }) => {
   const { method, data } = arg;
 
   try {
+    const config = {};
+
+    if (data instanceof FormData) {
+      config.headers = {
+        'Content-Type': "multipart/form-data",
+      };
+    } else {
+      config.headers = {
+        'Content-Type': 'application/json',
+      };
+    }
+
     let response;
     switch (method) {
       case 'POST':
-        response = await axiosInstance.post(url, data);
+        response = await axiosInstance.post(url, data, config);
         break;
       case 'PUT':
-        response = await axiosInstance.put(url, data);
+        response = await axiosInstance.put(url, data, config);
         break;
       case 'DELETE':
-        response = await axiosInstance.delete(url, { data });
+        response = await axiosInstance.delete(url, { data }, config);
         break;
       default:
         throw new Error("Unsupported request method");

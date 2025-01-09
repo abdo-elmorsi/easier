@@ -13,7 +13,13 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   i18n: il8nextConfig.i18n,
+  images: {
+    domains: [
+      "res.cloudinary.com"
+    ],
+  },
   productionBrowserSourceMaps: process.env.NODE_ENV != "development", // Enable source maps in production
+
 
 }
 module.exports = withPWA(nextConfig)

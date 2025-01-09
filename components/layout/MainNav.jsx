@@ -19,6 +19,7 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import { useOnlineStatus, useSavedState } from "hooks";
 import { useTheme } from "context/ThemeContext";
+import { imageUrl } from "utils/utils";
 
 
 
@@ -117,7 +118,7 @@ export default function MainNav() {
                 <div className="relative">
                   <span className={`w-2 h-2 rounded-full absolute -top-1 -left-1 ${isOnline ? "bg-green-500" : "bg-red-500"}`}></span>
                   {user_image ? <Image
-                    src={user_image}
+                    src={imageUrl(user_image)}
                     width={40}
                     height={40}
                     className=" rounded-full"

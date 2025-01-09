@@ -11,11 +11,12 @@ const MinimizedBox = ({
   className = "",
   title = "filters_key",
   actionText,
-  bordered = false
+  bordered = false,
+  minimized = false,
 }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
-  const [isMinimized, setIsMinimized] = useSavedState(false, `store-market-box-${router.pathname}-cache`); // Default to false for better UX
+  const [isMinimized, setIsMinimized] = useSavedState(minimized, `easier-box-${router.pathname}-cache`); // Default to false for better UX
   const [prevHeight, setPrevHeight] = useState("");
   const comRef = useRef(null);
   const [loading, setLoading] = useState(false);
