@@ -41,11 +41,13 @@ model Flat {
   number         String
   floor          Int
   password       String // Authentication field
+  phone          String?
   electricity    Boolean  @default(false) // Electricity availability
   water          Boolean  @default(false) // Water availability
   waste          Boolean  @default(false) // Waste availability
   guard          Boolean  @default(false) // Guard availability
   elevator       Boolean  @default(false) // Elevator availability
+  others         Boolean  @default(false) // Others availability
   pay_percentage Int      @default(100) // Pay percentage, can be 0, 50, or 100
   created_at     DateTime @default(now()) @db.Date
   updated_at     DateTime @updatedAt @db.Date
@@ -53,6 +55,4 @@ model Flat {
   // Relations
   tower_id String @db.ObjectId
   tower    Tower  @relation(fields: [tower_id], references: [id])
-
-  @@unique([number, floor, tower_id])
 }

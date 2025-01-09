@@ -5,8 +5,8 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 // Custom
-import { useHandleMessage, useInput, useSavedState } from "hooks";
-import { Spinner, Button, Input } from "components/UI";
+import { useCheckbox, useHandleMessage, useInput, useSavedState } from "hooks";
+import { Spinner, Button, Input, Checkbox } from "components/UI";
 import { MainLogo } from "components/icons";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Cookies from "js-cookie";
@@ -27,14 +27,26 @@ const Login = () => {
   const handleShowPass = () => setShowPass(!showPass);
 
 
+  const asFlat = useCheckbox(false, false);
+
+  const number = useInput("", null);
+  const floor = useInput("", 'number', true);
+
+
   const { executeMutation, isMutating } = useApiMutation("/authentication/login");
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const submitData = {
-      user_name: user_name.value,
       password: password.value,
+      asFlat: asFlat.checked,
+      ...(asFlat.checked ? {
+        number: number.value,
+        floor: +floor.value,
+      } : {
+        user_name: user_name.value,
+      })
     };
     try {
       const user = await executeMutation("POST", submitData);
@@ -69,11 +81,22 @@ const Login = () => {
 
         <form onSubmit={onSubmit} className="flex flex-col">
           <div className="mb-4">
-            <Input
+            {!asFlat.checked ? <Input
               label={t("name_key")}
               {...user_name.bind}
               name="name"
-            />
+            /> : <>
+              <Input
+                label={t("number_key")}
+                {...number.bind}
+                name="number"
+              />
+              <Input
+                label={t("floor_key")}
+                {...floor.bind}
+                name="floor"
+              />
+            </>}
           </div>
           <div className="mb-2">
             <Input
@@ -87,9 +110,9 @@ const Login = () => {
 
 
 
-
+          <Checkbox label={t("login_as_flat_owner_key")} {...asFlat.bind} />
           <Button
-            disabled={isMutating || !user_name.value || !password.value}
+            disabled={isMutating || (!user_name.value && (!number.value && !floor.value)) || !password.value}
             className="w-full mt-6 btn--primary"
             type="submit"
           >

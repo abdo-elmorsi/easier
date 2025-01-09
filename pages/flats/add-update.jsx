@@ -35,12 +35,14 @@ const Index = () => {
 	const number = useInput("", null);
 	const floor = useInput("", null);
 	const pay_percentage = useSelect(payPercentageOptions[0], "select", null);
+	const phone = useInput("", null);
 
 	const electricity = useCheckbox(true, false);
 	const water = useCheckbox(true, false);
 	const waste = useCheckbox(true, false);
 	const guard = useCheckbox(true, false);
 	const elevator = useCheckbox(true, false);
+	const others = useCheckbox(false, false);
 
 	const password = useInput("", "password_optional", true);
 
@@ -55,6 +57,7 @@ const Index = () => {
 			}),
 			number: number.value || null,
 			floor: +floor.value || null,
+			phone: phone.value || null,
 			password: password.value || null,
 			pay_percentage: pay_percentage.value?.value || 0,
 			electricity: electricity?.checked || false,
@@ -62,6 +65,7 @@ const Index = () => {
 			waste: waste?.checked || false,
 			guard: guard?.checked || false,
 			elevator: elevator?.checked || false,
+			others: others?.checked || false,
 		}
 
 		try {
@@ -79,6 +83,7 @@ const Index = () => {
 		if (!isValidating && !!flat) {
 			number.changeValue(flat.number || "");
 			floor.changeValue(flat.floor || "");
+			phone.changeValue(flat.phone || "");
 			towerId.changeValue({ id: flat.tower?.id, name: flat.tower?.name });
 			floor.changeValue(flat.floor || "");
 			pay_percentage.changeValue(payPercentageOptions.find(item => item.value == flat.pay_percentage));
@@ -87,6 +92,7 @@ const Index = () => {
 			waste.changeValue(flat?.waste || false);
 			guard.changeValue(flat?.guard || false);
 			elevator.changeValue(flat?.elevator || false);
+			others.changeValue(flat?.others || false);
 		}
 	}, [isValidating])
 
@@ -129,6 +135,10 @@ const Index = () => {
 									{...floor.bind}
 								/>
 								<Input
+									label={t("phone_key")}
+									{...phone.bind}
+								/>
+								<Input
 									mandatory={!flatId}
 									label={t("password_key")}
 									type={showPass ? "text" : "password"}
@@ -163,6 +173,10 @@ const Index = () => {
 									<Checkbox
 										label={t("elevator_key")}
 										{...elevator.bind}
+									/>
+									<Checkbox
+										label={t("others_key")}
+										{...others.bind}
 									/>
 								</div>
 							</div>
