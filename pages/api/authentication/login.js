@@ -5,7 +5,7 @@ const handler = async (req, res) => {
 	const { method, body } = req;
 	try {
 		if (method === "POST") {
-			await handleLogin(body, res);
+			await handleLogin(req, res);
 		} else {
 			res.status(405).json({ message: "Method Not Allowed" });
 		}
