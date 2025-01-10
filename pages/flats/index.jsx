@@ -87,17 +87,17 @@ const Index = () => {
             },
             {
                 name: t("created_at_key"),
-                selector: (row) => row?.createdAt,
-                cell: (row) => moment(row?.createdAt).format(date_format),
+                selector: (row) => row?.created_at,
+                cell: (row) => moment(row?.created_at).format(date_format),
                 sortable: true,
-                width: "200px"
+                width: "130px"
             },
             {
                 name: t("updated_at_key"),
-                selector: (row) => row?.updatedAt,
-                cell: (row) => moment(row?.updatedAt).format(date_format),
+                selector: (row) => row?.updated_at,
+                cell: (row) => moment(row?.updated_at).format(date_format),
                 sortable: true,
-                width: "200px"
+                width: "130px"
             },
             {
                 name: t("actions_key"),

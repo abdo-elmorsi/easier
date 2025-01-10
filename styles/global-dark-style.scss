@@ -18,8 +18,8 @@ html.dark {
     }
 
     // Date Picker Styles
-    .react-date-picker__clear-button,
-    .react-date-picker__calendar-button {
+    .react-datepicker__clear-button,
+    .react-datepicker__calendar-button {
         svg {
             stroke: $text-light-color; // Change SVG icon color
         }

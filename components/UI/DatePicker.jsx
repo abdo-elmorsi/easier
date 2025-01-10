@@ -1,7 +1,6 @@
 import React from 'react';
-import DatePicker from 'react-date-picker';
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 const CustomDatePicker = ({ minDate, maxDate, value, onChange, label = "", mandatory, formGroup = true, ...props }) => {
 	return (
@@ -15,12 +14,30 @@ const CustomDatePicker = ({ minDate, maxDate, value, onChange, label = "", manda
 			)}
 			<DatePicker
 				className="
-				text-gray-800 w-full bg-white dark:bg-gray-900 dark:text-white hover:border-primary border transition duration-300 ease-in-out hover:shadow-lg"
+				w-full
+				bg-white
+				hover:border-primary
+				px-3
+				py-2
+				rounded-lg 
+				 placeholder-gray-400 text-gray-700 border
+          dark:bg-gray-800
+           dark:text-white 
+           dark:focus:bg-gray-800
+            disabled:dark:bg-gray-600
+            disabled:bg-gray-300
+            disabled:focus:border-0
+            disabled:hover:border-transparent
+             focus:outline-none
+              disabled:cursor-not-allowed
+             focus:shadow-outline-blue
+             focus:border-primary
+				"
 				minDate={minDate}
 				maxDate={maxDate}
-				value={value}
+				selected={value}
 				onChange={onChange}
-				locale='ar'
+				// locale='ar'
 				{...props}
 			/>
 		</div>

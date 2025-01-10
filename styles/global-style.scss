@@ -33,22 +33,13 @@ html {
         }
 
         /* date picker */
-        .react-date-picker__wrapper {
+        .react-datepicker-wrapper {
             width: 100%;
-            padding-top: 0.3rem;
-            padding-bottom: 0.3rem;
-            padding-left: 0.7rem;
-            padding-right: 0.7rem;
-            border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            -ms-border-radius: 3px;
-            -o-border-radius: 3px;
         }
 
-        .react-date-picker__calendar {
+        .react-datepicker-popper {
             z-index: 150 !important;
-            inset: auto !important;
+            // inset: auto !important;
         }
 
         // for text in table
@@ -82,7 +73,7 @@ html {
 }
 
 @media (max-width: 768px) {
-    .react-date-picker__calendar {
+    .react-datepicker-popper {
         width: 290px;
     }
 }

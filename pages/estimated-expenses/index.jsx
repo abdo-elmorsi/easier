@@ -8,12 +8,13 @@ import { useRouter } from "next/router";
 // Custom imports
 import { Layout, LayoutWithSidebar } from "components/layout";
 import { DeleteModal, Header, Table, PrintView } from "components/global";
-import { Actions, Button, Modal } from "components/UI";
+import { Actions, Button, MinimizedBox, Modal } from "components/UI";
 import { exportExcel } from "utils";
 import { useHandleMessage, useQueryString } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import moment from 'moment-timezone';
+import { Filter } from "components/pages/estimated-expenses";
 
 const Index = () => {
     const router = useRouter();
@@ -26,10 +27,9 @@ const Index = () => {
 
 
 
-    const { queryString } = useQueryString();
-
+    const { queryString } = useQueryString({});
     // Fetch data using the API
-    const { data: tableData, isLoading, mutate } = useApi(`/towers?${queryString}`);
+    const { data: tableData, isLoading, mutate } = useApi(`/estimated-expenses?${queryString}`);
 
     // ================== Delete Logic ==================
 
@@ -38,7 +38,7 @@ const Index = () => {
         isOpen: false,
         id: null
     });
-    const { executeMutation } = useApiMutation(`/towers`);
+    const { executeMutation } = useApiMutation(`/estimated-expenses`);
 
     const closeDeleteModal = () => {
         setShowDeleteModal({});
@@ -61,20 +61,44 @@ const Index = () => {
     const columns = useMemo(
         () => [
             {
-                name: t("name_key"),
-                selector: (row) => row?.name,
+                name: t("electricity_key"),
+                selector: (row) => row?.electricity,
                 sortable: true,
                 width: "150px"
             },
             {
-                name: t("address_key"),
-                selector: (row) => row?.address,
+                name: t("water_key"),
+                selector: (row) => row?.water,
                 sortable: true,
-                width: "200px"
+                width: "150px"
             },
             {
-                name: t("num_of_floors_key"),
-                selector: (row) => row?.num_of_floors,
+                name: t("waste_key"),
+                selector: (row) => row?.waste,
+                sortable: true,
+                width: "150px"
+            },
+            {
+                name: t("guard_key"),
+                selector: (row) => row?.guard,
+                sortable: true,
+                width: "150px"
+            },
+            {
+                name: t("elevator_key"),
+                selector: (row) => row?.elevator,
+                sortable: true,
+                width: "150px"
+            },
+            {
+                name: t("others_key"),
+                selector: (row) => row?.others,
+                sortable: true,
+                width: "150px"
+            },
+            {
+                name: t("notes_key"),
+                selector: (row) => row?.notes ? row?.notes.slice(0, 30) : "",
                 sortable: true,
                 width: "180px"
             },
@@ -100,12 +124,14 @@ const Index = () => {
                 cell: (row) => (
                     <div className="flex gap-2">
                         <Button
-                            onClick={() => router.push(`/towers/add-update?id=${row?.id}`)}
+                            disabled={!moment(row.created_at).isSame(moment(), 'month')}
+                            onClick={() => router.push(`/estimated-expenses/add-update?id=${row?.id}`)}
                             className="px-3 py-2 cursor-pointer btn--primary"
                         >
                             <PencilSquareIcon width={22} />
                         </Button>
                         <Button
+                            disabled
                             onClick={() =>
                                 setShowDeleteModal({ isOpen: true, id: row?.id })
                             }
@@ -124,7 +150,7 @@ const Index = () => {
     // ================== Export Functions ==================
     const handleExportExcel = async () => {
         setExportingExcel(true);
-        await exportExcel(tableData, columns, t("towers_key"), handleMessage);
+        await exportExcel(tableData, columns, t("estimated_expenses_key"), handleMessage);
         setTimeout(() => {
             setExportingExcel(false);
         }, 1000);
@@ -140,10 +166,13 @@ const Index = () => {
         <>
             <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
                 <Header
-                    title={t("towers_key")}
-                    path="/towers"
+                    title={t("estimated_expenses_key")}
+                    path="/estimated-expenses"
                     classes="bg-gray-100 dark:bg-gray-700 border-none"
                 />
+                <MinimizedBox minimized={false}>
+                    <Filter />
+                </MinimizedBox>
                 <Table
                     columns={columns}
                     data={tableData || []}
@@ -153,7 +182,7 @@ const Index = () => {
                         <Actions
                             disableSearch={false}
                             addMsg={t("add_key")}
-                            onClickAdd={() => router.push("/towers/add-update")}
+                            onClickAdd={() => router.push("/estimated-expenses/add-update")}
                             onClickPrint={exportPDF}
                             isDisabledPrint={!tableData?.length}
                             onClickExport={handleExportExcel}
@@ -163,7 +192,7 @@ const Index = () => {
                 />
             </div>
             {tableData?.length && <PrintView
-                title={t("towers_key")}
+                title={t("estimated_expenses_key")}
                 ref={printViewRef}
                 data={tableData}
                 columns={columns}

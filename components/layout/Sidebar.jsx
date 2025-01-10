@@ -11,6 +11,7 @@ import {
   CogIcon,
   DocumentChartBarIcon,
   HomeIcon,
+  RocketLaunchIcon,
   ShoppingCartIcon,
   TruckIcon,
   UsersIcon,
@@ -68,6 +69,22 @@ const Sidebar = React.memo(() => {
       current: router.pathname === "/flats",
       icon: <HomeIcon className="w-5 h-5" />,
       submenuOpen: false,
+    },
+    {
+      nameAR: "ألاجرأت",
+      nameEN: "Actions",
+      icon: <RocketLaunchIcon className="w-5 h-5" />,
+      submenuOpen: activeAdminSubMenu === 4,
+
+      submenu: [
+        {
+          nameAR: "المصاريف التقديريه",
+          nameEN: "Estimated expenses",
+          href: "/estimated-expenses",
+          icon: <TruckIcon className="w-5 h-5" />,
+          current: router.pathname === "/estimated-expenses",
+        },
+      ],
     },
     // {
     //   nameAR: "المنتجات",

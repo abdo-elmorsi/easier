@@ -31,9 +31,10 @@ model Tower {
   updated_at    DateTime @updatedAt @db.Date
 
   // Relations
-  user_id String @db.ObjectId
-  user    User   @relation(fields: [user_id], references: [id])
-  flats   Flat[] // A tower can have multiple flats
+  user_id           String              @db.ObjectId
+  user              User                @relation(fields: [user_id], references: [id])
+  flats             Flat[] // A tower can have multiple flats
+  EstimatedExpenses EstimatedExpenses[]
 }
 
 model Flat {
@@ -51,6 +52,24 @@ model Flat {
   pay_percentage Int      @default(100) // Pay percentage, can be 0, 50, or 100
   created_at     DateTime @default(now()) @db.Date
   updated_at     DateTime @updatedAt @db.Date
+
+  // Relations
+  tower_id String @db.ObjectId
+  tower    Tower  @relation(fields: [tower_id], references: [id])
+}
+
+// this is the estimated expenses for each month in each tower 
+model EstimatedExpenses {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  electricity Int      @default(0) // Electricity number
+  water       Int      @default(0) // Water number
+  waste       Int      @default(0) // Waste number
+  guard       Int      @default(0) // Guard number
+  elevator    Int      @default(0) // Elevator number
+  others      Int      @default(0) // Others number
+  notes       String?
+  created_at  DateTime @default(now()) @db.Date
+  updated_at  DateTime @updatedAt @db.Date
 
   // Relations
   tower_id String @db.ObjectId
