@@ -5,11 +5,11 @@
     "orientation": "portrait",
     "scope": "/",
     "start_url": "/",
-    "name": "Army Store Market",
-    "short_name": "ArmySM",
-    "description": "The best Army Store Market App in the world, providing essential goods and services.",
+    "name": "Easier 2",
+    "short_name": "Easier",
+    "description": "Easier makes your life easier.",
     "lang": "en-US",
-    "categories": ["shopping", "military", "utilities"],
+    "categories": ["easy", "works", "towers"],
     "icons": [
         {
             "src": "/icon-192x192.png",

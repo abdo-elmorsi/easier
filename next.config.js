@@ -18,7 +18,7 @@ const nextConfig = {
       "res.cloudinary.com"
     ],
   },
-  productionBrowserSourceMaps: process.env.NODE_ENV != "development", // Enable source maps in production
+  productionBrowserSourceMaps: true, // Enable source maps in production
 
 
 }
