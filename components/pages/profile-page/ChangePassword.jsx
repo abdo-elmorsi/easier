@@ -5,7 +5,7 @@ import { useHandleMessage, useInput } from "hooks";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useApiMutation } from "hooks/useApi";
 
-const ChangePassword = ({ user_name }) => {
+const ChangePassword = () => {
 	const { t } = useTranslation("common");
 	const handleMessage = useHandleMessage();
 
@@ -31,7 +31,6 @@ const ChangePassword = ({ user_name }) => {
 			return;
 		}
 		const data = {
-			user_name,
 			oldPassword: oldPassword.value,
 			newPassword: newPassword.value,
 		}

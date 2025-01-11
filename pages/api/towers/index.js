@@ -1,20 +1,22 @@
+import { getUserFromToken } from "helper/apis/helpers";
 import { handleDeleteRequest, handleGetRequest, handlePostRequest, handlePutRequest } from "lib/controllers/towers-controller";
 
 const handler = async (req, res) => {
-  const { method, query, body } = req;
+
   try {
-    switch (method) {
+    getUserFromToken(req);
+    switch (req.method) {
       case "GET":
-        await handleGetRequest(query, res);
+        await handleGetRequest(req, res);
         break;
       case "POST":
-        await handlePostRequest(body, res);
+        await handlePostRequest(req, res);
         break;
       case "PUT":
-        await handlePutRequest(body, res);
+        await handlePutRequest(req, res);
         break;
       case "DELETE":
-        await handleDeleteRequest(body, res);
+        await handleDeleteRequest(req, res);
         break;
       default:
         res.status(405).json({ message: "Method Not Allowed" });

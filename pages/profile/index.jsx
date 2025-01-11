@@ -21,7 +21,7 @@ const Profile = ({ session }) => {
 		{
 			label: t("change_password_key"),
 			icon: <KeyIcon className="h-5 w-5" />,
-			content: <ChangePassword user_name={session?.user?.user_name} />,
+			content: <ChangePassword />,
 		},
 	];
 

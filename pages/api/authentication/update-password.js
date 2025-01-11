@@ -1,12 +1,13 @@
+import { getUserFromToken } from "helper/apis/helpers";
 import { handleUpdatePassword } from "lib/controllers/auth-controller";
 
 
 const handler = async (req, res) => {
-	const { method, body } = req;
 
 	try {
-		if (method === "POST") {
-			await handleUpdatePassword(body, res);
+		if (req.method === "POST") {
+			getUserFromToken(req);
+			await handleUpdatePassword(req, res);
 		} else {
 			res.status(405).json({ message: "Method Not Allowed" });
 		}

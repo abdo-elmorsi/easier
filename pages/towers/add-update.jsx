@@ -13,7 +13,7 @@ import { useHandleMessage, useInput } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
 
 
-const Index = ({ session }) => {
+const Index = () => {
 	const router = useRouter();
 	const towerId = router.query.id;
 	const handleMessage = useHandleMessage();
@@ -33,9 +33,7 @@ const Index = ({ session }) => {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		const newTower = {
-			...(towerId ? { id: towerId } : {
-				user_id: session.user?.id
-			}),
+			...(towerId ? { id: towerId } : {}),
 			name: name.value || null,
 			address: address.value || null,
 			num_of_floors: +num_of_floors.value || null,

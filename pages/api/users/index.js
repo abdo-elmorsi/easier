@@ -1,8 +1,10 @@
+import { getUserFromToken } from "helper/apis/helpers";
 import { handleDeleteRequest, handleGetRequest, handlePostRequest, handlePutRequest } from "lib/controllers/users-controller";
 
 const handler = async (req, res) => {
   const { method, query, body } = req;
   try {
+    getUserFromToken(req);
     switch (method) {
       case "GET":
         await handleGetRequest(query, res);
