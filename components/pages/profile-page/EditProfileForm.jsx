@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { FileInput, Input, Button, Spinner } from "components/UI";
 import PropTypes from "prop-types"
 import { useHandleMessage, useInput, useSavedState } from "hooks";
-import { convertImageToBase64 } from "utils/utils";
+import { convertImageToBase64, imageUrl } from "utils/utils";
 import Image from "next/image";
 import { useApiMutation } from "hooks/useApi";
 
@@ -12,13 +12,14 @@ const EditProfileForm = () => {
   const { t } = useTranslation("common");
   const { data: session, update } = useSession()
   const handleMessage = useHandleMessage();
-  const [image, setImage] = useState("");
 
-  const [user_image, set_user_image] = useSavedState("", 'user-image');
-  const { user_name: user_user_name, phone: user_phone, id } = session?.user || {};
+  const { user_name: user_user_name, phone: user_phone, id, img: user_image, role } = session?.user || {};
   const user_name = useInput(user_user_name, "");
   const phone = useInput(user_phone, "");
 
+  const [image, setImage] = useState("");
+
+  // console.log(role);
 
   const { executeMutation, isMutating } = useApiMutation(`/users`);
   const onSubmit = async (e) => {
@@ -29,11 +30,10 @@ const EditProfileForm = () => {
     }
 
     try {
-      await executeMutation('PUT', { id, ...user, ...(image ? { img: image } : {}) });
-      image && set_user_image(image)
+      const updated_user = await executeMutation('PUT', { id, ...user, ...(image ? { img: image } : {}) });
       handleMessage("updated_successfully_key", "success");
 
-      await update({ ...session, user: { ...session.user, ...user } })
+      await update({ ...session, user: { ...session.user, ...user, ...(image ? { img: updated_user.user.img } : {}) } })
     } catch (error) {
       handleMessage(error);
     }
@@ -58,7 +58,7 @@ const EditProfileForm = () => {
           label={<div className="user__image-box relative h-32 w-32 shrink-0 cursor-pointer overflow-hidden rounded-full shadow-lg outline outline-1 outline-offset-4 outline-gray-400 sm:h-48 sm:w-48">
             <Image
               alt={user_user_name}
-              src={image || user_image}
+              src={image || imageUrl(user_image)}
               width={200}
               height={200}
               className="user__image block h-full w-full scale-105 object-cover object-center transition-all duration-500"

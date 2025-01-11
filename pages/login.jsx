@@ -5,7 +5,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 // Custom
-import { useCheckbox, useHandleMessage, useInput, useSavedState } from "hooks";
+import { useCheckbox, useHandleMessage, useInput } from "hooks";
 import { Spinner, Button, Input, Checkbox } from "components/UI";
 import { MainLogo } from "components/icons";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
@@ -19,7 +19,6 @@ const Login = () => {
   const router = useRouter();
   const handleMessage = useHandleMessage();
 
-  const [_, set_user_image] = useSavedState("", 'user-image');
   const user_name = useInput("", null);
   const password = useInput("", null);
 
@@ -53,11 +52,10 @@ const Login = () => {
       handleMessage(user.message, "success");
 
       Cookies.set('user-token', user.token, { expires: 1, secure: true })
-      set_user_image(user.user?.img)
       await signIn("credentials", {
         redirect: false,
         callbackUrl: "/",
-        user: JSON.stringify({ ...user.user, img: null }),
+        user: JSON.stringify({ ...user.user }),
       });
       router.push(router.query.returnTo || '/');
     } catch (error) {

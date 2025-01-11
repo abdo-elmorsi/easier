@@ -28,7 +28,6 @@ export default function MainNav() {
   const { data } = useSession();
   const user = data?.user || {};
   const isOnline = useOnlineStatus()
-  const [user_image, _] = useSavedState("", 'user-image');
   const firstLetter = user?.user_name?.slice(0, 1) || "U";
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation("common");
@@ -116,8 +115,8 @@ export default function MainNav() {
 
                 <div className="relative">
                   <span className={`w-2 h-2 rounded-full absolute -top-1 -left-1 ${isOnline ? "bg-green-500" : "bg-red-500"}`}></span>
-                  {user_image ? <Image
-                    src={imageUrl(user_image)}
+                  {user?.img ? <Image
+                    src={imageUrl(user.img)}
                     width={40}
                     height={40}
                     className=" rounded-full"
