@@ -16,6 +16,7 @@ const Table = ({
   actions,
   searchAble = true,
   selectableRowSelected,
+  noDataMsg = "table_no_data_message_key",
   ...rest
 }) => {
   const [searchText, setSearchText] = useState("");
@@ -57,7 +58,7 @@ const Table = ({
         progressPending={rest.loading}
         progressComponent={<Spinner className="w-10 my-36" />}
         noDataComponent={
-          <h3 className="my-16">{t("table_no_data_message_key")}</h3>
+          <h3 className="my-16">{t(noDataMsg)}</h3>
         }
         paginationComponentOptions={{
           rowsPerPageText: t("rows_per_page_key"),

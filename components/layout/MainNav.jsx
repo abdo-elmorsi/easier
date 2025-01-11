@@ -47,8 +47,7 @@ export default function MainNav() {
   const roleOptions = useMemo(
     () => [
       { label: t("admin_key"), value: "admin", },
-      { label: t("store_key"), value: "store", },
-      { label: t("market_key"), value: "market", }
+      { label: t("user_key"), value: "user", },
     ],
     [t]
   );
