@@ -200,8 +200,9 @@ Index.propTypes = {
 
 export const getServerSideProps = async ({ req, locale, resolvedUrl }) => {
     const session = await getSession({ req });
+    const userRole = session?.user?.role;
 
-    if (!session) {
+    if (!session || userRole == "flat") {
         const loginUrl = locale === "en" ? `/${locale}/login` : "/login";
         return {
             redirect: {
@@ -218,5 +219,6 @@ export const getServerSideProps = async ({ req, locale, resolvedUrl }) => {
         };
     }
 };
+
 
 export default Index;

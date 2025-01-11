@@ -173,7 +173,7 @@ export default function MainNav() {
                   </ListItem>
                 </Link>) : (
                   <>
-                    <Link href="/profile">
+                    {user.role !== 'flat' && <Link href="/profile">
                       <ListItem
                         as={"a"}
                         className="gap-4 dark:text-gray-100 hover:text-black active:text-dark">
@@ -182,7 +182,7 @@ export default function MainNav() {
                         </ListItemPrefix>
                         {t("profile_key")}
                       </ListItem>
-                    </Link>
+                    </Link>}
                     <ListItem
                       onClick={logOut}
                       className="gap-4 dark:text-gray-100 hover:text-black active:text-dark">

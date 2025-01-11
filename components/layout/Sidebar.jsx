@@ -29,8 +29,8 @@ import { getRole } from "utils/utils";
 const Sidebar = React.memo(() => {
   const { data: session } = useSession();
   const admin = getRole(session, "admin")
-  // const store = getRole(session, "store")
-  // const market = getRole(session, "market")
+  const user = getRole(session, "user")
+  const flat = getRole(session, "flat")
   const router = useRouter();
   const [activeAdminSubMenu, setActiveAdminSubMenu] = useState(null);
   const [fixedSideBar, setFixedSideBar] = useSavedState(true, "easier-2-fixed-side-barr-cache")
@@ -61,6 +61,8 @@ const Sidebar = React.memo(() => {
       current: router.pathname === "/towers",
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
       submenuOpen: false,
+      omit: flat
+
     },
     {
       nameAR: "الشقق",
@@ -69,13 +71,14 @@ const Sidebar = React.memo(() => {
       current: router.pathname === "/flats",
       icon: <HomeIcon className="w-5 h-5" />,
       submenuOpen: false,
+      omit: flat
     },
     {
       nameAR: "ألاجرأت",
       nameEN: "Actions",
       icon: <RocketLaunchIcon className="w-5 h-5" />,
       submenuOpen: activeAdminSubMenu === 4,
-
+      omit: flat,
       submenu: [
         {
           nameAR: "المصاريف التقديريه",
@@ -246,7 +249,7 @@ const Sidebar = React.memo(() => {
       submenuOpen: false,
       omit: !admin
     },
-  ], [admin, router.pathname, activeAdminSubMenu]);
+  ], [admin, flat, router.pathname, activeAdminSubMenu]);
 
 
 

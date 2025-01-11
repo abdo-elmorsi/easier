@@ -32,7 +32,6 @@ const Profile = ({ session }) => {
 	);
 };
 
-export default Profile;
 Profile.propTypes = {
 	session: PropTypes.object.isRequired
 }
@@ -46,21 +45,24 @@ Profile.getLayout = function PageLayout(page) {
 
 export const getServerSideProps = async ({ req, locale, resolvedUrl }) => {
 	const session = await getSession({ req });
+	const userRole = session?.user?.role;
 
-	if (!session) {
+	if (!session || userRole == "flat") {
 		const loginUrl = locale === "en" ? `/${locale}/login` : "/login";
 		return {
 			redirect: {
 				destination: `${loginUrl}?returnTo=${encodeURIComponent(resolvedUrl || "/")}`,
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	} else {
 		return {
 			props: {
 				session,
-				...(await serverSideTranslations(locale, ["common"])),
-			},
+				...(await serverSideTranslations(locale, ["common"]))
+			}
 		};
 	}
 };
+
+export default Profile;

@@ -194,23 +194,26 @@ Index.propTypes = {
 };
 
 export const getServerSideProps = async ({ req, locale, resolvedUrl }) => {
-	const session = await getSession({ req: req });
-	if (!session) {
+	const session = await getSession({ req });
+	const userRole = session?.user?.role;
+
+	if (!session || userRole == "flat") {
 		const loginUrl = locale === "en" ? `/${locale}/login` : "/login";
 		return {
 			redirect: {
 				destination: `${loginUrl}?returnTo=${encodeURIComponent(resolvedUrl || "/")}`,
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	} else {
 		return {
 			props: {
 				session,
-				...(await serverSideTranslations(locale, ["common"])),
-			},
+				...(await serverSideTranslations(locale, ["common"]))
+			}
 		};
 	}
 };
+
 
 export default Index;
