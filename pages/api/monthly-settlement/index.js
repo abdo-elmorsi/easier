@@ -1,10 +1,8 @@
-import { getUserFromToken } from "helper/apis/helpers";
-import { handleDeleteRequest, handleGetRequest, handlePostRequest, handlePutRequest } from "lib/controllers/users-controller";
+import { handleDeleteRequest, handleGetRequest, handlePostRequest, handlePutRequest } from "lib/controllers/monthly-settlement-controller";
 
 const handler = async (req, res) => {
   const { method, query, body } = req;
   try {
-    getUserFromToken(req, res);
     switch (method) {
       case "GET":
         await handleGetRequest(query, res);

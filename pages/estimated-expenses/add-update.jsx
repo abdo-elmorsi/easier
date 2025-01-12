@@ -55,7 +55,7 @@ const Index = () => {
 
 		try {
 			await executeMutation(estimatedExpensesId ? 'PUT' : "POST", newTower);
-			mutate(`/estimated-expenses?id=${estimatedExpensesId}`)
+			estimatedExpensesId && mutate(`/estimated-expenses?id=${estimatedExpensesId}`)
 			router.back()
 		} catch (error) {
 			handleMessage(error);
@@ -65,7 +65,7 @@ const Index = () => {
 
 
 	useEffect(() => {
-		if (!isValidating && !!flat) {
+		if (!isLoading && !!flat) {
 			towerId.changeValue({ id: flat.tower?.id, name: flat.tower?.name });
 			electricity.changeValue(flat?.electricity || false);
 			water.changeValue(flat?.water || false);
@@ -75,7 +75,7 @@ const Index = () => {
 			others.changeValue(flat?.others || false);
 			notes.changeValue(flat?.notes);
 		}
-	}, [isValidating])
+	}, [isLoading])
 
 
 
@@ -136,7 +136,7 @@ const Index = () => {
 									{...others.bind}
 								/>
 								<Input
-									placeholder={t("Describe_key")}
+									placeholder={t("describe_key")}
 									label={t("notes_key")}
 									{...notes.bind}
 								/>

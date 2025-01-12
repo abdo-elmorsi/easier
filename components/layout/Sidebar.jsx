@@ -9,6 +9,7 @@ import {
   ChevronRightIcon,
   CircleStackIcon,
   CogIcon,
+  CurrencyDollarIcon,
   DocumentChartBarIcon,
   HomeIcon,
   RocketLaunchIcon,
@@ -74,18 +75,27 @@ const Sidebar = React.memo(() => {
       omit: flat
     },
     {
+      nameAR: "المصاريف التقديريه",
+      nameEN: "Estimated expenses",
+      href: "/estimated-expenses",
+      current: router.pathname === "/estimated-expenses",
+      icon: <CurrencyDollarIcon className="w-5 h-5" />,
+      submenuOpen: false,
+      omit: flat
+    },
+    {
       nameAR: "ألاجرأت",
       nameEN: "Actions",
       icon: <RocketLaunchIcon className="w-5 h-5" />,
-      submenuOpen: activeAdminSubMenu === 4,
+      submenuOpen: activeAdminSubMenu === 5,
       omit: flat,
       submenu: [
         {
-          nameAR: "المصاريف التقديريه",
-          nameEN: "Estimated expenses",
-          href: "/estimated-expenses",
+          nameAR: "التسوية الشهرية",
+          nameEN: "Monthly settlement",
+          href: "/monthly-settlement",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/estimated-expenses",
+          current: router.pathname === "/monthly-settlement",
         },
       ],
     },

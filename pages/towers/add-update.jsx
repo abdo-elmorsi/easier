@@ -42,7 +42,7 @@ const Index = () => {
 
 		try {
 			await executeMutation(towerId ? 'PUT' : "POST", newTower);
-			mutate(`/towers?id=${towerId}`)
+			towerId && mutate(`/towers?id=${towerId}`)
 			router.back()
 		} catch (error) {
 			handleMessage(error);
@@ -52,12 +52,12 @@ const Index = () => {
 
 
 	useEffect(() => {
-		if (!isValidating && !!tower) {
+		if (!isLoading && !!tower) {
 			name.changeValue(tower.name || "");
 			address.changeValue(tower.address || "");
 			num_of_floors.changeValue(tower.num_of_floors || "");
 		}
-	}, [isValidating])
+	}, [isLoading])
 
 
 

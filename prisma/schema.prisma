@@ -1,4 +1,3 @@
-// npx prisma generate to update the modals
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,7 +17,6 @@ model User {
   created_at DateTime @default(now()) @db.Date
   updated_at DateTime @updatedAt @db.Date
 
-  // Relations
   towers Tower[] // A user can manage multiple towers
 }
 
@@ -30,11 +28,11 @@ model Tower {
   created_at    DateTime @default(now()) @db.Date
   updated_at    DateTime @updatedAt @db.Date
 
-  // Relations
   user_id           String              @db.ObjectId
   user              User                @relation(fields: [user_id], references: [id])
   flats             Flat[] // A tower can have multiple flats
-  EstimatedExpenses EstimatedExpenses[]
+  EstimatedExpenses EstimatedExpenses[] // A tower can have multiple estimated expenses
+  monthlySettlement MonthlySettlement[] // A tower can have multiple monthlySettlement
 }
 
 model Flat {
@@ -53,12 +51,11 @@ model Flat {
   created_at     DateTime @default(now()) @db.Date
   updated_at     DateTime @updatedAt @db.Date
 
-  // Relations
-  tower_id String @db.ObjectId
-  tower    Tower  @relation(fields: [tower_id], references: [id])
+  tower_id          String              @db.ObjectId
+  tower             Tower               @relation(fields: [tower_id], references: [id])
+  monthlySettlement MonthlySettlement[] // A flat can have multiple monthlySettlement
 }
 
-// this is the estimated expenses for each month in each tower 
 model EstimatedExpenses {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   electricity Int      @default(0) // Electricity number
@@ -71,7 +68,28 @@ model EstimatedExpenses {
   created_at  DateTime @default(now()) @db.Date
   updated_at  DateTime @updatedAt @db.Date
 
-  // Relations
   tower_id String @db.ObjectId
   tower    Tower  @relation(fields: [tower_id], references: [id])
+}
+
+model MonthlySettlement {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  electricity            Int @default(0) // Electricity number
+  water                  Int @default(0) // Water number
+  waste                  Int @default(0) // Waste number
+  guard                  Int @default(0) // Guard number
+  elevator               Int @default(0) // Elevator number
+  others                 Int @default(0) // Others number
+  net_estimated_expenses Int @default(0) // Net estimated expenses
+  payed_amount           Int @default(0) // Pay percentage
+
+  notes      String?
+  created_at DateTime @default(now()) @db.Date
+  updated_at DateTime @updatedAt @db.Date
+
+  tower_id String @db.ObjectId
+  tower    Tower  @relation(fields: [tower_id], references: [id])
+  flat_id  String @db.ObjectId
+  flat     Flat   @relation(fields: [flat_id], references: [id])
 }

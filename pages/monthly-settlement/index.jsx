@@ -14,7 +14,7 @@ import { useHandleMessage, useQueryString } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import moment from 'moment-timezone';
-import { Filter } from "components/pages/estimated-expenses";
+import { Filter } from "components/pages/monthly-settlement";
 import { formatComma } from "utils/utils";
 
 const Index = () => {
@@ -30,7 +30,7 @@ const Index = () => {
 
     const { queryString } = useQueryString({});
     // Fetch data using the API
-    const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/estimated-expenses?${queryString}` : "");
+    const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/monthly-settlement?${queryString}` : "");
 
     // ================== Delete Logic ==================
 
@@ -39,7 +39,7 @@ const Index = () => {
         isOpen: false,
         id: null
     });
-    const { executeMutation } = useApiMutation(`/estimated-expenses`);
+    const { executeMutation } = useApiMutation(`/monthly-settlement`);
 
     const closeDeleteModal = () => {
         setShowDeleteModal({});
@@ -58,14 +58,23 @@ const Index = () => {
         }
     };
 
-    const isDisabledAdd = useMemo(() => {
-        const currentMonth = moment(); // Get the current moment outside of the loop
-        return tableData?.some(c => moment(c.created_at).isSame(currentMonth, 'month')); // Check if any item matches
-    }, [tableData]);
 
     // ================== Table Columns ==================
     const columns = useMemo(
         () => [
+            {
+                name: t("flat_key"),
+                selector: (row) => `n: ${row?.flat?.number} / f: ${row?.flat?.floor}`,
+                sortable: true,
+                width: "150px",
+                omit: queryString?.includes("flat")
+            },
+            {
+                name: t("payed_amount_key"),
+                selector: (row) => formatComma(row?.payed_amount),
+                sortable: true,
+                width: "150px"
+            },
             {
                 name: t("electricity_key"),
                 selector: (row) => formatComma(row?.electricity),
@@ -103,8 +112,8 @@ const Index = () => {
                 width: "150px"
             },
             {
-                name: t("total_key"),
-                selector: (row) => formatComma(row?.electricity + row?.water + row?.waste + row?.guard + row?.elevator + row?.others),
+                name: t("net_expenses_key"),
+                selector: (row) => formatComma(row?.net_estimated_expenses),
                 sortable: true,
                 width: "150px"
             },
@@ -137,7 +146,7 @@ const Index = () => {
                     <div className="flex gap-2">
                         <Button
                             disabled={!moment(row.created_at).isSame(moment(), 'month')}
-                            onClick={() => router.push(`/estimated-expenses/add-update?id=${row?.id}`)}
+                            onClick={() => router.push(`/monthly-settlement/add-update?id=${row?.id}`)}
                             className="px-3 py-2 cursor-pointer btn--primary"
                         >
                             <PencilSquareIcon width={22} />
@@ -162,7 +171,7 @@ const Index = () => {
     // ================== Export Functions ==================
     const handleExportExcel = async () => {
         setExportingExcel(true);
-        await exportExcel(tableData, columns, t("estimated_expenses_key"), handleMessage);
+        await exportExcel(tableData, columns, t("monthly_settlement_key"), handleMessage);
         setTimeout(() => {
             setExportingExcel(false);
         }, 1000);
@@ -178,8 +187,8 @@ const Index = () => {
         <>
             <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
                 <Header
-                    title={t("estimated_expenses_key")}
-                    path="/estimated-expenses"
+                    title={t("monthly_settlement_key")}
+                    path="/monthly-settlement"
                     classes="bg-gray-100 dark:bg-gray-700 border-none"
                 />
                 <MinimizedBox minimized={false}>
@@ -191,12 +200,12 @@ const Index = () => {
                     loading={isLoading}
                     searchAble={false}
                     noDataMsg="choose_a_tower_to_see_data_key"
+                    paginationPerPage={25}
                     actions={
                         <Actions
                             disableSearch={false}
                             addMsg={t("add_key")}
-                            isDisabledAdd={isDisabledAdd}
-                            onClickAdd={() => router.push("/estimated-expenses/add-update")}
+                            onClickAdd={() => router.push("/monthly-settlement/add-update")}
                             onClickPrint={exportPDF}
                             isDisabledPrint={!tableData?.length}
                             onClickExport={handleExportExcel}
@@ -206,7 +215,7 @@ const Index = () => {
                 />
             </div>
             {tableData?.length && <PrintView
-                title={t("estimated_expenses_key")}
+                title={t("monthly_settlement_key")}
                 ref={printViewRef}
                 data={tableData}
                 columns={columns}

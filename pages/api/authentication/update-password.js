@@ -6,7 +6,7 @@ const handler = async (req, res) => {
 
 	try {
 		if (req.method === "POST") {
-			getUserFromToken(req);
+			getUserFromToken(req, res);
 			await handleUpdatePassword(req, res);
 		} else {
 			res.status(405).json({ message: "Method Not Allowed" });

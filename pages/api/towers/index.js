@@ -4,7 +4,8 @@ import { handleDeleteRequest, handleGetRequest, handlePostRequest, handlePutRequ
 const handler = async (req, res) => {
 
   try {
-    getUserFromToken(req);
+    getUserFromToken(req, res);
+
     switch (req.method) {
       case "GET":
         await handleGetRequest(req, res);

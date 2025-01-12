@@ -19,10 +19,15 @@ export const handleErrorResponse = (error, res) => {
 };
 
 // Helpers
-export const getUserFromToken = (req) => {
-  const token = req.cookies["user-token"];
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  req.user_id = decoded.userId;
-  req.role = decoded.role;
-  // return decoded
+export const getUserFromToken = (req, res) => {
+  try {
+    const token = req.cookies["user-token"];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    req.user_id = decoded.userId;
+    req.role = decoded.role;
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid credentials or password provided to JWT" });
+
+  }
 };

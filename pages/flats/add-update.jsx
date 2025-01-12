@@ -70,7 +70,7 @@ const Index = () => {
 
 		try {
 			await executeMutation(flatId ? 'PUT' : "POST", newTower);
-			mutate(`/flats?id=${flatId}`)
+			flatId && mutate(`/flats?id=${flatId}`)
 			router.back()
 		} catch (error) {
 			handleMessage(error);
@@ -80,7 +80,7 @@ const Index = () => {
 
 
 	useEffect(() => {
-		if (!isValidating && !!flat) {
+		if (!isLoading && !!flat) {
 			number.changeValue(flat.number || "");
 			floor.changeValue(flat.floor || "");
 			phone.changeValue(flat.phone || "");
@@ -94,7 +94,7 @@ const Index = () => {
 			elevator.changeValue(flat?.elevator || false);
 			others.changeValue(flat?.others || false);
 		}
-	}, [isValidating])
+	}, [isLoading])
 
 
 

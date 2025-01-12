@@ -65,7 +65,7 @@ const Index = () => {
 
 		try {
 			await executeMutation(userId ? 'PUT' : "POST", newUser);
-			mutate(`/users?id=${userId}`)
+			userId && mutate(`/users?id=${userId}`)
 			router.back()
 		} catch (error) {
 			handleMessage(error);
@@ -75,11 +75,11 @@ const Index = () => {
 
 
 	useEffect(() => {
-		if (!isValidating && !!user) {
+		if (!isLoading && !!user) {
 			user_name.changeValue(user.user_name || "");
 			phone.changeValue(user.phone || "");
 		}
-	}, [isValidating])
+	}, [isLoading])
 
 
 

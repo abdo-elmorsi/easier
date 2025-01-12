@@ -52,7 +52,7 @@ const mutationHandler = async (url, { arg }) => {
 // Custom hook for GET requests
 export const useApi = (endpoint, options = {}) => {
   const {
-    revalidateOnFocus = true, // Enable revalidate on focus
+    revalidateOnFocus = false, // Enable revalidate on focus
     revalidateOnReconnect = true, // Enable revalidate on reconnect
     focusThrottleInterval = 3000, // Throttle revalidation
     refreshInterval = 0, // Set to a positive number to enable automatic refresh
