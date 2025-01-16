@@ -163,7 +163,7 @@ const Index = () => {
 			<div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
 				<Header
 					title={t("estimated_expenses_key")}
-					path="/monthly-settlement"
+					path="/actions/monthly-settlement"
 					classes="bg-gray-100 dark:bg-gray-700 border-none"
 					links={[{ label: monthlySettlementId ? t("edit_key") : t("add_key") }]}
 				/>

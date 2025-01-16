@@ -67,12 +67,12 @@ const Index = () => {
 	useEffect(() => {
 		if (!isLoading && !!flat) {
 			towerId.changeValue({ id: flat.tower?.id, name: flat.tower?.name });
-			electricity.changeValue(flat?.electricity || false);
-			water.changeValue(flat?.water || false);
-			waste.changeValue(flat?.waste || false);
-			guard.changeValue(flat?.guard || false);
-			elevator.changeValue(flat?.elevator || false);
-			others.changeValue(flat?.others || false);
+			electricity.changeValue(flat?.electricity || 0);
+			water.changeValue(flat?.water || 0);
+			waste.changeValue(flat?.waste || 0);
+			guard.changeValue(flat?.guard || 0);
+			elevator.changeValue(flat?.elevator || 0);
+			others.changeValue(flat?.others || 0);
 			notes.changeValue(flat?.notes);
 		}
 	}, [isLoading])

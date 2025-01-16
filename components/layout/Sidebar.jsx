@@ -75,27 +75,32 @@ const Sidebar = React.memo(() => {
       omit: flat
     },
     {
-      nameAR: "المصاريف التقديريه",
-      nameEN: "Estimated expenses",
-      href: "/estimated-expenses",
-      current: router.pathname === "/estimated-expenses",
-      icon: <CurrencyDollarIcon className="w-5 h-5" />,
-      submenuOpen: false,
-      omit: flat
-    },
-    {
       nameAR: "ألاجرأت",
       nameEN: "Actions",
       icon: <RocketLaunchIcon className="w-5 h-5" />,
-      submenuOpen: activeAdminSubMenu === 5,
+      submenuOpen: activeAdminSubMenu === 4,
       omit: flat,
       submenu: [
         {
+          nameAR: "الرصيد الافتتاحي",
+          nameEN: "Opening Balance",
+          href: "/actions/opening-balance",
+          icon: <TruckIcon className="w-5 h-5" />,
+          current: router.pathname === "/actions/opening-balance",
+        },
+        {
+          nameAR: "المصاريف التقديريه",
+          nameEN: "Estimated expenses",
+          href: "/actions/estimated-expenses",
+          icon: <TruckIcon className="w-5 h-5" />,
+          current: router.pathname === "/actions/estimated-expenses",
+        },
+        {
           nameAR: "التسوية الشهرية",
           nameEN: "Monthly settlement",
-          href: "/monthly-settlement",
+          href: "/actions/monthly-settlement",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/monthly-settlement",
+          current: router.pathname === "/actions/monthly-settlement",
         },
       ],
     },

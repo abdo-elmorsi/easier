@@ -14,7 +14,8 @@ import { useHandleMessage, useQueryString } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import moment from 'moment-timezone';
-import { Filter } from "components/pages/monthly-settlement";
+import { payPercentageOptions } from "assets";
+import { Filter } from "components/pages/opening-balance";
 import { formatComma } from "utils/utils";
 
 const Index = () => {
@@ -29,8 +30,9 @@ const Index = () => {
 
 
     const { queryString } = useQueryString({});
+
     // Fetch data using the API
-    const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/monthly-settlement?${queryString}` : "");
+    const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/opening-balance?${queryString}` : "");
 
     // ================== Delete Logic ==================
 
@@ -39,7 +41,7 @@ const Index = () => {
         isOpen: false,
         id: null
     });
-    const { executeMutation } = useApiMutation(`/monthly-settlement`);
+    const { executeMutation } = useApiMutation(`/opening-balance`);
 
     const closeDeleteModal = () => {
         setShowDeleteModal({});
@@ -58,71 +60,22 @@ const Index = () => {
         }
     };
 
-
     // ================== Table Columns ==================
     const columns = useMemo(
         () => [
             {
-                name: t("flat_key"),
-                selector: (row) => `n: ${row?.flat?.number} / f: ${row?.flat?.floor}`,
-                sortable: true,
-                width: "150px",
-                omit: queryString?.includes("flat")
-            },
-            {
-                name: t("payed_amount_key"),
-                selector: (row) => formatComma(row?.payed_amount),
+                name: t("tower_key"),
+                selector: (row) => row?.tower?.name,
                 sortable: true,
                 width: "150px"
             },
             {
-                name: t("electricity_key"),
-                selector: (row) => formatComma(row?.electricity),
+                name: t("balance_key"),
+                selector: (row) => formatComma(row?.balance),
                 sortable: true,
                 width: "150px"
             },
-            {
-                name: t("water_key"),
-                selector: (row) => formatComma(row?.water),
-                sortable: true,
-                width: "150px"
-            },
-            {
-                name: t("waste_key"),
-                selector: (row) => formatComma(row?.waste),
-                sortable: true,
-                width: "150px"
-            },
-            {
-                name: t("guard_key"),
-                selector: (row) => formatComma(row?.guard),
-                sortable: true,
-                width: "150px"
-            },
-            {
-                name: t("elevator_key"),
-                selector: (row) => formatComma(row?.elevator),
-                sortable: true,
-                width: "150px"
-            },
-            {
-                name: t("others_key"),
-                selector: (row) => formatComma(row?.others),
-                sortable: true,
-                width: "150px"
-            },
-            {
-                name: t("net_expenses_key"),
-                selector: (row) => formatComma(row?.net_estimated_expenses),
-                sortable: true,
-                width: "150px"
-            },
-            {
-                name: t("notes_key"),
-                selector: (row) => row?.notes ? row?.notes.slice(0, 30) : "",
-                sortable: true,
-                width: "180px"
-            },
+
             {
                 name: t("created_at_key"),
                 selector: (row) => row?.created_at,
@@ -145,14 +98,12 @@ const Index = () => {
                 cell: (row) => (
                     <div className="flex gap-2">
                         <Button
-                            disabled={!moment(row.created_at).isSame(moment(), 'month')}
-                            onClick={() => router.push(`/monthly-settlement/add-update?id=${row?.id}`)}
+                            onClick={() => router.push(`/actions/opening-balance/add-update?id=${row?.id}`)}
                             className="px-3 py-2 cursor-pointer btn--primary"
                         >
                             <PencilSquareIcon width={22} />
                         </Button>
                         <Button
-                            disabled
                             onClick={() =>
                                 setShowDeleteModal({ isOpen: true, id: row?.id })
                             }
@@ -171,7 +122,7 @@ const Index = () => {
     // ================== Export Functions ==================
     const handleExportExcel = async () => {
         setExportingExcel(true);
-        await exportExcel(tableData, columns, t("monthly_settlement_key"), handleMessage);
+        await exportExcel(tableData, columns, t("opening_balance_key"), handleMessage);
         setTimeout(() => {
             setExportingExcel(false);
         }, 1000);
@@ -187,8 +138,8 @@ const Index = () => {
         <>
             <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
                 <Header
-                    title={t("monthly_settlement_key")}
-                    path="/monthly-settlement"
+                    title={t("opening_balance_key")}
+                    path="/opening-balance"
                     classes="bg-gray-100 dark:bg-gray-700 border-none"
                 />
                 <MinimizedBox minimized={false}>
@@ -200,12 +151,11 @@ const Index = () => {
                     loading={isLoading}
                     searchAble={false}
                     noDataMsg="choose_a_tower_to_see_data_key"
-                    paginationPerPage={25}
                     actions={
                         <Actions
                             disableSearch={false}
                             addMsg={t("add_key")}
-                            onClickAdd={() => router.push("/monthly-settlement/add-update")}
+                            onClickAdd={() => router.push("/actions/opening-balance/add-update")}
                             onClickPrint={exportPDF}
                             isDisabledPrint={!tableData?.length}
                             onClickExport={handleExportExcel}
@@ -215,7 +165,7 @@ const Index = () => {
                 />
             </div>
             {tableData?.length && <PrintView
-                title={t("monthly_settlement_key")}
+                title={t("opening_balance_key")}
                 ref={printViewRef}
                 data={tableData}
                 columns={columns}
@@ -271,6 +221,5 @@ export const getServerSideProps = async ({ req, locale, resolvedUrl }) => {
         };
     }
 };
-
 
 export default Index;
