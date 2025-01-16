@@ -35,8 +35,7 @@ const Filter = () => {
 	};
 
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-10">
-
+		<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10">
 			<DatePicker
 				label={t("from_date_key")}
 				value={selectedStartDate}

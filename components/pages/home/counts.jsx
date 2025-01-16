@@ -12,10 +12,8 @@ import { useRouter } from "next/router";
 function Counts() {
 	const router = useRouter();
 	const { t } = useTranslation("common");
-	const startDate = router.query.startDate || moment().subtract(1, "month").format("YYYY-MM-DD"); // Default to 1 month ago
-	const endDate = router.query.endDate || moment().format("YYYY-MM-DD"); // Default to today
 
-	const { queryString } = useQueryString({ startDate, endDate });
+	const { queryString } = useQueryString();
 
 	// Fetch data using the API
 	const { data, isLoading } = useApi(`/dashboard/counts?${queryString}`, {
@@ -25,24 +23,24 @@ function Counts() {
 	// Memoize the table data to avoid unnecessary recalculations
 	const tableData = useMemo(() => [
 		{
-			title: "users_key",
-			count: data?.userCount || 0,
-			desc: "users_key",
-			percentage: data?.userPercentChange || 0,
-			duration: moment(startDate).fromNow(),
+			title: "towers_key",
+			count: data?.towerCount || 0,
+			desc: "tower_key",
+			percentage: data?.towerPercentChange || 0,
+			duration: moment().fromNow(),
 		},
 		{
 			title: "flats_key",
-			count: data?.productCount || 0,
+			count: data?.flatCount || 0,
 			desc: "flats_key",
-			percentage: data?.productPercentChange || 0,
-			duration: moment(startDate).fromNow(),
+			percentage: data?.flatPercentChange || 0,
+			duration: moment().fromNow(),
 		},
-	], [data, startDate]);
+	], [data]);
 	return (
-		<div className="grid grid-rows-2 gap-4 mb-8 sm:grid-cols-2 md:grid-cols-2">
+		<div className="grid gap-4 mb-8 sm:grid-cols-2">
 			{tableData.map((card, idx) => (
-				<div key={`${card.count}-${idx}`} className="p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
+				<div key={`${card?.count}-${idx}`} className="p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
 					<div className="font-bold text-slate-600 dark:text-slate-200">
 						{t(card.title)}
 					</div>

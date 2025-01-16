@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 // Custom
 import { Layout, LayoutWithSidebar } from "components/layout";
 import { MinimizedBox } from "components/UI";
-import { Filter, Counts } from "components/pages/home";
+import { Filter, Counts, EstimatedExpenses } from "components/pages/home";
 import { getRole } from "utils/utils";
 
 const Index = ({ session }) => {
@@ -12,11 +12,12 @@ const Index = ({ session }) => {
 
     return (
         <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
-            <MinimizedBox>
+            {/* <MinimizedBox>
                 <Filter />
-            </MinimizedBox>
+            </MinimizedBox> */}
 
             <Counts />
+            <EstimatedExpenses />
         </div>
     );
 };

@@ -104,53 +104,22 @@ const Sidebar = React.memo(() => {
         },
       ],
     },
-    // {
-    //   nameAR: "التقارير",
-    //   nameEN: "Reports",
-    //   icon: <DocumentChartBarIcon className="w-5 h-5" />,
-    //   submenuOpen: activeAdminSubMenu === 5,
-    //   submenu: [
-    //     {
-    //       nameAR: "الحركات",
-    //       nameEN: "Transactions",
-    //       href: "/reports/transactions",
-    //       icon: <TruckIcon className="w-5 h-5" />,
-    //       current: router.pathname === "/reports/transactions",
-    //     },
-    //     {
-    //       nameAR: "تقرير الأرباح بالحركات",
-    //       nameEN: "Earnings transactions report",
-    //       href: "/reports/earnings-transactions",
-    //       icon: <TruckIcon className="w-5 h-5" />,
-    //       current: router.pathname === "/reports/earnings-transactions",
-    //       omit: !admin
-    //     },
-    //     {
-    //       nameAR: "تقرير الأرباح بالمنتجات",
-    //       nameEN: "Earnings products report",
-    //       href: "/reports/earnings-products",
-    //       icon: <TruckIcon className="w-5 h-5" />,
-    //       current: router.pathname === "/reports/earnings-products",
-    //       omit: !admin
-    //     },
-    //     {
-    //       nameAR: "تقرير المبيعات",
-    //       nameEN: "Sales Report",
-    //       href: "/reports/sales",
-    //       icon: <TruckIcon className="w-5 h-5" />,
-    //       current: router.pathname === "/reports/sales",
+    {
+      nameAR: "التقارير",
+      nameEN: "Reports",
+      icon: <DocumentChartBarIcon className="w-5 h-5" />,
+      submenuOpen: activeAdminSubMenu === 5,
+      submenu: [
+        {
+          nameAR: "الشققق",
+          nameEN: "Flats",
+          href: "/reports/flats",
+          icon: <TruckIcon className="w-5 h-5" />,
+          current: router.pathname === "/reports/flats",
+        },
 
-    //     },
-    //     {
-    //       nameAR: "تقرير المشتريات",
-    //       nameEN: "Purchase Report",
-    //       href: "/reports/purchase",
-    //       icon: <TruckIcon className="w-5 h-5" />,
-    //       current: router.pathname === "/reports/purchase",
-
-    //     },
-    //   ],
-    // },
+      ],
+    },
     {
       nameAR: "الإعدادات",
       nameEN: "Settings",
