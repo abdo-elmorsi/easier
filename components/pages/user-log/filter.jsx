@@ -24,6 +24,11 @@ const Filter = () => {
 			id: number
 		}
 	}), []);
+	const statuses = useMemo(() => [
+		{ label: t("all_key"), id: null },
+		{ label: t("success_key"), id: 'true' },
+		{ label: t("failed_key"), id: 'false' }
+	], []);
 
 	const { data: users = [], loading } = useApi(`/users?for_select`);
 
@@ -31,11 +36,13 @@ const Filter = () => {
 	const currentPage = router.query.page_id || null;
 	const currentActions = router.query.action_id || null;
 	const currentUser = router.query.user_id || null;
+	const currentStatus = router.query.status || null;
 
 
 	const selectedPageOption = findSelectedOption(pages, currentPage);
 	const selectedActionOption = findSelectedOption(actions, currentActions);
 	const selectedUserOption = findSelectedOption(users, currentUser);
+	const selectedStatusOption = findSelectedOption(statuses, currentStatus);
 
 
 	return (
@@ -61,6 +68,13 @@ const Filter = () => {
 				getOptionLabel={(option) => option.user_name}
 				value={selectedUserOption}
 				onChange={(selected) => updateQuery('user_id', selected?.id)}
+			/>
+			<Select
+				label={t("status_key")}
+				options={statuses}
+				getOptionValue={(option) => option.id}
+				value={selectedStatusOption}
+				onChange={(selected) => updateQuery('status', selected?.id)}
 			/>
 		</div>
 	);

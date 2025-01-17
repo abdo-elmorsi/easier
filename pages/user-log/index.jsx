@@ -10,7 +10,7 @@ import { Actions, Button, MinimizedBox, Modal } from "components/UI";
 import { exportExcel } from "utils";
 import { useHandleMessage, useQueryString } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, QuestionMarkCircleIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import moment from 'moment-timezone';
 import { Filter } from "components/pages/user-log";
 
@@ -82,8 +82,25 @@ const Index = () => {
             },
 
             {
+                name: t("page_key"),
+                selector: (row) => row?.action.split(":")[0],
+                sortable: true,
+                width: "150px"
+            },
+            {
                 name: t("action_key"),
-                selector: (row) => row?.action,
+                selector: (row) => row?.action.split(":")[1],
+                sortable: true,
+                width: "150px"
+            },
+            {
+                name: t("status_key"),
+                selector: (row) => row?.status,
+                cell: (row) => {
+                    return <p className={`text-sm ${row?.status ? "text-green-500" : "text-red-500"}`}>
+                        {row?.status ? <XMarkIcon className="w-5 h-5" /> : <CheckCircleIcon className="w-5 h-5" />}
+                    </p>
+                },
                 sortable: true,
                 width: "150px"
             },
