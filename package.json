@@ -18,8 +18,6 @@
         "bcryptjs": "^2.4.3",
         "cloudinary": "^2.5.1",
         "i18next": "^22.4.13",
-        "js-cookie": "^3.0.5",
-        "jsonwebtoken": "^9.0.2",
         "lodash.debounce": "^4.0.8",
         "moment-timezone": "^0.5.46",
         "next": "^12.3.4",

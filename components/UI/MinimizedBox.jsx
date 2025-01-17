@@ -1,7 +1,7 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import { useSavedState } from "hooks";

@@ -3,7 +3,7 @@ import DataTable from "react-data-table-component";
 import PropTypes from "prop-types";
 import SearchInput from "../SearchInput";
 import { Spinner } from "components/UI";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useTheme } from "context/ThemeContext";
 
 const Table = ({

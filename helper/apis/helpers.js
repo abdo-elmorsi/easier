@@ -1,6 +1,3 @@
-
-import jwt from "jsonwebtoken";
-
 // Handle error response
 export const handleErrorResponse = (error, res) => {
   const errorMessage = error?.response?.data?.message || "An error occurred while fetching data.";
@@ -19,13 +16,11 @@ export const handleErrorResponse = (error, res) => {
 };
 
 // Helpers
-export const getUserFromToken = (req, res) => {
+export const getUserFromToken = async (req, res) => {
   try {
-    const token = req.cookies["user-token"];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    req.user_id = decoded.userId;
-    req.role = decoded.role;
+    const token = await getToken({ req, secret: process.env.JWT_SECRET });
+    req.user_id = token.id;
+    req.role = token.role;
   } catch (error) {
     return res.status(401).json({ error: "Invalid credentials or password provided to JWT" });
 

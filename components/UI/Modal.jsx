@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "./Button";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { LockClosedIcon, XCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Modal({

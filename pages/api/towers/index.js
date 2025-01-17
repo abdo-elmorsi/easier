@@ -1,10 +1,12 @@
-import { getUserFromToken } from "helper/apis/helpers";
 import { handleDeleteRequest, handleGetRequest, handlePostRequest, handlePutRequest } from "lib/controllers/towers-controller";
+import { getToken } from "next-auth/jwt";
 
 const handler = async (req, res) => {
 
   try {
-    getUserFromToken(req, res);
+    const token = await getToken({ req, secret: process.env.JWT_SECRET });
+    req.user_id = token.id;
+    req.role = token.role;
 
     switch (req.method) {
       case "GET":

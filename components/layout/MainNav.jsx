@@ -15,7 +15,6 @@ import { signOut, useSession } from "next-auth/react";
 import { MainLogo } from "components/icons";
 import Link from "next/link";
 import { Badge, Button, List, ListItem, ListItemPrefix, Popover, PopoverContent, PopoverHandler } from "@material-tailwind/react";
-import Cookies from "js-cookie";
 import Image from "next/image";
 import { useOnlineStatus, useSavedState } from "hooks";
 import { useTheme } from "context/ThemeContext";
@@ -40,7 +39,6 @@ export default function MainNav() {
 
   const logOut = () => {
     signOut();
-    Cookies.remove('user-token');
   };
 
   const roleOptions = useMemo(

@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Input } from "components/UI";
 import { useRouter } from "next/router";

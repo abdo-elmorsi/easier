@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 // custom
 import PrintPageTableWrapper from "components/printPageTableWrapper";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 
 const PrintView = forwardRef(({ title = 'title', columns = [], data = [], paperMode = false }, ref) => {

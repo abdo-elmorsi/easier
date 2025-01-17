@@ -1,15 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { getSession } from "next-auth/react";
 import PropTypes from "prop-types"
 import { useRouter } from "next/router";
 
 // Custom
 import { Layout, LayoutWithSidebar } from "components/layout";
 import { Header } from "components/global";
-import { Button, Input, Select, Spinner } from "components/UI";
-import { useHandleMessage, useInput, useSelect } from "hooks";
+import { Button, Input, Spinner } from "components/UI";
+import { useHandleMessage, useInput } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { convertImageToBase64 } from "utils/utils";
@@ -168,26 +167,12 @@ Index.propTypes = {
 	session: PropTypes.object.isRequired
 };
 
-export const getServerSideProps = async ({ req, locale, resolvedUrl }) => {
-	const session = await getSession({ req });
-	const userRole = session?.user?.role;
-
-	if (!session || userRole !== "admin") {
-		const loginUrl = locale === "en" ? `/${locale}/login` : "/login";
-		return {
-			redirect: {
-				destination: `${loginUrl}?returnTo=${encodeURIComponent(resolvedUrl || "/")}`,
-				permanent: false,
-			},
-		};
-	} else {
-		return {
-			props: {
-				session,
-				...(await serverSideTranslations(locale, ["common"])),
-			},
-		};
-	}
+export const getServerSideProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale, ["common"])),
+		},
+	};
 };
 
 export default Index;

@@ -1,7 +1,7 @@
 import DataTable from "react-data-table-component";
 import PropTypes from "prop-types";
 import { Spinner } from "components/UI";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useTheme } from "context/ThemeContext";
 
 const ServerTable = ({

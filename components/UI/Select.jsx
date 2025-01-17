@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ReactSelect from "react-select";
 import AsyncSelect from "react-select/async";
 import TextError from "./TextError";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useTheme } from "context/ThemeContext";
 
 const Select = React.forwardRef((props, ref) => {

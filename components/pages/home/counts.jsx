@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import moment from 'moment-timezone';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 // Custom
 import { Spinner } from "components/UI";

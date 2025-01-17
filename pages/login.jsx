@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { getSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
@@ -9,7 +9,6 @@ import { useCheckbox, useHandleMessage, useInput } from "hooks";
 import { Spinner, Button, Input, Checkbox } from "components/UI";
 import { MainLogo } from "components/icons";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import Cookies from "js-cookie";
 import { useApiMutation } from "hooks/useApi";
 
 
@@ -51,13 +50,16 @@ const Login = () => {
       const user = await executeMutation("POST", submitData);
       handleMessage(user.message, "success");
 
-      Cookies.set('user-token', user.token, { expires: 1, secure: true })
-      await signIn("credentials", {
+      const result = await signIn("credentials", {
         redirect: false,
-        callbackUrl: "/",
+        // callbackUrl: "/",
         user: JSON.stringify({ ...user.user }),
       });
-      router.push(router.query.returnTo || '/');
+      // Check if signIn was successful
+      if (result.error) {
+        throw new Error(result.error); // Handle sign-in error
+      }
+      router.replace(router.query['call-back-url'] || '/');
     } catch (error) {
       handleMessage(error);
     }
@@ -137,22 +139,10 @@ Login.getLayout = function PageLayout(page) {
 };
 
 
-export const getServerSideProps = async ({ req, locale }) => {
-  const session = await getSession({ req: req });
-  const routeUrl = locale === 'ar' ? '/' : `/${locale}/`;
-  if (session) {
-    return {
-      redirect: {
-        destination: `${routeUrl}`,
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {
-        session,
-        ...(await serverSideTranslations(locale, ['common'])),
-      },
-    };
+export const getServerSideProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
   }
 };

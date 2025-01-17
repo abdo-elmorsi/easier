@@ -1,10 +1,13 @@
-import { getUserFromToken } from "helper/apis/helpers";
 import { handleDeleteRequest, handleGetRequest, handlePostRequest, handlePutRequest } from "lib/controllers/users-controller";
+import { getToken } from "next-auth/jwt";
 
 const handler = async (req, res) => {
   const { method, query, body } = req;
   try {
-    getUserFromToken(req, res);
+    const token = await getToken({ req, secret: process.env.JWT_SECRET });
+    req.user_id = token.id;
+    req.role = token.role;
+
     switch (method) {
       case "GET":
         await handleGetRequest(query, res);

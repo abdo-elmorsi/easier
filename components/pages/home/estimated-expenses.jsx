@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import moment from "moment-timezone";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useQueryString, useSavedState } from "hooks";
 import { useApi } from "hooks/useApi";
 import { useRouter } from "next/router";
@@ -32,7 +32,7 @@ function EstimatedExpenses() {
 
 
 	const { data, isLoading } = useApi(
-		`/dashboard/estimated-expenses?tower_id=${tower_id}`,
+		`/dashboard/estimated-expenses${tower_id ? `?tower_id=${tower_id}` : ''}`,
 		{
 			dedupingInterval: 10000,
 		}

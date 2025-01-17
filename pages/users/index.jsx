@@ -1,15 +1,12 @@
 import { useCallback, useMemo, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { getSession } from "next-auth/react";
-import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 
 // Custom imports
 import { Layout, LayoutWithSidebar } from "components/layout";
 import { DeleteModal, Header, Table, PrintView } from "components/global";
-import { Actions, Button, MinimizedBox, Modal } from "components/UI";
-// import { Filter } from "components/pages/users";
+import { Actions, Button, Modal } from "components/UI";
 import { exportExcel } from "utils";
 import { useHandleMessage, useQueryString } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
@@ -81,7 +78,7 @@ const Index = () => {
                 width: "150px"
             },
             {
-                name: t("name_key"),
+                name: t("name"),
                 selector: (row) => row?.user_name,
                 sortable: true,
                 width: "200px"
@@ -164,9 +161,7 @@ const Index = () => {
                     path="/users"
                     classes="bg-gray-100 dark:bg-gray-700 border-none"
                 />
-                {/* <MinimizedBox>
-                    <Filter roleOptions={roleOptions} />
-                </MinimizedBox> */}
+
                 <Table
                     columns={columns}
                     data={tableData || []}
@@ -217,30 +212,14 @@ Index.getLayout = function PageLayout(page) {
     );
 };
 
-Index.propTypes = {
-    session: PropTypes.object.isRequired
-};
 
-export const getServerSideProps = async ({ req, locale, resolvedUrl }) => {
-    const session = await getSession({ req });
-    const userRole = session?.user?.role;
 
-    if (!session || userRole !== "admin") {
-        const loginUrl = locale === "en" ? `/${locale}/login` : "/login";
-        return {
-            redirect: {
-                destination: `${loginUrl}?returnTo=${encodeURIComponent(resolvedUrl || "/")}`,
-                permanent: false
-            }
-        };
-    } else {
-        return {
-            props: {
-                session,
-                ...(await serverSideTranslations(locale, ["common"]))
-            }
-        };
-    }
+export const getServerSideProps = async ({ locale }) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common"]))
+        }
+    };
 };
 
 export default Index;

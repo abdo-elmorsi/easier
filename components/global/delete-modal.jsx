@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 // Custom
 import { Button, Spinner } from "components/UI";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export default function DeleteModal({ showDeleteModal, handleClose, handleDelete }) {
   const { t } = useTranslation("common");

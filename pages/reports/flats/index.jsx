@@ -1,15 +1,12 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { getSession } from "next-auth/react";
-import PropTypes from "prop-types";
-import { useRouter } from "next/router";
+
 
 // Custom imports
 import { Layout, LayoutWithSidebar } from "components/layout";
 import { Header } from "components/global";
 
 const Index = () => {
-    const router = useRouter();
     const { t } = useTranslation("common");
 
     return (
@@ -35,30 +32,12 @@ Index.getLayout = function PageLayout(page) {
     );
 };
 
-Index.propTypes = {
-    session: PropTypes.object.isRequired
-};
-
-export const getServerSideProps = async ({ req, locale, resolvedUrl }) => {
-    const session = await getSession({ req });
-    const userRole = session?.user?.role;
-
-    if (!session || userRole !== "admin") {
-        const loginUrl = locale === "en" ? `/${locale}/login` : "/login";
-        return {
-            redirect: {
-                destination: `${loginUrl}?returnTo=${encodeURIComponent(resolvedUrl || "/")}`,
-                permanent: false
-            }
-        };
-    } else {
-        return {
-            props: {
-                session,
-                ...(await serverSideTranslations(locale, ["common"]))
-            }
-        };
-    }
+export const getServerSideProps = async ({ locale }) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common"])),
+        },
+    };
 };
 
 export default Index;

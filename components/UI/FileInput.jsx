@@ -2,7 +2,7 @@ import { Fragment, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { TextError } from "components/UI";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 function FileInput({ value, label, name, className, errorMsg, onChange, placeholder, multiple = false, disabled, mandatory, ...rest }) {
   const { t } = useTranslation("common");

@@ -4,11 +4,10 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 // Custom
-import { useHandleMessage, useInput, useSavedState } from "hooks";
+import { useHandleMessage, useInput } from "hooks";
 import { Spinner, Button, Input } from "components/UI";
 import { MainLogo } from "components/icons";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import Cookies from "js-cookie";
 import { useApiMutation } from "hooks/useApi";
 import { getSession } from "next-auth/react";
 
@@ -38,8 +37,7 @@ const SignUp = () => {
 			const user = await executeMutation("POST", submitData);
 			handleMessage(user.message, "success");
 
-			Cookies.set('user-token', user.token, { expires: 1, secure: true });
-			router.push(router.query.returnTo || '/');
+			router.replace('/login');
 		} catch (error) {
 			handleMessage(error);
 		}
