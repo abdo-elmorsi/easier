@@ -19,7 +19,6 @@ const EditProfileForm = () => {
 
   const [image, setImage] = useState("");
 
-  // console.log(role);
 
   const { executeMutation, isMutating } = useApiMutation(`/users`);
   const onSubmit = async (e) => {

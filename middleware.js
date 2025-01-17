@@ -13,7 +13,7 @@ const protectedRoutes = new Set([
 	"/flats-report",
 	"/settings",
 ]);
-const authCookieName = "next-auth.session-token"; // Replace with your actual auth cookie name
+const authCookieName = process.env.NODE_ENV === 'development' ? "next-auth.session-token" : "__Secure-next-auth.session-token"; // Replace with your actual auth cookie name
 
 // Middleware
 export default withAuth(

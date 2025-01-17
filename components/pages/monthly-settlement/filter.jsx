@@ -17,14 +17,13 @@ const Filter = () => {
 	const currentFlat = router.query.flat || null;
 
 	const { data: towers = [], isLoading } = useApi(`/towers`);
-	const { data: flatsData = [], isLoadingFlats } = useApi(currentTower ? `/flats?tower=${currentTower}` : null);
+	const { data: flatsData = [] } = useApi(currentTower ? `/flats?tower=${currentTower}` : null);
 
 	const flats = useMemo(() => {
 		return flatsData.map(row => {
 			return { id: row.id, name: `n: ${row?.number} / f: ${row?.floor}` };
 		})
 	}, [flatsData])
-	console.log({ flats });
 
 	// Ensure selectedMonth is set only if month is provided in the query
 	const selectedMonth = useMemo(() => {

@@ -13,7 +13,6 @@ const MinimizedBox = ({
   const { t } = useTranslation("common");
   const [loading, setLoading] = useState(false);
 
-  console.log({ items });
 
 
 

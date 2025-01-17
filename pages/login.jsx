@@ -59,6 +59,7 @@ const Login = () => {
       if (result.error) {
         throw new Error(result.error); // Handle sign-in error
       }
+
       router.replace(router.query['call-back-url'] || '/');
     } catch (error) {
       handleMessage(error);
