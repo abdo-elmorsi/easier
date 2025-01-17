@@ -144,7 +144,7 @@ const Index = () => {
                     <div className="flex gap-2">
                         <Button
                             disabled={!moment(row.created_at).isSame(moment(), 'month')}
-                            onClick={() => router.push(`/actions/monthly-settlement/add-update?id=${row?.id}`)}
+                            onClick={() => router.push(`/monthly-settlement/add-update?id=${row?.id}`)}
                             className="px-3 py-2 cursor-pointer btn--primary"
                         >
                             <PencilSquareIcon width={22} />
@@ -203,7 +203,7 @@ const Index = () => {
                         <Actions
                             disableSearch={false}
                             addMsg={t("add_key")}
-                            onClickAdd={() => router.push("/actions/monthly-settlement/add-update")}
+                            onClickAdd={() => router.push("/monthly-settlement/add-update")}
                             onClickPrint={exportPDF}
                             isDisabledPrint={!tableData?.length}
                             onClickExport={handleExportExcel}

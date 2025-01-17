@@ -95,7 +95,7 @@ const Index = () => {
                 cell: (row) => (
                     <div className="flex gap-2">
                         <Button
-                            onClick={() => router.push(`/actions/opening-balance/add-update?id=${row?.id}`)}
+                            onClick={() => router.push(`/opening-balance/add-update?id=${row?.id}`)}
                             className="px-3 py-2 cursor-pointer btn--primary"
                         >
                             <PencilSquareIcon width={22} />
@@ -152,7 +152,7 @@ const Index = () => {
                         <Actions
                             disableSearch={false}
                             addMsg={t("add_key")}
-                            onClickAdd={() => router.push("/actions/opening-balance/add-update")}
+                            onClickAdd={() => router.push("/opening-balance/add-update")}
                             onClickPrint={exportPDF}
                             isDisabledPrint={!tableData?.length}
                             onClickExport={handleExportExcel}

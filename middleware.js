@@ -10,7 +10,7 @@ const protectedRoutes = new Set([
 	"/opening-balance",
 	"/estimated-expenses",
 	"/monthly-settlement",
-	"/reports/flats",
+	"/flats-report",
 	"/settings",
 ]);
 const authCookieName = "next-auth.session-token"; // Replace with your actual auth cookie name
@@ -19,19 +19,20 @@ const authCookieName = "next-auth.session-token"; // Replace with your actual au
 export default withAuth(
 	async function middleware(request) {
 		const { pathname } = request.nextUrl;
-		const session = request.cookies.get(authCookieName);
+		const token = request.cookies.get(authCookieName);
+
 
 		const isAuthPage = pathname === "/login";
 		const isProtectedRoute = protectedRoutes.has(pathname);
 
 		// Redirect to login if not authenticated and trying to access a protected route
-		if (!session && isProtectedRoute) {
+		if (!token && isProtectedRoute) {
 			const loginUrl = new URL(`/login?call-back-url=${encodeURIComponent(pathname)}`, request.url);
 			return NextResponse.redirect(loginUrl);
 		}
 
 		// Redirect to home if authenticated and trying to access the login page
-		if (session && isAuthPage) {
+		if (token && isAuthPage) {
 			return NextResponse.redirect(new URL("/", request.url));
 		}
 
@@ -57,7 +58,7 @@ export const config = {
 		"/opening-balance",
 		"/estimated-expenses",
 		"/monthly-settlement",
-		"/reports/flats",
+		"/flats-report",
 		"/settings",
 	],
 };

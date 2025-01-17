@@ -57,7 +57,7 @@ export const useApi = (endpoint, options = {}) => {
     focusThrottleInterval = 3000, // Throttle revalidation
     refreshInterval = 0, // Set to a positive number to enable automatic refresh
     dedupingInterval = 2000, // Cache data for 2 seconds
-    errorRetryCount = 2, //
+    errorRetryCount = 0, //
     errorRetryInterval = 5000,
     ...restOptions
   } = options;

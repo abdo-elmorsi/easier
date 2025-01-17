@@ -142,6 +142,7 @@ Select.propTypes = {
   autoHeight: PropTypes.bool,
   className: PropTypes.string,
   cacheOptions: PropTypes.bool,
+  isLoading: PropTypes.bool,
 };
 Select.displayName = "Select"; // Add the display name here
 

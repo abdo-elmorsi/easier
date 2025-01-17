@@ -17,7 +17,18 @@ model User {
   created_at DateTime @default(now()) @db.Date
   updated_at DateTime @updatedAt @db.Date
 
-  towers Tower[] // A user can manage multiple towers
+  towers  Tower[] // A user can manage multiple towers
+  userLog UserLog[]
+}
+
+model UserLog {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  action     String // The action the user performed (e.g., "login", "logout", "update-profile")
+  status     Boolean // The status of the action (e.g., "success", "failure")
+  details    String? // Additional details about the action (e.g., "IP address", "browser type")
+  created_at DateTime @default(now()) @db.Date
+  user_id    String   @db.ObjectId // User who performed the action
+  user       User     @relation(fields: [user_id], references: [id])
 }
 
 model Tower {

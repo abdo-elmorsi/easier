@@ -14,7 +14,7 @@ const Index = () => {
             <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
                 <Header
                     title={t("flats_key")}
-                    path="/reports/flats"
+                    path="/flats-report"
                     classes="bg-gray-100 dark:bg-gray-700 border-none"
                 />
                 <h1>{t("flats_key")}</h1>
