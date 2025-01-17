@@ -27,8 +27,8 @@ model UserLog {
   status     Boolean // The status of the action (e.g., "success", "failure")
   details    String? // Additional details about the action (e.g., "IP address", "browser type")
   created_at DateTime @default(now()) @db.Date
-  user_id    String   @db.ObjectId // User who performed the action
-  user       User     @relation(fields: [user_id], references: [id])
+  user_id    String?  @db.ObjectId // User who performed the action
+  user       User?    @relation(fields: [user_id], references: [id])
 }
 
 model Tower {

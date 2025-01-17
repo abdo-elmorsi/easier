@@ -3,7 +3,7 @@ import { handlePostRequest as handleUserLogPostRequest } from "lib/controllers/u
 import { getToken } from "next-auth/jwt";
 
 const handler = async (req, res) => {
-  const action = `Flat:${req.method}`;
+  const action = `flat:${req.method}`;
 
   const token = await getToken({ req, secret: process.env.JWT_SECRET });
   if (!token) res.status(401).json({ message: "Unauthorized" });
