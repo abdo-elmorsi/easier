@@ -10,10 +10,11 @@ import { Actions, Button, MinimizedBox, Modal } from "components/UI";
 import { exportExcel } from "utils";
 import { useHandleMessage, useQueryString } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, PencilSquareIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import moment from 'moment-timezone';
-import { Filter } from "components/pages/monthly-settlement";
+import { Filter } from "components/pages/settlement";
 import { formatComma } from "utils/utils";
+import { payPercentageOptions } from "assets";
 
 const Index = () => {
     const router = useRouter();
@@ -28,7 +29,7 @@ const Index = () => {
 
     const { queryString } = useQueryString({});
     // Fetch data using the API
-    const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/monthly-settlement?${queryString}` : "");
+    const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/settlement?${queryString}` : "");
 
     // ================== Delete Logic ==================
 
@@ -37,7 +38,7 @@ const Index = () => {
         isOpen: false,
         id: null
     });
-    const { executeMutation } = useApiMutation(`/monthly-settlement`);
+    const { executeMutation } = useApiMutation(`/settlement`);
 
     const closeDeleteModal = () => {
         setShowDeleteModal({});
@@ -74,44 +75,74 @@ const Index = () => {
                 width: "150px"
             },
             {
+                name: t("pay_percentage_key"),
+                selector: (row) => payPercentageOptions.find(item => item.value == row?.pay_percentage)?.label,
+                sortable: true,
+                width: "180px"
+            },
+            {
                 name: t("electricity_key"),
-                selector: (row) => formatComma(row?.electricity),
+                selector: (row) => row?.electricity,
+                cell: (row) => {
+                    return <p className={`text-sm ${row?.electricity ? "text-green-500" : "text-red-500"}`}>
+                        {row?.electricity ? <XMarkIcon className="w-5 h-5" /> : <CheckCircleIcon className="w-5 h-5" />}
+                    </p>
+                },
                 sortable: true,
                 width: "150px"
             },
             {
                 name: t("water_key"),
-                selector: (row) => formatComma(row?.water),
+                selector: (row) => row?.water,
+                cell: (row) => {
+                    return <p className={`text-sm ${row?.water ? "text-green-500" : "text-red-500"}`}>
+                        {row?.water ? <XMarkIcon className="w-5 h-5" /> : <CheckCircleIcon className="w-5 h-5" />}
+                    </p>
+                },
                 sortable: true,
                 width: "150px"
             },
             {
                 name: t("waste_key"),
-                selector: (row) => formatComma(row?.waste),
+                selector: (row) => row?.waste,
+                cell: (row) => {
+                    return <p className={`text-sm ${row?.waste ? "text-green-500" : "text-red-500"}`}>
+                        {row?.waste ? <XMarkIcon className="w-5 h-5" /> : <CheckCircleIcon className="w-5 h-5" />}
+                    </p>
+                },
                 sortable: true,
                 width: "150px"
             },
             {
                 name: t("guard_key"),
-                selector: (row) => formatComma(row?.guard),
+                selector: (row) => row?.guard,
+                cell: (row) => {
+                    return <p className={`text-sm ${row?.guard ? "text-green-500" : "text-red-500"}`}>
+                        {row?.guard ? <XMarkIcon className="w-5 h-5" /> : <CheckCircleIcon className="w-5 h-5" />}
+                    </p>
+                },
                 sortable: true,
                 width: "150px"
             },
             {
                 name: t("elevator_key"),
-                selector: (row) => formatComma(row?.elevator),
+                selector: (row) => row?.elevator,
+                cell: (row) => {
+                    return <p className={`text-sm ${row?.elevator ? "text-green-500" : "text-red-500"}`}>
+                        {row?.elevator ? <XMarkIcon className="w-5 h-5" /> : <CheckCircleIcon className="w-5 h-5" />}
+                    </p>
+                },
                 sortable: true,
                 width: "150px"
             },
             {
                 name: t("others_key"),
-                selector: (row) => formatComma(row?.others),
-                sortable: true,
-                width: "150px"
-            },
-            {
-                name: t("net_expenses_key"),
-                selector: (row) => formatComma(row?.net_estimated_expenses),
+                selector: (row) => row?.others,
+                cell: (row) => {
+                    return <p className={`text-sm ${row?.others ? "text-green-500" : "text-red-500"}`}>
+                        {row?.others ? <XMarkIcon className="w-5 h-5" /> : <CheckCircleIcon className="w-5 h-5" />}
+                    </p>
+                },
                 sortable: true,
                 width: "150px"
             },
@@ -144,7 +175,7 @@ const Index = () => {
                     <div className="flex gap-2">
                         <Button
                             disabled={!moment(row.created_at).isSame(moment(), 'month')}
-                            onClick={() => router.push(`/monthly-settlement/add-update?id=${row?.id}`)}
+                            onClick={() => router.push(`/settlement/add-update?id=${row?.id}`)}
                             className="px-3 py-2 cursor-pointer btn--primary"
                         >
                             <PencilSquareIcon width={22} />
@@ -169,7 +200,7 @@ const Index = () => {
     // ================== Export Functions ==================
     const handleExportExcel = async () => {
         setExportingExcel(true);
-        await exportExcel(tableData, columns, t("monthly_settlement_key"), handleMessage);
+        await exportExcel(tableData, columns, t("settlement_key"), handleMessage);
         setTimeout(() => {
             setExportingExcel(false);
         }, 1000);
@@ -185,8 +216,8 @@ const Index = () => {
         <>
             <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
                 <Header
-                    title={t("monthly_settlement_key")}
-                    path="/monthly-settlement"
+                    title={t("settlement_key")}
+                    path="/settlement"
                     classes="bg-gray-100 dark:bg-gray-700 border-none"
                 />
                 <MinimizedBox minimized={false}>
@@ -203,7 +234,7 @@ const Index = () => {
                         <Actions
                             disableSearch={false}
                             addMsg={t("add_key")}
-                            onClickAdd={() => router.push("/monthly-settlement/add-update")}
+                            onClickAdd={() => router.push("/settlement/add-update")}
                             onClickPrint={exportPDF}
                             isDisabledPrint={!tableData?.length}
                             onClickExport={handleExportExcel}
@@ -213,7 +244,7 @@ const Index = () => {
                 />
             </div>
             {tableData?.length && <PrintView
-                title={t("monthly_settlement_key")}
+                title={t("settlement_key")}
                 ref={printViewRef}
                 data={tableData}
                 columns={columns}

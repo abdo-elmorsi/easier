@@ -24,6 +24,9 @@
     .btn {
         @apply rounded-lg text-base font-medium  py-2 px-4 disabled:cursor-not-allowed disabled:opacity-50;
     }
+    .btn-sm {
+        @apply text-sm font-normal px-2 py-1;
+    }
     .btn--primary {
         @apply bg-primary text-white hover:bg-hoverPrimary disabled:hover:bg-hoverPrimary;
     }

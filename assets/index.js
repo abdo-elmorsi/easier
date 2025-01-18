@@ -15,7 +15,7 @@ export const PageType = {
 	2: "flat",
 	3: "opening_balance",
 	4: "estimated_expenses",
-	5: "monthly_settlement",
+	5: "settlement",
 	6: "user_log",
 	7: "login",
 	8: "update_password",

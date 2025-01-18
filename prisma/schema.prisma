@@ -23,11 +23,11 @@ model User {
 
 model UserLog {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  action     String // The action the user performed (e.g., "login", "logout", "update-profile")
-  status     Boolean // The status of the action (e.g., "success", "failure")
-  details    String? // Additional details about the action (e.g., "IP address", "browser type")
+  action     String
+  status     Boolean
+  details    String?
   created_at DateTime @default(now()) @db.Date
-  user_id    String?  @db.ObjectId // User who performed the action
+  user_id    String?  @db.ObjectId
   user       User?    @relation(fields: [user_id], references: [id])
 }
 
@@ -41,36 +41,36 @@ model Tower {
 
   user_id           String              @db.ObjectId
   user              User                @relation(fields: [user_id], references: [id])
-  flats             Flat[] // A tower can have multiple flats
-  EstimatedExpenses EstimatedExpenses[] // A tower can have multiple estimated expenses
-  monthlySettlement MonthlySettlement[] // A tower can have multiple monthlySettlement
+  flats             Flat[]
+  EstimatedExpenses EstimatedExpenses[]
   OpeningBalance    OpeningBalance[]
+  Settlement        Settlement[]
 }
 
 model Flat {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   number         String
   floor          Int
-  password       String // Authentication field
+  password       String
   phone          String?
-  electricity    Boolean  @default(false) // Electricity availability
-  water          Boolean  @default(false) // Water availability
-  waste          Boolean  @default(false) // Waste availability
-  guard          Boolean  @default(false) // Guard availability
-  elevator       Boolean  @default(false) // Elevator availability
-  others         Boolean  @default(false) // Others availability
-  pay_percentage Int      @default(100) // Pay percentage, can be 0, 50, or 100
+  electricity    Boolean  @default(false)
+  water          Boolean  @default(false)
+  waste          Boolean  @default(false)
+  guard          Boolean  @default(false)
+  elevator       Boolean  @default(false)
+  others         Boolean  @default(false)
+  pay_percentage Int      @default(100)
   created_at     DateTime @default(now()) @db.Date
   updated_at     DateTime @updatedAt @db.Date
 
-  tower_id          String              @db.ObjectId
-  tower             Tower               @relation(fields: [tower_id], references: [id])
-  monthlySettlement MonthlySettlement[] // A flat can have multiple monthlySettlement
+  tower_id   String       @db.ObjectId
+  tower      Tower        @relation(fields: [tower_id], references: [id])
+  Settlement Settlement[]
 }
 
 model OpeningBalance {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  balance    Int      @default(0) // Opening balance for the year
+  balance    Int      @default(0)
   created_at DateTime @default(now()) @db.Date
   updated_at DateTime @updatedAt @db.Date
 
@@ -80,13 +80,14 @@ model OpeningBalance {
 
 model EstimatedExpenses {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  electricity Int      @default(0) // Electricity number
-  water       Int      @default(0) // Water number
-  waste       Int      @default(0) // Waste number
-  guard       Int      @default(0) // Guard number
-  elevator    Int      @default(0) // Elevator number
-  others      Int      @default(0) // Others number
+  electricity Int      @default(0)
+  water       Int      @default(0)
+  waste       Int      @default(0)
+  guard       Int      @default(0)
+  elevator    Int      @default(0)
+  others      Int      @default(0)
   notes       String?
+  attachments String[]
   created_at  DateTime @default(now()) @db.Date
   updated_at  DateTime @updatedAt @db.Date
 
@@ -94,21 +95,21 @@ model EstimatedExpenses {
   tower    Tower  @relation(fields: [tower_id], references: [id])
 }
 
-model MonthlySettlement {
+model Settlement {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  electricity            Int @default(0) // Electricity number
-  water                  Int @default(0) // Water number
-  waste                  Int @default(0) // Waste number
-  guard                  Int @default(0) // Guard number
-  elevator               Int @default(0) // Elevator number
-  others                 Int @default(0) // Others number
-  net_estimated_expenses Int @default(0) // Net estimated expenses
-  payed_amount           Int @default(0) // Pay percentage
+  pay_percentage Int     @default(0)
+  electricity    Boolean @default(false)
+  water          Boolean @default(false)
+  waste          Boolean @default(false)
+  guard          Boolean @default(false)
+  elevator       Boolean @default(false)
+  others         Boolean @default(false)
 
-  notes      String?
-  created_at DateTime @default(now()) @db.Date
-  updated_at DateTime @updatedAt @db.Date
+  payed_amount Int      @default(0)
+  notes        String?
+  created_at   DateTime @default(now()) @db.Date
+  updated_at   DateTime @updatedAt @db.Date
 
   tower_id String @db.ObjectId
   tower    Tower  @relation(fields: [tower_id], references: [id])

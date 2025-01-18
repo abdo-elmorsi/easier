@@ -5,14 +5,14 @@ import { useRouter } from "next/router";
 
 // Custom imports
 import { Layout, LayoutWithSidebar } from "components/layout";
-import { DeleteModal, Header, Table, PrintView } from "components/global";
+import { Header, Table, PrintView } from "components/global";
 import { Actions, Button, MinimizedBox, Modal } from "components/UI";
 import { exportExcel } from "utils";
 import { useHandleMessage, useQueryString } from "hooks";
-import { useApi, useApiMutation } from "hooks/useApi";
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useApi } from "hooks/useApi";
+import { EyeIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import moment from 'moment-timezone';
-import { Filter } from "components/pages/estimated-expenses";
+import { Filter, ShowAttachmentsModal } from "components/pages/estimated-expenses";
 import { formatComma } from "utils/utils";
 
 const Index = () => {
@@ -30,31 +30,13 @@ const Index = () => {
     // Fetch data using the API
     const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/estimated-expenses?${queryString}` : "");
 
-    // ================== Delete Logic ==================
-
-    const [showDeleteModal, setShowDeleteModal] = useState({
-        loading: false,
+    // ================== show images Logic ==================
+    const [showImagesModal, setShowImagesModal] = useState({
         isOpen: false,
-        id: null
+        attachments: []
     });
-    const { executeMutation } = useApiMutation(`/estimated-expenses`);
 
-    const closeDeleteModal = () => {
-        setShowDeleteModal({});
-    };
-
-    const handleDelete = async () => {
-        setShowDeleteModal((prev) => ({ ...prev, loading: true }));
-        try {
-            await executeMutation("DELETE", { id: showDeleteModal.id });
-            mutate();
-            closeDeleteModal();
-        } catch (error) {
-            handleMessage(error);
-        } finally {
-            setShowDeleteModal((prev) => ({ ...prev, loading: false }));
-        }
-    };
+    const closeImagesModal = () => setShowImagesModal({ isOpen: false, attachments: [] })
 
     const isDisabledAdd = useMemo(() => {
         const currentMonth = moment(); // Get the current moment outside of the loop
@@ -141,13 +123,13 @@ const Index = () => {
                             <PencilSquareIcon width={22} />
                         </Button>
                         <Button
-                            disabled
+                            disabled={!row?.attachments?.length}
                             onClick={() =>
-                                setShowDeleteModal({ isOpen: true, id: row?.id })
+                                setShowImagesModal({ isOpen: true, attachments: row?.attachments })
                             }
-                            className="px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600"
+                            className="px-3 py-2 text-white bg-green-500 cursor-pointer hover:bg-green-600"
                         >
-                            <TrashIcon width={22} />
+                            <EyeIcon width={22} />
                         </Button>
                     </div>
                 ),
@@ -209,17 +191,17 @@ const Index = () => {
                 data={tableData}
                 columns={columns}
             />}
-            {showDeleteModal?.isOpen && (
+
+            {showImagesModal?.isOpen && (
                 <Modal
-                    title={t("delete_key")}
-                    show={showDeleteModal?.isOpen}
+                    title={t("attachments_key")}
+                    show={showImagesModal?.isOpen}
                     footer={false}
-                    onClose={closeDeleteModal}
+                    onClose={closeImagesModal}
                 >
-                    <DeleteModal
-                        showDeleteModal={showDeleteModal}
-                        handleClose={closeDeleteModal}
-                        handleDelete={handleDelete}
+                    <ShowAttachmentsModal
+                        showImagesModal={showImagesModal}
+                        handleClose={closeImagesModal}
                     />
                 </Modal>
             )}

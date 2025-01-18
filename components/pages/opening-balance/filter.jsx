@@ -10,10 +10,10 @@ const Filter = () => {
 	const router = useRouter();
 	const { updateQuery } = useQueryString();
 
-	const { data: towers = [], isLoading } = useApi(`/towers`);
+	const { data: towers = [], isLoading } = useApi(`/towers?for_select=true`);
 
 
-	const currentTower = router.query.tower || null;
+	const currentTower = router.query.tower_id || null;
 
 
 	const selectedTowerOption = findSelectedOption(towers, currentTower);
@@ -27,7 +27,7 @@ const Filter = () => {
 				getOptionValue={(option) => option.id}
 				getOptionLabel={(option) => option.name}
 				value={selectedTowerOption}
-				onChange={(selected) => updateQuery('tower', selected?.id)}
+				onChange={(selected) => updateQuery('tower_id', selected?.id)}
 			/>
 
 		</div>

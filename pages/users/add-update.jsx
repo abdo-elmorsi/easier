@@ -117,6 +117,9 @@ const Index = () => {
 
 								<Input
 									type="file"
+									multiple={false}
+									accept="image/*"
+									placeholder={t("upload_image_key")}
 									label={t("image_key")}
 									onChange={updateImage}
 								/>

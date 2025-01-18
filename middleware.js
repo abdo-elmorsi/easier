@@ -9,7 +9,7 @@ const protectedRoutes = new Set([
 	"/flats",
 	"/opening-balance",
 	"/estimated-expenses",
-	"/monthly-settlement",
+	"/settlement",
 	"/flats-report",
 	"/settings",
 ]);
@@ -57,7 +57,7 @@ export const config = {
 		"/flats",
 		"/opening-balance",
 		"/estimated-expenses",
-		"/monthly-settlement",
+		"/settlement",
 		"/flats-report",
 		"/settings",
 	],

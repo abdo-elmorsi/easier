@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
@@ -9,6 +9,8 @@ import { Header } from "components/global";
 import { Button, Input, Select, Spinner } from "components/UI";
 import { useHandleMessage, useInput, useSelect } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
+import { convertImageToBase64, imageUrl } from "utils/utils";
+import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const Index = () => {
 	const router = useRouter();
@@ -17,7 +19,7 @@ const Index = () => {
 
 	const { t } = useTranslation("common");
 
-	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(`/towers`);
+	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(`/towers?for_select=true`);
 
 
 	const { data: flat, isLoading, isValidating, mutate } = useApi(estimatedExpensesId ? `/estimated-expenses?id=${estimatedExpensesId}` : null);
@@ -27,13 +29,61 @@ const Index = () => {
 
 	const towerId = useSelect("", "select", null);
 
-	const electricity = useInput("0", "number", true);
-	const water = useInput("0", "number", true);
-	const waste = useInput("0", "number", true);
-	const guard = useInput("0", "number", true);
-	const elevator = useInput("0", "number", true);
-	const others = useInput("0", "number", true);
+	const electricity = useInput(0, "number", true);
+	const water = useInput(0, "number", true);
+	const waste = useInput(0, "number", true);
+	const guard = useInput(0, "number", true);
+	const elevator = useInput(0, "number", true);
+	const others = useInput(0, "number", true);
 	const notes = useInput("", null);
+
+
+	const [currentImages, setCurrentImages] = useState([]);
+	const [images, setImages] = useState([]);
+	const removeImage = (image) => setImages(images.filter((i) => i !== image));
+
+	const updateImages = useCallback(
+		async (e) => {
+			const files = e.target?.files;
+
+			if (!files || files.length === 0) {
+				return;
+			}
+
+			const MAX_FILES = 5;
+			const MAX_FILE_SIZE_MB = 2; // Example max size of 2MB per file
+
+			// Combine current images with new selections to validate total
+			const totalFiles = images.length + files.length;
+
+			if (totalFiles > MAX_FILES) {
+				handleMessage("maximum_images_available_for_upload_key", "warning");
+				e.target.value = ""; // Reset input value
+				return;
+			}
+
+			try {
+				const newFiles = await Promise.all(
+					Array.from(files).map(async (file) => {
+						if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+							throw new Error(`${file.name} exceeds the size limit of ${MAX_FILE_SIZE_MB}MB.`);
+						}
+						return await convertImageToBase64(file);
+					})
+				);
+
+				setImages((prevImages) => [...prevImages, ...newFiles]);
+			} catch (error) {
+				console.error('Error uploading images:', error);
+				handleMessage(error.message || "error_uploading_images_key", "error");
+				setImages([]); // Clear images or handle as needed
+			}
+
+			e.target.value = ""; // Reset input value to allow selecting the same files again
+		}, [images])
+
+
+
 
 
 	const onSubmit = async (e) => {
@@ -49,6 +99,7 @@ const Index = () => {
 			elevator: +elevator?.value || 0,
 			others: +others?.value || 0,
 			notes: notes?.value,
+			images
 		}
 
 		try {
@@ -72,6 +123,7 @@ const Index = () => {
 			elevator.changeValue(flat?.elevator || 0);
 			others.changeValue(flat?.others || 0);
 			notes.changeValue(flat?.notes);
+			flat?.attachments?.length && setCurrentImages(flat.attachments)
 		}
 	}, [isLoading])
 
@@ -138,18 +190,54 @@ const Index = () => {
 									label={t("notes_key")}
 									{...notes.bind}
 								/>
+								<div className="flex flex-col">
+									<div className="flex items-center justify-start gap-2 flex-wrap">
+										{images.map((image, index) => (
+											<div className="relative">
+												<XMarkIcon onClick={() => removeImage(image)} className="cursor-pointer w-5 h-5 absolute -top-2 -left-2 text-red-500" />
+												<img
+													key={image}
+													src={image}
+													alt={`Image ${index + 1}`}
+													className="w-12 h-12 object-cover rounded-md"
+												/>
+											</div>
+										))}
+										{images.length && currentImages.length ? <span className="w-1 h-full bg-primary mx-2"></span> : ""}
+										{currentImages.map((image) => (
+											<div className="relative">
+												<CheckCircleIcon className="w-5 h-5 absolute -top-2 -left-2 text-green-500" />
+												<img
+													key={image}
+													src={imageUrl(image)}
+													alt={`Image ${image}`}
+													className="w-12 h-12 object-cover rounded-md"
+												/>
+											</div>
+										))}
+									</div>
+									<Input
+										type="file"
+										multiple={true}
+										max={3}
+										accept="image/*"
+										placeholder={t("upload_images_key")}
+										label={t("images_key")}
+										onChange={updateImages}
+									/>
+								</div>
 							</div>
 							<div className="flex justify-start gap-8 items-center">
 								<Button
-									disabled={isMutating ||
-
-										!towerId.value?.id ||
-										!electricity.value ||
-										!water.value ||
-										!waste.value ||
-										!guard.value ||
-										!elevator.value ||
-										!others.value
+									disabled={
+										isMutating ||
+										!towerId.value?.id
+										// !electricity.value ||
+										// !water.value ||
+										// !waste.value ||
+										// !guard.value ||
+										// !elevator.value ||
+										// !others.value
 									}
 									className="btn--primary w-32 flex items-center justify-center"
 									type="submit"

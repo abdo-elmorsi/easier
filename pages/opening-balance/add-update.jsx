@@ -18,7 +18,7 @@ const Index = () => {
 
 	const { t } = useTranslation("common");
 
-	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(`/towers`);
+	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(`/towers?for_select=true`);
 
 
 	const { data: openingBalance, isLoading, isValidating, mutate } = useApi(openingBalanceId ? `/opening-balance?id=${openingBalanceId}` : null);

@@ -1,9 +1,9 @@
-import { handleDeleteRequest, handleGetRequest, handlePostRequest, handlePutRequest } from "lib/controllers/monthly-settlement-controller";
+import { handleDeleteRequest, handleGetRequest, handlePostRequest, handlePutRequest } from "lib/controllers/settlement-controller";
 import { handlePostRequest as handleUserLogPostRequest } from "lib/controllers/user-log-controller";
 import { getToken } from "next-auth/jwt";
 
 const handler = async (req, res) => {
-  const action = `monthly_settlement:${req.method}`;
+  const action = `settlement:${req.method}`;
 
   const token = await getToken({ req, secret: process.env.JWT_SECRET });
   if (!token) res.status(401).json({ message: "Unauthorized" });

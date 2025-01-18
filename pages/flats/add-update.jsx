@@ -20,7 +20,7 @@ const Index = () => {
 
 	const { t } = useTranslation("common");
 
-	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(`/towers`);
+	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(`/towers?for_select=true`);
 
 
 	const { data: flat, isLoading, isValidating, mutate } = useApi(flatId ? `/flats?id=${flatId}` : null);
