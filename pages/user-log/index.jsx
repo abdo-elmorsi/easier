@@ -57,16 +57,16 @@ const Index = () => {
         setShowDeleteModal({});
     };
 
-    const handleDelete = async () => {
-        setShowDeleteModal((prev) => ({ ...prev, loading: true }));
+    const handleDelete = async ({ id = null }) => {
+        !id && setShowDeleteModal((prev) => ({ ...prev, loading: true }));
         try {
-            await executeMutation("DELETE", { id: showDeleteModal.id });
+            await executeMutation("DELETE", { id: id || showDeleteModal.id });
             mutate();
-            closeDeleteModal();
+            !id && closeDeleteModal();
         } catch (error) {
             handleMessage(error);
         } finally {
-            setShowDeleteModal((prev) => ({ ...prev, loading: false }));
+            !id && setShowDeleteModal((prev) => ({ ...prev, loading: false }));
         }
     };
 
@@ -136,6 +136,7 @@ const Index = () => {
                             onClick={() =>
                                 setShowDeleteModal({ isOpen: true, id: row?.id })
                             }
+
                             className="px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600"
                         >
                             <TrashIcon width={22} />
@@ -183,6 +184,7 @@ const Index = () => {
                     paginationTotalRows={totalUserLogs}
                     paginationPerPage={limit} // Use limit from router query
                     paginationDefaultPage={page} // Use page from router query
+                    onRowDoubleClicked={(row) => handleDelete({ id: row?.id })}
                     actions={
                         <Actions
                             onClickPrint={exportPDF}

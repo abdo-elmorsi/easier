@@ -24,16 +24,6 @@ const handler = async (req, res) => {
         return res.status(405).json({ message: "Method Not Allowed" });
     }
 
-    // Log success for non-GET requests
-    if (req.method !== "GET") {
-      handleUserLogPostRequest({
-        action,
-        status: true,
-        user_id: token.id,
-        details: `${action} => ${req.body?.id || req.body?.name}`,
-      });
-    }
-
   } catch (error) {
     handleUserLogPostRequest({
       action,
