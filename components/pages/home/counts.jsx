@@ -25,7 +25,7 @@ function Counts() {
 		{
 			title: "towers_key",
 			count: data?.towerCount || 0,
-			desc: "tower_key",
+			desc: "towers_key",
 			percentage: data?.towerPercentChange || 0,
 			duration: moment().fromNow(),
 		},

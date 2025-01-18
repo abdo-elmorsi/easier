@@ -48,7 +48,6 @@ const Login = () => {
     };
     try {
       const user = await executeMutation("POST", submitData);
-      handleMessage("login_success_key", "success");
 
       const result = await signIn("credentials", {
         redirect: false,

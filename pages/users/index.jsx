@@ -78,7 +78,7 @@ const Index = () => {
                 width: "150px"
             },
             {
-                name: t("name"),
+                name: t("name_key"),
                 selector: (row) => row?.user_name,
                 sortable: true,
                 width: "200px"

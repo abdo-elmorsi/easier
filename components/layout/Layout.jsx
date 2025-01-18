@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <MainNav />
-      <main className="overflow-x-hidden bg-gray-100 remain-height dark:bg-gray-700 dark:text-gray-300">
+      <main className="min-h-[calc(100vh_-_4rem)] bg-gray-100 dark:bg-gray-700">
         {children}
       </main>
     </>

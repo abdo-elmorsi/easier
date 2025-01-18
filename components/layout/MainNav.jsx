@@ -16,7 +16,7 @@ import { MainLogo } from "components/icons";
 import Link from "next/link";
 import { Badge, Button, List, ListItem, ListItemPrefix, Popover, PopoverContent, PopoverHandler } from "@material-tailwind/react";
 import Image from "next/image";
-import { useOnlineStatus, useSavedState } from "hooks";
+import { useOnlineStatus } from "hooks";
 import { useTheme } from "context/ThemeContext";
 import { imageUrl } from "utils/utils";
 

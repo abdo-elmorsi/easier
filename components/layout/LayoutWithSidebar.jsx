@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 const LayoutWithSidebar = ({ children }) => {
   return (
-    <div className="flex antialiased text-black bg-gray-100 remain-height dark:bg-gray-700 dark:text-white">
+    <div className="flex">
       <Sidebar />
-      <div className="block w-full m-2 overflow-hidden sm:m-8 dark:bg-gray-700 dark:text-white ">
+      <div className="w-full m-2 sm:m-8 overflow-hidden dark:text-white ">
         {children}
       </div>
     </div>

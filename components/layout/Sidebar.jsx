@@ -3,17 +3,12 @@ import { useRouter } from "next/router";
 import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
-  BriefcaseIcon,
   BuildingOfficeIcon,
-  BuildingStorefrontIcon,
   ChevronRightIcon,
-  CircleStackIcon,
   CogIcon,
-  CurrencyDollarIcon,
   DocumentChartBarIcon,
   HomeIcon,
   RocketLaunchIcon,
-  ShoppingCartIcon,
   TruckIcon,
   UsersIcon,
 
@@ -142,7 +137,7 @@ const Sidebar = React.memo(() => {
 
   return (
     // w-14 hover:w-64
-    <div className={`group flex flex-col flex-shrink-0  transition-all duration-300 bg-white border-none w-14 hover:w-64 ${fixedSideBar ? "md:w-64 opened" : ""} sidebar dark:bg-gray-900 `}>
+    <div className={`min-h-[calc(100vh_-_4rem)] group flex flex-col flex-shrink-0  transition-all duration-300 bg-white w-14 hover:w-64 ${fixedSideBar ? "md:w-64 opened" : ""} sidebar dark:bg-gray-900 `}>
       <div className="flex flex-col fixed">
         <ul className="flex flex-col py-4 space-y-1 overflow-y-auto no-scrollbar border-y-2 border-gray-100 dark:border-gray-700">
 

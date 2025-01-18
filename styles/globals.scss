@@ -2,23 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "components/layout/sidebar";
 @import "global-style";
 @import "global-dark-style";
-@import "global-rtl-style";
+@import "components/layout/sidebar";
 @import "pages/login";
-
-@layer utilities {
-    .remain-height {
-        min-height: calc(100vh - 4rem);
-    }
-}
-
-@layer base {
-    .test {
-        @apply block border-b-2 px-3 py-2 text-base font-medium dark:rounded-md;
-    }
-}
+@import "global-rtl-style";
 
 @layer components {
     .btn {
