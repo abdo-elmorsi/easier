@@ -7,6 +7,10 @@ export function formatComma(value, minimumFractionDigits = 2) {
     return value.toLocaleString('en-US', { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: Math.max(2, minimumFractionDigits) });
 }
 
+export function formatNumber(value = 0, minimumFractionDigits = 2) {
+    return Number(value.toFixed(minimumFractionDigits))
+}
+
 
 export function sum(arr = [], prop = "") {
     return arr?.reduce((accumulator, object) => {

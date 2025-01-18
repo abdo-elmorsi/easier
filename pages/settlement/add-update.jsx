@@ -25,7 +25,7 @@ const Index = () => {
 
 	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(!settlementId ? `/towers?for_select=true` : "");
 
-	const { isLoading: isLoadingFlatOptions, mutate: mutateFlats, data: flatOptions = [] } = useApi(!settlementId && tower_id.value?.id ? `/flats?tower=${tower_id.value?.id}&for_settlement=true` : null);
+	const { isLoading: isLoadingFlatOptions, isValidating: isValidatingFlatOptions, mutate: mutateFlats, data: flatOptions = [] } = useApi(!settlementId && tower_id.value?.id ? `/flats?tower=${tower_id.value?.id}&for_settlement=true` : null);
 
 
 	const { data: settlement, isLoading, isValidating, mutate } = useApi(settlementId ? `/settlement?id=${settlementId}` : null);
@@ -147,12 +147,12 @@ const Index = () => {
 								/>
 								<Select
 									mandatory
-									isDisabled={settlementId}
+									isDisabled={settlementId || isLoadingFlatOptions || isValidatingFlatOptions}
 									label={t("flat_key")}
 									options={flatOptions}
 									getOptionValue={(option) => option?.id}
 									getOptionLabel={(option) => `n: ${option?.number} / f: ${option?.floor}`}
-									isLoading={isLoadingFlatOptions}
+									isLoading={isLoadingFlatOptions || isValidatingFlatOptions}
 									{...flat_id.bind}
 								/>
 

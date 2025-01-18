@@ -5,8 +5,12 @@ html {
 
     /* For WebKit browsers (Chrome, Safari, Edge) */
     ::-webkit-scrollbar {
-        width: 5px; /* Width of the scrollbar */
-        height: 5px; /* Height of the horizontal scrollbar */
+        width: 8px; /* Width of the scrollbar */
+        height: 8px; /* Height of the horizontal scrollbar */
+    }
+    ::-webkit-scrollbar:hover {
+        width: 10px; /* Width of the scrollbar */
+        height: 10px; /* Height of the horizontal scrollbar */
     }
 
     ::-webkit-scrollbar-track {

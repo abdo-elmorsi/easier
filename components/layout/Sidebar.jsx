@@ -111,11 +111,11 @@ const Sidebar = React.memo(() => {
       submenuOpen: activeAdminSubMenu === 5,
       submenu: [
         {
-          nameAR: "الشققق",
-          nameEN: "Flats",
-          href: "/flats-report",
+          nameAR: "شهري",
+          nameEN: "Monthly",
+          href: "/monthly-report",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/flats-report",
+          current: router.pathname === "/monthly-report",
         },
         {
           nameAR: "سجل المستخدم",
