@@ -6,10 +6,10 @@ const handler = async (req, res) => {
   const action = `flat:${req.method}`;
 
   const token = await getToken({ req, secret: process.env.JWT_SECRET });
-  if (!token) res.status(401).json({ message: "Unauthorized" });
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
 
-  req.user_id = token.id;
-  req.role = token.role;
+  req.user_id = token?.id;
+  req.role = token?.role;
 
   try {
 
@@ -35,7 +35,7 @@ const handler = async (req, res) => {
       handleUserLogPostRequest({
         action,
         status: true,
-        user_id: token.id,
+        user_id: token?.id,
         details: `${action} => ${req.body?.id || req.body?.name}`,
       });
     }
@@ -44,7 +44,7 @@ const handler = async (req, res) => {
     handleUserLogPostRequest({
       action,
       status: false,
-      user_id: token.id,
+      user_id: token?.id,
       details: `statusCode:${error.statusCode || 500} message:${error?.message || "An unexpected error occurred."}`,
     });
     return res.status(error.statusCode || 500).json({ ...error, message: error?.message || "An unexpected error occurred." });

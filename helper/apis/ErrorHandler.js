@@ -49,7 +49,10 @@ class ErrorHandler extends Error {
 	static serviceUnavailable(message = "Service unavailable", details = {}, errorCode = "SERVICE_UNAVAILABLE") {
 		return new ErrorHandler(message, 503, details, errorCode);
 	}
-
+	// New static method for validation errors
+	static validationError(message = "Validation error", details = {}, errorCode = "VALIDATION_ERROR") {
+		return new ErrorHandler(message, 400, details, errorCode);
+	}
 	static isErrorHandler(error) {
 		return error instanceof ErrorHandler; // Checks if the error is an instance of ErrorHandler
 	}

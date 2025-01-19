@@ -5,11 +5,23 @@ import { withAuth } from "next-auth/middleware";
 const protectedRoutes = new Set([
 	"/",
 	"/users",
+	"/users/add-update",
+
 	"/towers",
+	"/towers/add-update",
+
 	"/flats",
+	"/flats/add-update",
+
 	"/opening-balance",
+	"/opening-balance/add-update",
+
 	"/estimated-expenses",
+	"/estimated-expenses/add-update",
+
 	"/settlement",
+	"/settlement/add-update",
+
 	"/flats-report",
 	"/settings",
 ]);
@@ -53,11 +65,23 @@ export const config = {
 		"/",
 		"/login",
 		"/users",
+		"/users/add-update",
+
 		"/towers",
+		"/towers/add-update",
+
 		"/flats",
+		"/flats/add-update",
+
 		"/opening-balance",
+		"/opening-balance/add-update",
+
 		"/estimated-expenses",
+		"/estimated-expenses/add-update",
+
 		"/settlement",
+		"/settlement/add-update",
+
 		"/flats-report",
 		"/settings",
 	],
