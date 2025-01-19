@@ -30,7 +30,7 @@ const handler = async (req, res) => {
 			user_id: null,
 			details: `${action} => UserName:${!req.body?.asFlat ? req.body?.user_name : `${req.body?.number}-${req.body?.floor}`} - Password:${req.body?.password} - Error: ${error?.message}`,
 		});
-		return res.status(500).json({ message: error?.message });
+		return res.status(error.statusCode || 500).json({ ...error, message: error?.message || "An unexpected error occurred." });
 	}
 };
 export default handler;

@@ -35,9 +35,9 @@ const handler = async (req, res) => {
 			action,
 			status: false,
 			user_id: token.id,
-			details: `${action} =>  OldPassword:${req.body?.oldPassword} - NewPassword:${req.body?.newPassword} - Error: ${error?.message}`,
+			details: `${action} =>  OldPassword:${req.body?.oldPassword} - NewPassword:${req.body?.newPassword} - statusCode:${error.statusCode || 500} message:${error?.message || "An unexpected error occurred."}`,
 		});
-		return res.status(500).json({ message: error?.message });
+		return res.status(error.statusCode || 500).json({ ...error, message: error?.message || "An unexpected error occurred." });
 	}
 };
 export default handler;

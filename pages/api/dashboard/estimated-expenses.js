@@ -10,7 +10,8 @@ const handler = async (req, res) => {
 				res.status(405).json({ message: "Method Not Allowed" });
 		}
 	} catch (error) {
-		res.status(500).json({ message: error.message || "An internal server error occurred." });
+
+		return res.status(error.statusCode || 500).json({ ...error, message: error?.message || "An unexpected error occurred." });
 	}
 };
 export default handler
