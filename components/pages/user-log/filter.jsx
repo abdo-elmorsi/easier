@@ -30,7 +30,7 @@ const Filter = () => {
 		{ label: t("failed_key"), id: 'false' }
 	], []);
 
-	const { data: users = [], loading } = useApi(`/users?for_select`);
+	const { data: users = [], loading } = useApi(`/users?for_select=true`);
 
 
 	const currentPage = router.query.page_id || null;

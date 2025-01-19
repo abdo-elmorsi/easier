@@ -60,12 +60,12 @@ const Index = () => {
     // ================== Table Columns ==================
     const columns = useMemo(
         () => [
-            {
-                name: t("tower_key"),
-                selector: (row) => row?.tower?.name,
-                sortable: true,
-                width: "150px"
-            },
+            // {
+            //     name: t("tower_key"),
+            //     selector: (row) => row?.tower?.name,
+            //     sortable: true,
+            //     width: "150px"
+            // },
             {
                 name: t("number_key"),
                 selector: (row) => row?.number,

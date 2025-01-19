@@ -22,7 +22,7 @@ function EstimatedExpenses() {
 	const language = router.locale.toLowerCase();
 
 
-	const { data: towers = [] } = useApi(`/towers`);
+	const { data: towers = [] } = useApi(`/towers?for_select=true`);
 
 
 	const [tower_id, setTower_id] = useSavedState(null, "easier-2-selected-tower-for-estimated-expenses-chart-cache")

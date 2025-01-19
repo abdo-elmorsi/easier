@@ -6,9 +6,9 @@ export const payPercentageOptions = [
 
 export const ActionType = {
 	// 1: "GET",
-	2: "POST",
-	3: "PUT",
-	4: "DELETE"
+	2: "post",
+	3: "put",
+	4: "delete"
 };
 export const PageType = {
 	1: "tower",

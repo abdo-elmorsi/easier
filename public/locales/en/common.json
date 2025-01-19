@@ -69,5 +69,10 @@
     "user_log_key": "User log",
     "save_key": "Save",
     "cancel_key": "Cancel",
-    "warning_delete_key": "Are you sure you want to delete"
+    "warning_delete_key": "Are you sure you want to delete",
+    "post_key": "Post",
+    "put_key": "Put",
+    "login_key": "Login",
+    "update_password_key": "Update password",
+    "settlement_key": "Settlement"
 }

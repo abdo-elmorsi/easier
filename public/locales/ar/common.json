@@ -69,5 +69,10 @@
     "user_log_key": "سجل المستخدم",
     "save_key": "حفظ",
     "cancel_key": "ألغاء",
-    "warning_delete_key": "هل أنت متأكد أنك تريد الحذف؟"
+    "warning_delete_key": "هل أنت متأكد أنك تريد الحذف؟",
+    "post_key": "إرسال",
+    "put_key": "تحديث",
+    "login_key": "تسجيل الدخول",
+    "update_password_key": "تحديث كلمة المرور",
+    "settlement_key": "تسوية"
 }

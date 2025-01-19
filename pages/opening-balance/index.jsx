@@ -61,12 +61,6 @@ const Index = () => {
     const columns = useMemo(
         () => [
             {
-                name: t("tower_key"),
-                selector: (row) => row?.tower?.name,
-                sortable: true,
-                width: "150px"
-            },
-            {
                 name: t("balance_key"),
                 selector: (row) => formatComma(row?.balance),
                 sortable: true,
