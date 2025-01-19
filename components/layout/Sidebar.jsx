@@ -196,7 +196,7 @@ const Sidebar = React.memo(() => {
                   )}
                 </>
               ) : (
-                <div className="cursor-pointer" aria-hidden="true" onClick={() => activeAdminSubMenu && setActiveAdminSubMenu(null)}>
+                <div className="cursor-pointer" onClick={() => activeAdminSubMenu && setActiveAdminSubMenu(null)}>
                   <Link href={tab.href} >
                     <a
                       className={`${tab.current

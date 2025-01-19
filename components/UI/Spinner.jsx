@@ -9,7 +9,6 @@ const Spinner = ({ className }) => {
   );
   return (
     <svg
-      aria-hidden="true"
       role="status"
       className={boxClasses}
       viewBox="0 0 100 101"
