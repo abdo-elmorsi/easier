@@ -19,8 +19,6 @@ class MyDocument extends Document {
           />
 
           {/* Primary Meta Tags */}
-          <title>Easier</title>
-
           <meta name="application-name" content="Easier" />
           <meta name="description" content="Easier is a web app designed to help tower managers efficiently manage towers, flats, and financial records. Track payments, monitor flat owners, and streamline operations with ease." />
           <meta name="keywords" content="Abdo Elmorsi, tower management, flats, financial records, flat owners, payments, Easier web app" />
