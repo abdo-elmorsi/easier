@@ -68,6 +68,13 @@ const Index = () => {
             },
 
             {
+                name: t("year_key"),
+                selector: (row) => row?.created_at,
+                cell: (row) => moment(row?.created_at).format("yyyy"),
+                sortable: true,
+                width: "130px"
+            },
+            {
                 name: t("created_at_key"),
                 selector: (row) => row?.created_at,
                 cell: (row) => moment(row?.created_at).format(date_format),

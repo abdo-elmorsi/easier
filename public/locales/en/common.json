@@ -74,5 +74,16 @@
     "put_key": "Put",
     "login_key": "Login",
     "update_password_key": "Update password",
-    "settlement_key": "Settlement"
+    "settlement_key": "Settlement",
+    "year_key": "Year",
+    "change_password_key": "Change password",
+    "general_key": "General",
+    "old_password_key": "Old password",
+    "new_password_key": "New password",
+    "new_password_does_not_match_confirm_password_key": "New password does not match confirm password",
+    "confirm_password_key": "Confirm password",
+    "updated_successfully_key": "Updated successfully",
+    "change_your_image_key": "Change your image",
+    "image_allowed_key": "Image allowed",
+    "max_image_size_key": "Max image size"
 }

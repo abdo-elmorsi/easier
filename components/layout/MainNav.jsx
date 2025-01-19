@@ -18,7 +18,7 @@ import { Badge, Button, List, ListItem, ListItemPrefix, Popover, PopoverContent,
 import Image from "next/image";
 import { useOnlineStatus } from "hooks";
 import { useTheme } from "context/ThemeContext";
-import { imageUrl } from "utils/utils";
+import { generateCloudinaryUrl } from "utils/utils";
 
 
 
@@ -114,7 +114,7 @@ export default function MainNav() {
                 <div className="relative">
                   <span className={`w-2 h-2 rounded-full absolute -top-1 -left-1 ${isOnline ? "bg-green-500" : "bg-red-500"}`}></span>
                   {user?.img ? <Image
-                    src={imageUrl(user.img)}
+                    src={generateCloudinaryUrl(user.img)}
                     width={40}
                     height={40}
                     className=" rounded-full"

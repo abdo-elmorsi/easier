@@ -13,7 +13,7 @@ import { useApi, useApiMutation } from "hooks/useApi";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import moment from 'moment-timezone';
-import { imageUrl } from "utils/utils";
+import { generateCloudinaryUrl } from "utils/utils";
 
 const Index = () => {
     const router = useRouter();
@@ -70,7 +70,7 @@ const Index = () => {
                         width={40}
                         height={40}
                         className="rounded"
-                        src={imageUrl(row.img)}
+                        src={generateCloudinaryUrl(row.img)}
                         alt={row.user_name}
                     /> : null
                 ),

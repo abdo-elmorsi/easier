@@ -74,5 +74,16 @@
     "put_key": "تحديث",
     "login_key": "تسجيل الدخول",
     "update_password_key": "تحديث كلمة المرور",
-    "settlement_key": "تسوية"
+    "settlement_key": "تسوية",
+    "year_key": "السنة",
+    "change_password_key": "تغيير كلمة المرور",
+    "general_key": "عام",
+    "old_password_key": "كلمة المرور القديمة",
+    "new_password_key": "كلمة المرور الجديدة",
+    "new_password_does_not_match_confirm_password_key": "كلمة المرور الجديدة لا تطابق تأكيد كلمة المرور",
+    "confirm_password_key": "تأكيد كلمة المرور",
+    "updated_successfully_key": "تم التحديث بنجاح",
+    "change_your_image_key": "تغيير صورتك",
+    "image_allowed_key": "الصورة مسموحة",
+    "max_image_size_key": "الحد الأقصى لحجم الصورة"
 }

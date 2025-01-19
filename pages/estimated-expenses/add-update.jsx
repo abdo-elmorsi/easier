@@ -9,7 +9,7 @@ import { Header } from "components/global";
 import { Button, Input, Select, Spinner } from "components/UI";
 import { useHandleMessage, useInput, useSelect } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
-import { convertImageToBase64, imageUrl } from "utils/utils";
+import { convertImageToBase64, generateCloudinaryUrl } from "utils/utils";
 import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const Index = () => {
@@ -209,7 +209,7 @@ const Index = () => {
 												<CheckCircleIcon className="w-5 h-5 absolute -top-2 -left-2 text-green-500" />
 												<img
 													key={image}
-													src={imageUrl(image)}
+													src={generateCloudinaryUrl(image)}
 													alt={`Image ${image}`}
 													className="w-12 h-12 object-cover rounded-md"
 												/>

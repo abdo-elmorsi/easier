@@ -86,6 +86,6 @@ export function groupBy(arr = [], groupByProperty, sumByProperty) {
 }
 
 
-export const imageUrl = (public_id) => {
+export const generateCloudinaryUrl = (public_id) => {
     return `https://res.cloudinary.com/dwzymxb27/image/upload/${public_id}.jpg`
 }

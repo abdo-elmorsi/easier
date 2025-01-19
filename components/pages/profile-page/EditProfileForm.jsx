@@ -2,15 +2,14 @@ import { useState } from "react";
 import { useTranslation } from "next-i18next";
 import { useSession } from "next-auth/react";
 import { FileInput, Input, Button, Spinner } from "components/UI";
-import PropTypes from "prop-types"
-import { useHandleMessage, useInput, useSavedState } from "hooks";
-import { convertImageToBase64, imageUrl } from "utils/utils";
+import { useHandleMessage, useInput } from "hooks";
+import { convertImageToBase64, generateCloudinaryUrl } from "utils/utils";
 import Image from "next/image";
 import { useApiMutation } from "hooks/useApi";
 
 const EditProfileForm = () => {
   const { t } = useTranslation("common");
-  const { data: session, update } = useSession()
+  const { data: session, update, status } = useSession()
   const handleMessage = useHandleMessage();
 
   const { user_name: user_user_name, phone: user_phone, id, img: user_image, role } = session?.user || {};
@@ -53,15 +52,15 @@ const EditProfileForm = () => {
     <form onSubmit={onSubmit} className="flex flex-col items-center justify-around gap-8 sm:m-5 lg:flex-row">
       <div className="mb-12 flex flex-col items-center justify-center">
         <FileInput
-          name={user_user_name}
+          name={user_user_name || 'user'}
           label={<div className="user__image-box relative h-32 w-32 shrink-0 cursor-pointer overflow-hidden rounded-full shadow-lg outline outline-1 outline-offset-4 outline-gray-400 sm:h-48 sm:w-48">
-            <Image
+            {status !== 'loading' && <Image
               alt={user_user_name}
-              src={image || imageUrl(user_image)}
+              src={image || generateCloudinaryUrl(user_image)}
               width={200}
               height={200}
               className="user__image block h-full w-full scale-105 object-cover object-center transition-all duration-500"
-            />
+            />}
             <span className="user__edit translate-y-1/5 absolute  top-1/2 left-1/2 -translate-x-1/2 text-center text-sm text-white opacity-0 transition-all duration-500 md:text-lg">
               {t("change_your_image_key")}
             </span>
@@ -105,10 +104,5 @@ const EditProfileForm = () => {
 
   );
 };
-
-
-EditProfileForm.propTypes = {
-  session: PropTypes.object.isRequired
-}
 
 export default EditProfileForm;

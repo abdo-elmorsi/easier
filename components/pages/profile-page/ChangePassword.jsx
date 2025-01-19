@@ -26,7 +26,7 @@ const ChangePassword = () => {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		if (newPassword.value != confirmPassword.value) {
-			handleMessage("new_password_does_not_match_confirm_password_key", "warning");
+			handleMessage(t("new_password_does_not_match_confirm_password_key"), "warning");
 
 			return;
 		}
@@ -67,7 +67,7 @@ const ChangePassword = () => {
 					{...newPassword.bind}
 				/>
 				<Input
-					label={t("confirm_new_password_key")}
+					label={t("confirm_password_key")}
 					type={showPassTwo ? "text" : "password"}
 					append={showPassTwo ? <EyeIcon onClick={handleShowPassTwo} className="cursor-pointer text-primary" width={"25"} /> : <EyeSlashIcon onClick={handleShowPassTwo} className="cursor-pointer text-primary" width={"25"} />}
 					className={"w-full"}
