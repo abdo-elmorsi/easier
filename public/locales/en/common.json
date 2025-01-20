@@ -19,6 +19,7 @@
     "actions_key": "Actions",
     "users_key": "Users",
     "add_key": "Add",
+    "edit_key": "Edit",
     "delete_key": "Delete",
     "address_key": "Address",
     "num_of_floors_key": "Number of floors",

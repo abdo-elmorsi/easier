@@ -19,32 +19,19 @@ function EstimatedExpenses() {
 	const { t } = useTranslation("common");
 	const language = router.locale.toLowerCase();
 
-
 	const { data: towers = [] } = useApi(`/towers?for_select=true`);
 
-
-	const [tower_id, setTower_id] = useSavedState(null, "easier-2-selected-tower-for-estimated-expenses-chart-cache")
+	const [tower_id, setTower_id] = useSavedState(null, "easier-2-selected-tower-for-payments-chart-cache");
 
 	const selectedTowerOption = findSelectedOption(towers, tower_id);
 
-
-	const { data, isLoading } = useApi(tower_id ? `/dashboard/estimated-expenses?tower_id=${tower_id}` : null);
-
-	const colors = {
-		electricity: "#5c6bc0",
-		water: "#42a5f5",
-		waste: "#66bb6a",
-		guard: "#ab47bc",
-		elevator: "#ff7043",
-		others: "#29b6f6",
-		total: "#26a69a",
-	};
+	const { data = [], isLoading } = useApi(tower_id ? `/dashboard/payments?tower_id=${tower_id}` : null);
 
 	return (
 		<div className="mb-8 flex-1 p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
 			<div className="grid grid-cols-1 md:grid-cols-3 mb-2 items-center">
-				<h2 className=" text-xl font-bold col-span-2">
-					{t("estimated_expenses_key")}
+				<h2 className="text-xl font-bold col-span-2">
+					{t("payed_amount_key")}
 				</h2>
 				<Select
 					label={t("tower_key")}
@@ -62,41 +49,30 @@ function EstimatedExpenses() {
 				<ResponsiveContainer width="100%" height={400}>
 					<AreaChart
 						data={data}
-						margin={{ top: 10, right: language == "en" ? 40 : 0, left: 0, bottom: 0 }}
+						margin={{ top: 10, right: language === "en" ? 40 : 0, left: 0, bottom: 0 }}
 					>
 						<CartesianGrid strokeDasharray="3 3" />
-						<XAxis dataKey="month"
-						// reversed={language === "ar"}  // Reverse the X-axis if language is Arabic (RTL)
-						/>
+						<XAxis dataKey="month" />
 						<YAxis />
 						<Tooltip content={({ active, payload, label }) => {
 							if (active && payload && payload.length) {
 								return (
 									<div className="p-4 bg-hoverPrimary text-white rounded-lg shadow-sm" >
-										{Object.keys(colors).map((item, i) => {
-											return (
-												<p key={item} className={`mb-2 flex flex-row gap-2 items-center justify-between border-b-2 ${item == "total" ? "font-bold text-xl" : ""}`}>
-													<span>{t(`${item}_key`)}:</span>
-													<span>{formatComma(payload[i].value || 0)}</span>
-												</p>
-											);
-										})}
+										<p>{`${t('month_key')}: ${label}`}</p>
+										<p>{`${t('payed_amount_key')}: ${formatComma(payload[0].value || 0)}`}</p> {/* Customize this to display your custom label */}
 									</div>
 								);
 							}
+
 							return null;
 						}} />
-
-						{Object.keys(colors).map((key) => (
-							<Area
-								key={key}
-								type="monotone"
-								dataKey={key}
-								stackId="1"
-								stroke={colors[key]}
-								fill={colors[key]}
-							/>
-						))}
+						<Area
+							type="monotone"
+							dataKey="payed_amount"
+							label={"tests"}
+							stroke="var(--primary)"
+							fill="var(--primary)"
+						/>
 					</AreaChart>
 				</ResponsiveContainer>
 			)}
@@ -106,10 +82,8 @@ function EstimatedExpenses() {
 
 export default EstimatedExpenses;
 
-
 const SkeletonLoader = () => (
 	<div className="animate-pulse flex flex-col">
-
 		<div className="h-32 bg-gray-300 dark:bg-gray-600 rounded mb-2" />
 		<div className="h-32 bg-gray-300 dark:bg-gray-600 rounded mb-2" />
 		<div className="h-32 bg-gray-300 dark:bg-gray-600 rounded mb-2" />

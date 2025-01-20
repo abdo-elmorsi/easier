@@ -15,9 +15,9 @@ module.exports = withMT({
         english: ['Inter', 'sans-serif'],  // English font
       },
       colors: {
-        primary: '#336a86',          // Primary brand color
-        hoverPrimary: '#28556c',     // Hover color for primary
-        secondary: '#e8fffe',        // Secondary color
+        primary: 'var(--primary)',
+        hoverPrimary: 'var(--hoverPrimary)',
+        secondary: 'var(--secondary)',
         // Tailwind default color palette extensions
         slate: colors.slate,
         sky: colors.sky,
