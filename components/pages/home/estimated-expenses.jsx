@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next";
-import { useSavedState } from "hooks";
+import { useQueryString } from "hooks";
 import { useApi } from "hooks/useApi";
 import { useRouter } from "next/router";
 import {
@@ -11,8 +11,7 @@ import {
 	YAxis,
 	ResponsiveContainer,
 } from "recharts";
-import { Select } from "components/UI";
-import { findSelectedOption, formatComma } from "utils/utils";
+import { formatComma } from "utils/utils";
 
 function EstimatedExpenses() {
 	const router = useRouter();
@@ -20,15 +19,13 @@ function EstimatedExpenses() {
 	const language = router.locale.toLowerCase();
 
 
-	const { data: towers = [] } = useApi(`/towers?for_select=true`);
+	const { queryString } = useQueryString();
 
 
-	const [tower_id, setTower_id] = useSavedState(null, "easier-2-selected-tower-for-estimated-expenses-chart-cache")
 
-	const selectedTowerOption = findSelectedOption(towers, tower_id);
-
-
-	const { data, isLoading } = useApi(tower_id ? `/dashboard/estimated-expenses?tower_id=${tower_id}` : null);
+	const { data, isLoading } = useApi(queryString.includes('tower_id') ? `/dashboard/estimated-expenses?${queryString}` : null, {
+		dedupingInterval: 10000,
+	});
 
 	const colors = {
 		electricity: "#5c6bc0",
@@ -42,19 +39,8 @@ function EstimatedExpenses() {
 
 	return (
 		<div className="mb-8 flex-1 p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
-			<div className="grid grid-cols-1 md:grid-cols-3 mb-2 items-center">
-				<h2 className=" text-xl font-bold col-span-2">
-					{t("estimated_expenses_key")}
-				</h2>
-				<Select
-					label={t("tower_key")}
-					options={towers}
-					getOptionValue={(option) => option.id}
-					getOptionLabel={(option) => option.name}
-					value={selectedTowerOption}
-					onChange={(selected) => setTower_id(selected?.id)}
-				/>
-			</div>
+			<h2 className=" text-xl font-bold col-span-2">{t("estimated_expenses_key")}</h2>
+
 
 			{isLoading ? (
 				<SkeletonLoader />

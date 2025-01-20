@@ -1,8 +1,8 @@
-import { DatePicker } from 'components/UI';
+import { Select } from 'components/UI';
+import { useApi } from 'hooks/useApi';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
-import moment from 'moment-timezone';
-import { useMemo } from 'react';
+import { findSelectedOption } from 'utils/utils';
 import { useQueryString } from 'hooks';
 
 const Filter = () => {
@@ -10,43 +10,25 @@ const Filter = () => {
 	const router = useRouter();
 	const { updateQuery } = useQueryString();
 
+	const { data: towers = [], isLoading } = useApi(`/towers?for_select=true`);
 
-	// Set default dates
-	const defaultStartDate = moment().subtract(1, 'month'); // Default start date: one week ago
-	const defaultEndDate = moment(); // Default end date: today
 
-	const selectedStartDate = useMemo(() => {
-		const date = router.query?.startDate ? moment(router.query.startDate) : defaultStartDate;
-		return date.isValid() ? date.toDate() : defaultStartDate.toDate();
-	}, [router.query?.startDate, defaultStartDate]);
+	const currentTower = router.query.tower_id || null;
 
-	const selectedEndDate = useMemo(() => {
-		const date = router.query?.endDate ? moment(router.query.endDate) : defaultEndDate;
-		return date.isValid() ? date.toDate() : defaultEndDate.toDate();
-	}, [router.query?.endDate, defaultEndDate]);
 
-	const handleDateChange = (key, date) => {
-		const formattedDate = moment(date).isValid()
-			? moment(date).format("YYYY-MM-DD")
-			: key === "startDate"
-				? defaultStartDate.format("YYYY-MM-DD")
-				: defaultEndDate.format("YYYY-MM-DD");
-		updateQuery(key, formattedDate);
-	};
+	const selectedTowerOption = findSelectedOption(towers, currentTower);
+
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10">
-			<DatePicker
-				label={t("from_date_key")}
-				value={selectedStartDate}
-				onChange={(date) => handleDateChange('startDate', date)}
-				maxDate={new Date()} // Prevent selecting future dates
-			/>
-			<DatePicker
-				label={t("to_date_key")}
-				value={selectedEndDate}
-				onChange={(date) => handleDateChange('endDate', date)}
-				maxDate={new Date()} // Prevent selecting future dates
+			<Select
+				label={t("tower_key")}
+				options={towers}
+				getOptionValue={(option) => option.id}
+				getOptionLabel={(option) => option.name}
+				value={selectedTowerOption}
+				isLoading={isLoading}
+				onChange={(selected) => updateQuery('tower_id', selected?.id)}
 			/>
 		</div>
 	);

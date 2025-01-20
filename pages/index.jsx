@@ -2,13 +2,16 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // Custom
 import { Layout, LayoutWithSidebar } from "components/layout";
-import { Counts, EstimatedExpenses, Payments } from "components/pages/home";
+import { Counts, EstimatedExpenses, Filter, Payments } from "components/pages/home";
+import { MinimizedBox } from "components/UI";
 
 const Index = () => {
 
     return (
         <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
-
+            <MinimizedBox minimized={false}>
+                <Filter />
+            </MinimizedBox>
             <Counts />
             <EstimatedExpenses />
             <Payments />

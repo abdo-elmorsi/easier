@@ -6,17 +6,15 @@ import { useTranslation } from "next-i18next";
 import { Spinner } from "components/UI";
 import { useQueryString } from "hooks";
 import { useApi } from "hooks/useApi";
-import { useRouter } from "next/router";
 
 
 function Counts() {
-	const router = useRouter();
 	const { t } = useTranslation("common");
 
 	const { queryString } = useQueryString();
 
 	// Fetch data using the API
-	const { data, isLoading } = useApi(`/dashboard/counts?${queryString}`, {
+	const { data, isLoading } = useApi(queryString.includes('tower_id') ? `/dashboard/counts?${queryString}` : null, {
 		dedupingInterval: 10000,
 	});
 
