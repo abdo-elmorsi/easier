@@ -85,5 +85,7 @@
     "updated_successfully_key": "تم التحديث بنجاح",
     "change_your_image_key": "تغيير صورتك",
     "image_allowed_key": "الصورة مسموحة",
-    "max_image_size_key": "الحد الأقصى لحجم الصورة"
+    "max_image_size_key": "الحد الأقصى لحجم الصورة",
+    "printed_on_key": "تم الطباعه في",
+    "annually_report_key": "التقرير السنوي"
 }

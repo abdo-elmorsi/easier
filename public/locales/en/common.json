@@ -85,5 +85,7 @@
     "updated_successfully_key": "Updated successfully",
     "change_your_image_key": "Change your image",
     "image_allowed_key": "Image allowed",
-    "max_image_size_key": "Max image size"
+    "max_image_size_key": "Max image size",
+    "printed_on_key": "Printed on",
+    "annually_report_key": "Annually Report"
 }
