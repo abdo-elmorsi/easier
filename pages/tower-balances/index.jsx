@@ -55,15 +55,15 @@ const Index = () => {
                             <div className="relative group">
                                 <p className="flex items-center gap-2">
                                     <QuestionMarkCircleIcon className="w-5 h-5 group-hover:text-primary" />
-                                    <span>{formatComma((towerBalances?.balance - towerBalances?.openingBalance - towerBalances?.totalIncome) || 0)}</span>
+                                    <span>{formatMinus(-towerBalances?.totalOutComeTotal || 0)}</span>
                                 </p>
                                 <ul className="absolute duration-300 scale-0 group-hover:scale-100 flex flex-col gap-2 list-none text-sm bg-hoverPrimary rounded shadow-lg p-2 w-48">
-                                    <li>{`${t("electricity_key")}: ${formatComma(towerBalances?.totalOutCome?.electricity || 0)}`}</li>
-                                    <li>{`${t("water_key")}: ${formatComma(towerBalances?.totalOutCome?.water || 0)}`}</li>
-                                    <li>{`${t("waste_key")}: ${formatComma(towerBalances?.totalOutCome?.waste || 0)}`}</li>
-                                    <li>{`${t("guard_key")}: ${formatComma(towerBalances?.totalOutCome?.guard || 0)}`}</li>
-                                    <li>{`${t("elevator_key")}: ${formatComma(towerBalances?.totalOutCome?.elevator || 0)}`}</li>
-                                    <li>{`${t("others_key")}: ${formatComma(towerBalances?.totalOutCome?.others || 0)}`}</li>
+                                    <li>{`${t("electricity_key")}: ${formatMinus(-towerBalances?.totalOutCome?.electricity || 0)}`}</li>
+                                    <li>{`${t("water_key")}: ${formatMinus(-towerBalances?.totalOutCome?.water || 0)}`}</li>
+                                    <li>{`${t("waste_key")}: ${formatMinus(-towerBalances?.totalOutCome?.waste || 0)}`}</li>
+                                    <li>{`${t("guard_key")}: ${formatMinus(-towerBalances?.totalOutCome?.guard || 0)}`}</li>
+                                    <li>{`${t("elevator_key")}: ${formatMinus(-towerBalances?.totalOutCome?.elevator || 0)}`}</li>
+                                    <li>{`${t("others_key")}: ${formatMinus(-towerBalances?.totalOutCome?.others || 0)}`}</li>
                                 </ul>
                             </div>
                         </div>
