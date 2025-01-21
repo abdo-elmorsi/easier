@@ -57,8 +57,6 @@ const Sidebar = React.memo(() => {
       current: router.pathname === "/towers",
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
       submenuOpen: false,
-      omit: flat
-
     },
     {
       nameAR: "الشقق",
@@ -67,14 +65,12 @@ const Sidebar = React.memo(() => {
       current: router.pathname === "/flats",
       icon: <HomeIcon className="w-5 h-5" />,
       submenuOpen: false,
-      omit: flat
     },
     {
       nameAR: "ألاجرأت",
       nameEN: "Actions",
       icon: <RocketLaunchIcon className="w-5 h-5" />,
       submenuOpen: activeAdminSubMenu === 4,
-      omit: flat,
       submenu: [
         {
           nameAR: "الرصيد الافتتاحي",
@@ -132,6 +128,7 @@ const Sidebar = React.memo(() => {
           href: "/user-log",
           icon: <TruckIcon className="w-5 h-5" />,
           current: router.pathname === "/user-log",
+          omit: !admin
         },
 
       ],
