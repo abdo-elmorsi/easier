@@ -10,7 +10,7 @@ const CopyRight = () => {
         className="text-primary hover:underline cursor-pointer"
         href="https://elmorsi.vercel.app/"
       >
-        Abdo Elsohagi
+        Abdo Elmorsi
       </a>{' '}
       {moment().format("YYYY")}
     </p>
