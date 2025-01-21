@@ -88,5 +88,8 @@
     "image_allowed_key": "Image allowed",
     "max_image_size_key": "Max image size",
     "printed_on_key": "Printed on",
-    "annually_report_key": "Annually Report"
+    "annually_report_key": "Annually Report",
+    "tower_balances_key": "Tower Balance",
+    "total_income_key": "Total income",
+    "total_outcome_key": "Total outcome"
 }

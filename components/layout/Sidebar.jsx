@@ -120,6 +120,13 @@ const Sidebar = React.memo(() => {
           current: router.pathname === "/annually-report",
         },
         {
+          nameAR: "ارصدت البرج",
+          nameEN: "Tower balances",
+          href: "/tower-balances",
+          icon: <TruckIcon className="w-5 h-5" />,
+          current: router.pathname === "/tower-balances",
+        },
+        {
           nameAR: "سجل المستخدم",
           nameEN: "User Log",
           href: "/user-log",

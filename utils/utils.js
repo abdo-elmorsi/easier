@@ -7,6 +7,12 @@ export function formatComma(value, minimumFractionDigits = 2) {
     return value.toLocaleString('en-US', { minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: Math.max(2, minimumFractionDigits) });
 }
 
+export const formatMinus = (val, digits = 2) => {
+    const absVal = Math.abs(val);
+    const formattedVal = formatComma(absVal, digits);
+    return val < 0 ? `(${formattedVal})` : formattedVal;
+};
+
 export function formatNumber(value = 0, minimumFractionDigits = 2) {
     return Number(value.toFixed(minimumFractionDigits))
 }

@@ -88,5 +88,8 @@
     "image_allowed_key": "الصورة مسموحة",
     "max_image_size_key": "الحد الأقصى لحجم الصورة",
     "printed_on_key": "تم الطباعه في",
-    "annually_report_key": "التقرير السنوي"
+    "annually_report_key": "التقرير السنوي",
+    "tower_balances_key": "رصيد البرج",
+    "total_income_key": "إجمالي الدخل",
+    "total_outcome_key": "إجمالي المصروفات"
 }

@@ -4,6 +4,8 @@ import { withAuth } from "next-auth/middleware";
 // Constants
 const protectedRoutes = new Set([
 	"/",
+
+	// pages
 	"/users",
 	"/users/add-update",
 
@@ -13,6 +15,7 @@ const protectedRoutes = new Set([
 	"/flats",
 	"/flats/add-update",
 
+	// actions
 	"/opening-balance",
 	"/opening-balance/add-update",
 
@@ -22,7 +25,14 @@ const protectedRoutes = new Set([
 	"/settlement",
 	"/settlement/add-update",
 
-	"/flats-report",
+	// report
+	"/monthly-report",
+	"/annually-report",
+	"/tower-balances",
+	"/user-log",
+
+
+	"/profile",
 	"/settings",
 ]);
 const authCookieName = process.env.NODE_ENV === 'development' ? "next-auth.session-token" : "__Secure-next-auth.session-token"; // Replace with your actual auth cookie name
@@ -63,7 +73,10 @@ export default withAuth(
 export const config = {
 	matcher: [
 		"/",
+		// auth
 		"/login",
+
+		// pages
 		"/users",
 		"/users/add-update",
 
@@ -73,6 +86,7 @@ export const config = {
 		"/flats",
 		"/flats/add-update",
 
+		// actions
 		"/opening-balance",
 		"/opening-balance/add-update",
 
@@ -82,7 +96,14 @@ export const config = {
 		"/settlement",
 		"/settlement/add-update",
 
-		"/flats-report",
+		// report
+		"/monthly-report",
+		"/annually-report",
+		"/tower-balances",
+		"/user-log",
+
+
+		"/profile",
 		"/settings",
 	],
 };
