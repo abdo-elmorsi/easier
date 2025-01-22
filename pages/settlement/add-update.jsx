@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
@@ -9,7 +9,6 @@ import { Header } from "components/global";
 import { Button, Checkbox, Input, Select, Spinner } from "components/UI";
 import { useCheckbox, useHandleMessage, useInput, useSelect } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
-import { formatComma } from "utils/utils";
 import { payPercentageOptions } from "assets";
 
 const Index = () => {
@@ -96,7 +95,7 @@ const Index = () => {
 			elevator.changeValue(settlement?.elevator);
 			others.changeValue(settlement?.others);
 		}
-	}, [isLoading])
+	}, [isLoading, settlement])
 
 
 
@@ -117,6 +116,12 @@ const Index = () => {
 		}
 	}, [flat_id.value?.id]);
 
+	useEffect(() => {
+		if (!settlementId) {
+			flat_id.reset()
+		}
+	}, [tower_id.value?.id]);
+
 
 
 
@@ -127,7 +132,10 @@ const Index = () => {
 					title={t("settlement_key")}
 					path="/settlement"
 					classes="bg-gray-100 dark:bg-gray-700 border-none"
-					links={[{ label: settlementId ? t("edit_key") : t("add_key") }]}
+					links={[{
+						label: settlementId ? t("edit_key") : t("add_key"),
+						path: `add-update${settlementId ? `?id=${settlementId}` : ""}`
+					}]}
 				/>
 				<div className="p-5 rounded-2xl bg-white dark:bg-gray-800">
 					{isLoading ? <div className="flex justify-center items-center my-28">

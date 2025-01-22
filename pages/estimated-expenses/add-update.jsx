@@ -136,7 +136,10 @@ const Index = () => {
 					title={t("estimated_expenses_key")}
 					path="/estimated-expenses"
 					classes="bg-gray-100 dark:bg-gray-700 border-none"
-					links={[{ label: estimatedExpensesId ? t("edit_key") : t("add_key") }]}
+					links={[{
+						label: estimatedExpensesId ? t("edit_key") : t("add_key"),
+						path: `add-update${estimatedExpensesId ? `?id=${estimatedExpensesId}` : ""}`
+					}]}
 				/>
 				<div className="p-5 rounded-2xl bg-white dark:bg-gray-800">
 					{isLoading ? <div className="flex justify-center items-center my-28">

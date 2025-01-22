@@ -66,7 +66,10 @@ const Index = () => {
 					title={t("towers_key")}
 					path="/towers"
 					classes="bg-gray-100 dark:bg-gray-700 border-none"
-					links={[{ label: towerId ? t("edit_key") : t("add_key") }]}
+					links={[{
+						label: towerId ? t("edit_key") : t("add_key"),
+						path: `add-update${towerId ? `?id=${towerId}` : ""}`
+					}]}
 				/>
 				<div className="p-5 rounded-2xl bg-white dark:bg-gray-800">
 					{isLoading ? <div className="flex justify-center items-center my-28">
