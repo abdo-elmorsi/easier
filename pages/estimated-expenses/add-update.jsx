@@ -186,7 +186,7 @@ const Index = () => {
 									{...others.bind}
 								/>
 								<Input
-									placeholder={t("describe_key")}
+									placeholder={t("notes_key")}
 									label={t("notes_key")}
 									{...notes.bind}
 								/>
