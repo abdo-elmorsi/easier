@@ -1,61 +1,52 @@
 import { NextResponse } from "next/server";
 import { withAuth } from "next-auth/middleware";
+import { getToken } from "next-auth/jwt";
 
 // Constants
-const protectedRoutes = new Set([
+const PROTECTED_ROUTES = new Set([
 	"/",
-
-	// pages
-	"/users",
-	"/users/add-update",
-
-	"/towers",
-	"/towers/add-update",
-
-	"/flats",
-	"/flats/add-update",
-
-	// actions
-	"/opening-balance",
-	"/opening-balance/add-update",
-
-	"/estimated-expenses",
-	"/estimated-expenses/add-update",
-
-	"/settlement",
-	"/settlement/add-update",
-
-	// report
-	"/monthly-report",
-	"/annually-report",
-	"/tower-balances",
-	"/user-log",
-
-
-	"/profile",
-	"/settings",
+	"/users", "/users/add-update",
+	"/towers", "/towers/add-update",
+	"/flats", "/flats/add-update",
+	"/opening-balance", "/opening-balance/add-update",
+	"/estimated-expenses", "/estimated-expenses/add-update",
+	"/settlement", "/settlement/add-update",
+	"/monthly-report", "/annually-report", "/tower-balances", "/user-log",
+	"/profile", "/settings"
 ]);
-const authCookieName = process.env.NODE_ENV === 'development' ? "next-auth.session-token" : "__Secure-next-auth.session-token"; // Replace with your actual auth cookie name
+
+const ADMIN_ROUTES = new Set([
+	"/users", "/users/add-update",
+	"/user-log"
+]);
 
 // Middleware
 export default withAuth(
 	async function middleware(request) {
 		const { pathname } = request.nextUrl;
-		const token = request.cookies.get(authCookieName);
+		const user = await getToken({ req: request, secret: process.env.JWT_SECRET });
 
+		if (!user) {
+			const isProtectedRoute = PROTECTED_ROUTES.has(pathname);
 
-		const isAuthPage = pathname === "/login";
-		const isProtectedRoute = protectedRoutes.has(pathname);
+			// Redirect to login if no user and accessing a protected route
+			if (isProtectedRoute) {
+				const loginUrl = new URL(`/login?call-back-url=${encodeURIComponent(pathname)}`, request.url);
+				return NextResponse.redirect(loginUrl);
+			}
+		} else {
+			const isAuthPage = pathname === "/login";
+			const isAdminRoute = ADMIN_ROUTES.has(pathname);
 
-		// Redirect to login if not authenticated and trying to access a protected route
-		if (!token && isProtectedRoute) {
-			const loginUrl = new URL(`/login?call-back-url=${encodeURIComponent(pathname)}`, request.url);
-			return NextResponse.redirect(loginUrl);
-		}
+			// Redirect authenticated users away from the login page
+			if (isAuthPage) {
+				return NextResponse.redirect(new URL("/", request.url));
+			}
 
-		// Redirect to home if authenticated and trying to access the login page
-		if (token && isAuthPage) {
-			return NextResponse.redirect(new URL("/", request.url));
+			// Redirect non-admin users trying to access admin-only routes
+			if (isAdminRoute && user.role !== "admin") {
+				return NextResponse.redirect(new URL("/", request.url));
+			}
 		}
 
 		return NextResponse.next();
@@ -63,7 +54,7 @@ export default withAuth(
 	{
 		callbacks: {
 			authorized() {
-				return true;
+				return true; // Allow all users to proceed; route access is handled above
 			},
 		},
 	}
@@ -73,37 +64,14 @@ export default withAuth(
 export const config = {
 	matcher: [
 		"/",
-		// auth
 		"/login",
-
-		// pages
-		"/users",
-		"/users/add-update",
-
-		"/towers",
-		"/towers/add-update",
-
-		"/flats",
-		"/flats/add-update",
-
-		// actions
-		"/opening-balance",
-		"/opening-balance/add-update",
-
-		"/estimated-expenses",
-		"/estimated-expenses/add-update",
-
-		"/settlement",
-		"/settlement/add-update",
-
-		// report
-		"/monthly-report",
-		"/annually-report",
-		"/tower-balances",
-		"/user-log",
-
-
-		"/profile",
-		"/settings",
+		"/users", "/users/add-update",
+		"/towers", "/towers/add-update",
+		"/flats", "/flats/add-update",
+		"/opening-balance", "/opening-balance/add-update",
+		"/estimated-expenses", "/estimated-expenses/add-update",
+		"/settlement", "/settlement/add-update",
+		"/monthly-report", "/annually-report", "/tower-balances", "/user-log",
+		"/profile", "/settings"
 	],
 };

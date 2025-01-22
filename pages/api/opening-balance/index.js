@@ -5,11 +5,11 @@ import { getToken } from "next-auth/jwt";
 const handler = async (req, res) => {
   const action = `opening_balance:${req.method}`;
 
-  const token = await getToken({ req, secret: process.env.JWT_SECRET });
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
+  const user = await getToken({ req, secret: process.env.JWT_SECRET });
+  if (!user?.id) return res.status(401).json({ message: "Unauthorized" });
 
-  req.user_id = token?.id;
-  req.role = token?.role;
+  req.user_id = user?.id;
+  req.role = user?.role;
 
   try {
 
