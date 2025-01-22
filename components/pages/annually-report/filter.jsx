@@ -17,7 +17,7 @@ const Filter = () => {
 	const currentFlat = router.query.flat_id || null;
 
 	const { data: towers = [], isLoading } = useApi(`/towers?for_select=true`);
-	const { data: flatsData = [], isLoading: isLoadingFlat } = useApi(currentTower ? `/flats?tower=${currentTower}` : null);
+	const { data: flatsData = [], isLoading: isLoadingFlat } = useApi(currentTower ? `/flats?tower=${currentTower}&for_select=true` : null);
 
 	const flats = useMemo(() => {
 		return flatsData.map(row => {

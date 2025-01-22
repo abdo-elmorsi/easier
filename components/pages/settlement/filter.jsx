@@ -17,7 +17,7 @@ const Filter = () => {
 	const currentFlat = router.query.flat || null;
 
 	const { data: towers = [], isLoading } = useApi(`/towers?for_select=true`);
-	const { data: flatsData = [] } = useApi(currentTower ? `/flats?tower=${currentTower}` : null);
+	const { data: flatsData = [], isLoading: isLoadingFlat } = useApi(currentTower ? `/flats?tower=${currentTower}&for_select=true` : null);
 
 	const flats = useMemo(() => {
 		return flatsData.map(row => {
@@ -51,6 +51,7 @@ const Filter = () => {
 				getOptionLabel={(option) => option.name}
 				value={selectedTowerOption}
 				onChange={(selected) => updateQuery('tower', selected?.id)}
+				isLoading={isLoading}
 			/>
 			<Select
 				label={t("flat_key")}
@@ -59,6 +60,7 @@ const Filter = () => {
 				getOptionLabel={(option) => option?.name}
 				value={selectedFlatOption}
 				onChange={(selected) => updateQuery('flat', selected?.id)}
+				isLoading={isLoadingFlat}
 			/>
 
 			<DatePicker

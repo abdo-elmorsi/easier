@@ -35,7 +35,7 @@ const handler = async (req, res) => {
       handleUserLogPostRequest({
         action,
         status: true,
-        user_id: token?.id,
+        user_id: user?.id,
         details: `${action} => ${req.body?.id || req.body?.name}`,
       });
     }
@@ -44,7 +44,7 @@ const handler = async (req, res) => {
     handleUserLogPostRequest({
       action,
       status: false,
-      user_id: token?.id,
+      user_id: user?.id,
       details: `statusCode:${error.statusCode || 500} message:${error?.message || "An unexpected error occurred."}`,
     });
     return res.status(error.statusCode || 500).json({ ...error, message: error?.message || "An unexpected error occurred." });
