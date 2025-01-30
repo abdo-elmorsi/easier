@@ -7,6 +7,7 @@ import { Button } from "components/UI";
 export default function Error500() {
   const { t } = useTranslation("common");
   const router = useRouter();
+  
   return (
     <>
       <div className="grid h-screen grid-cols-1 gap-12 px-6 text-gray-800 dark:bg-gray-700 dark:text-gray-300 sm:px-8 md:grid-cols-2 md:px-16 xl:px-32">
