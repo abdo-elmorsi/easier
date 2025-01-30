@@ -8,7 +8,6 @@ import Image from "next/image";
 export const Error404 = () => {
   const router = useRouter();
   const { t } = useTranslation("common");
-
   return (
     <>
       <div className="grid h-screen grid-cols-1 gap-12 px-6 text-gray-800 dark:bg-gray-700 dark:text-gray-300 sm:px-8 md:grid-cols-2 md:px-16 xl:px-32">
