@@ -98,7 +98,7 @@ const Index = () => {
                 selector: (row) => row?.status,
                 cell: (row) => {
                     return <p className={`text-sm ${row?.status ? "text-green-500" : "text-red-500"}`}>
-                        {row?.status ? <XMarkIcon className="w-5 h-5" /> : <CheckCircleIcon className="w-5 h-5" />}
+                        {row?.status ? <CheckCircleIcon className="w-5 h-5" /> : <XMarkIcon className="w-5 h-5" />}
                     </p>
                 },
                 sortable: true,
