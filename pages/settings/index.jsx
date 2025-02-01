@@ -50,7 +50,7 @@ const Index = () => {
     const handleColorChange = (value) => setThemeColor(value.id);
 
     return (
-        <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-800">
+        <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
             <Header title={t("settings_key")} path="/settings" classes="bg-gray-100 dark:bg-gray-700 border-none" />
             <div className="p-5 rounded-2xl bg-white dark:bg-gray-800">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 min-h-80">
