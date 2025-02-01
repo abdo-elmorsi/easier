@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 // Custom
 import { Layout, LayoutWithSidebar } from "components/layout";
 import { Header } from "components/global";
-import { Button, Input, Select, Spinner } from "components/UI";
-import { useHandleMessage, useInput, useSelect } from "hooks";
+import { Button, Input, Spinner } from "components/UI";
+import { useHandleMessage, useInput } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
 
 
@@ -18,25 +18,21 @@ const Index = () => {
 
 	const { t } = useTranslation("common");
 
-	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(`/towers?for_select=true`);
-
 
 	const { data: openingBalance, isLoading, isValidating, mutate } = useApi(openingBalanceId ? `/opening-balance?id=${openingBalanceId}` : null);
 	const { executeMutation, isMutating } = useApiMutation(`/opening-balance`);
 
 
-
-	const towerId = useSelect("", "select", null);
 	const balance = useInput("", 'number', true);
+	const notes = useInput("", null);
 
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		const newOpeningBalance = {
-			...(openingBalanceId ? { id: openingBalanceId } : {
-				towerId: towerId.value?.id || null,
-			}),
+			...(openingBalanceId ? { id: openingBalanceId } : {}),
 			balance: +balance.value || 0,
+			notes: notes.value || null,
 
 		}
 
@@ -54,7 +50,7 @@ const Index = () => {
 	useEffect(() => {
 		if (!isLoading && !!openingBalance) {
 			balance.changeValue(openingBalance.balance || "");
-			towerId.changeValue({ id: openingBalance.tower?.id, name: openingBalance.tower?.name });
+			notes.changeValue(openingBalance.notes || "");
 		}
 	}, [isLoading])
 
@@ -78,21 +74,14 @@ const Index = () => {
 					</div>
 						: <form onSubmit={onSubmit}>
 							<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 min-h-80">
-								<Select
-									mandatory
-									isDisabled={openingBalanceId}
-									label={t("tower_key")}
-									options={towerOptions}
-									getOptionValue={(option) => option?.id}
-									getOptionLabel={(option) => option?.name}
-									isLoading={isLoadingTowerOptions}
-									{...towerId.bind}
-								/>
-
 								<Input
 									mandatory
 									label={t("balance_key")}
 									{...balance.bind}
+								/>
+								<Input
+									label={t("notes_key")}
+									{...notes.bind}
 								/>
 
 							</div>

@@ -18,13 +18,8 @@ const Index = () => {
 
 	const { t } = useTranslation("common");
 
-	const tower_id = useSelect("", "select", null);
 
-
-
-	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(!settlementId ? `/towers?for_select=true` : "");
-
-	const { isLoading: isLoadingFlatOptions, isValidating: isValidatingFlatOptions, mutate: mutateFlats, data: flatOptions = [] } = useApi(!settlementId && tower_id.value?.id ? `/flats?tower=${tower_id.value?.id}&for_settlement=true` : null);
+	const { isLoading: isLoadingFlatOptions, isValidating: isValidatingFlatOptions, mutate: mutateFlats, data: flatOptions = [] } = useApi(!settlementId ? `/flats?for_settlement=true` : null);
 
 
 	const { data: settlement, isLoading, isValidating, mutate } = useApi(settlementId ? `/settlement?id=${settlementId}` : null);
@@ -52,7 +47,6 @@ const Index = () => {
 		e.preventDefault();
 		const newSettlement = {
 			...(settlementId ? { id: settlementId } : {
-				tower_id: tower_id.value?.id || null,
 				flat_id: flat_id.value?.id || null,
 			}),
 			payed_amount: +payed_amount?.value || 0,
@@ -71,7 +65,7 @@ const Index = () => {
 		try {
 			await executeMutation(settlementId ? 'PUT' : "POST", newSettlement);
 			settlementId && mutate(`/settlement?id=${settlementId}`)
-			mutateFlats(`/flats?tower=${tower_id.value?.id}&for_settlement=true`)
+			mutateFlats(`/flats?for_settlement=true`)
 			router.back()
 		} catch (error) {
 			handleMessage(error);
@@ -82,7 +76,6 @@ const Index = () => {
 
 	useEffect(() => {
 		if (!isLoading && !!settlement) {
-			tower_id.changeValue({ id: settlement.tower?.id, name: settlement.tower?.name });
 			flat_id.changeValue({ id: settlement.flat?.id, number: settlement.flat?.number, floor: settlement.flat?.floor });
 			notes.changeValue(settlement?.notes);
 
@@ -116,11 +109,6 @@ const Index = () => {
 		}
 	}, [flat_id.value?.id]);
 
-	useEffect(() => {
-		if (!settlementId) {
-			flat_id.reset()
-		}
-	}, [tower_id.value?.id]);
 
 
 
@@ -143,16 +131,6 @@ const Index = () => {
 					</div>
 						: <form onSubmit={onSubmit}>
 							<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 min-h-80">
-								<Select
-									mandatory
-									isDisabled={settlementId}
-									label={t("tower_key")}
-									options={towerOptions}
-									getOptionValue={(option) => option?.id}
-									getOptionLabel={(option) => option?.name}
-									isLoading={isLoadingTowerOptions}
-									{...tower_id.bind}
-								/>
 								<Select
 									mandatory
 									isDisabled={settlementId || isLoadingFlatOptions || isValidatingFlatOptions}
@@ -213,7 +191,6 @@ const Index = () => {
 								<Button
 									disabled={
 										isMutating ||
-										!tower_id.value?.id ||
 										!flat_id.value?.id ||
 										!payed_amount.value
 									}

@@ -13,11 +13,9 @@ const Filter = () => {
 	const { updateQuery } = useQueryString();
 
 
-	const currentTower = router.query.tower || null;
 	const currentFlat = router.query.flat || null;
 
-	const { data: towers = [], isLoading } = useApi(`/towers?for_select=true`);
-	const { data: flatsData = [], isLoading: isLoadingFlat } = useApi(currentTower ? `/flats?tower=${currentTower}&for_select=true` : null);
+	const { data: flatsData = [], isLoading: isLoadingFlat } = useApi(`/flats?for_select=true`);
 
 	const flats = useMemo(() => {
 		return flatsData.map(row => {
@@ -31,10 +29,9 @@ const Filter = () => {
 			const date = moment(router.query.month);
 			return date.isValid() ? date.toDate() : null; // return null if the date is invalid
 		}
-		return null; // Do not default to a date
+		return moment().startOf("month").toDate(); // Do not default to a date
 	}, [router.query?.month]);
 
-	const selectedTowerOption = findSelectedOption(towers, currentTower);
 	const selectedFlatOption = findSelectedOption(flats, currentFlat);
 
 	const handleDateChange = (key, date) => {
@@ -44,15 +41,6 @@ const Filter = () => {
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10">
-			<Select
-				label={t("tower_key")}
-				options={towers}
-				getOptionValue={(option) => option.id}
-				getOptionLabel={(option) => option.name}
-				value={selectedTowerOption}
-				onChange={(selected) => updateQuery('tower', selected?.id)}
-				isLoading={isLoading}
-			/>
 			<Select
 				label={t("flat_key")}
 				options={flats}

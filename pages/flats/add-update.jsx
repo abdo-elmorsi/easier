@@ -20,15 +20,10 @@ const Index = () => {
 
 	const { t } = useTranslation("common");
 
-	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(`/towers?for_select=true`);
-
 
 	const { data: flat, isLoading, isValidating, mutate } = useApi(flatId ? `/flats?id=${flatId}` : null);
 	const { executeMutation, isMutating } = useApiMutation(`/flats`);
 
-
-
-	const towerId = useSelect("", "select", null);
 
 	const number = useInput("", null);
 	const floor = useInput("", null);
@@ -49,10 +44,8 @@ const Index = () => {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		const newTower = {
-			...(flatId ? { id: flatId } : {
-				towerId: towerId.value?.id || null,
-			}),
+		const newFlat = {
+			...(flatId ? { id: flatId } : {}),
 			number: number.value || null,
 			floor: +floor.value || null,
 			phone: phone.value || null,
@@ -67,7 +60,7 @@ const Index = () => {
 		}
 
 		try {
-			await executeMutation(flatId ? 'PUT' : "POST", newTower);
+			await executeMutation(flatId ? 'PUT' : "POST", newFlat);
 			flatId && mutate(`/flats?id=${flatId}`)
 			router.back()
 		} catch (error) {
@@ -82,7 +75,6 @@ const Index = () => {
 			number.changeValue(flat.number || "");
 			floor.changeValue(flat.floor || "");
 			phone.changeValue(flat.phone || "");
-			towerId.changeValue({ id: flat.tower?.id, name: flat.tower?.name });
 			floor.changeValue(flat.floor || "");
 			pay_percentage.changeValue(payPercentageOptions.find(item => item.value == flat.pay_percentage));
 			electricity.changeValue(flat?.electricity || false);
@@ -114,17 +106,6 @@ const Index = () => {
 					</div>
 						: <form onSubmit={onSubmit}>
 							<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 min-h-80">
-								<Select
-									mandatory
-									isDisabled={flatId}
-									label={t("tower_key")}
-									options={towerOptions}
-									getOptionValue={(option) => option?.id}
-									getOptionLabel={(option) => option?.name}
-									isLoading={isLoadingTowerOptions}
-									{...towerId.bind}
-								/>
-
 								<Input
 									mandatory
 									label={t("number_key")}

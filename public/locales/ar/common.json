@@ -33,7 +33,7 @@
     "elevator_key": "المصعد",
     "others_key": "أخرى",
     "notes_key": "الملاحظات",
-    "choose_a_tower_to_see_data_key": "اختر برجًا لعرض البيانات",
+    "choose_a_flat_to_see_data_key": "اختر شقة لرؤية البيانات",
     "balance_key": "الرصيد",
     "opening_balance_key": "الرصيد الافتتاحي",
     "monthly_report_key": "التقرير الشهري",
@@ -91,5 +91,8 @@
     "annually_report_key": "التقرير السنوي",
     "tower_balances_key": "رصيد البرج",
     "total_income_key": "إجمالي الدخل",
-    "total_outcome_key": "إجمالي المصروفات"
+    "total_outcome_key": "إجمالي المصروفات",
+    "email_key": "البريد الألكتروني",
+    "count_key": "عدد",
+    "settings_key": "الأعدادات"
 }

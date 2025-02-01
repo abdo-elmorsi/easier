@@ -9,8 +9,8 @@ const handler = async (req, res) => {
 	const token = await getToken({ req, secret: process.env.JWT_SECRET });
 	if (!token) return res.status(401).json({ message: "Unauthorized" });
 
-	req.user_id = token?.id;
-	req.role = token?.role;
+	req.user = user;
+
 
 
 	try {

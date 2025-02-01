@@ -21,7 +21,7 @@ function EstimatedExpenses() {
 	const { queryString } = useQueryString();
 
 
-	const { data = [], isLoading } = useApi(queryString.includes('tower_id') ? `/dashboard/payments?${queryString}` : null, {
+	const { data = [], isLoading } = useApi(`/dashboard/payments?${queryString}`, {
 		dedupingInterval: 10000,
 	});
 
@@ -45,7 +45,8 @@ function EstimatedExpenses() {
 								return (
 									<div className="p-4 bg-hoverPrimary text-white rounded-lg shadow-sm" >
 										<p>{`${t('month_key')}: ${label}`}</p>
-										<p>{`${t('payed_amount_key')}: ${formatComma(payload[0].value || 0)}`}</p> {/* Customize this to display your custom label */}
+										<p>{`${t('payed_amount_key')}: ${formatComma(payload[0].value || 0)}`}</p>
+										<p>{`${t('count_key')}: ${payload[0]?.payload?.count || 0}`}</p>
 									</div>
 								);
 							}

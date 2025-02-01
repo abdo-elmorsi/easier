@@ -4,9 +4,9 @@ import { getToken } from "next-auth/jwt";
 const handler = async (req, res) => {
   const { method, query, body } = req;
   try {
-    const token = await getToken({ req, secret: process.env.JWT_SECRET });
-    req.user_id = token?.id;
-    req.role = token?.role;
+    const user = await getToken({ req, secret: process.env.JWT_SECRET });
+
+    req.user = user;
 
     switch (method) {
       case "GET":

@@ -28,7 +28,7 @@ const Index = () => {
 
     const { queryString } = useQueryString({});
     // Fetch data using the API
-    const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/estimated-expenses?${queryString}` : "");
+    const { data: tableData, isLoading } = useApi(`/estimated-expenses?${queryString}`);
 
     // ================== show images Logic ==================
     const [showImagesModal, setShowImagesModal] = useState({
@@ -170,7 +170,6 @@ const Index = () => {
                     data={tableData || []}
                     loading={isLoading}
                     searchAble={false}
-                    noDataMsg="choose_a_tower_to_see_data_key"
                     actions={
                         <Actions
                             disableSearch={false}

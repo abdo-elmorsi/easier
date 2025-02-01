@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 // Custom
 import { Layout, LayoutWithSidebar } from "components/layout";
 import { Header } from "components/global";
-import { Button, Input, Select, Spinner } from "components/UI";
-import { useHandleMessage, useInput, useSelect } from "hooks";
+import { Button, Input, Spinner } from "components/UI";
+import { useHandleMessage, useInput } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
 import { convertImageToBase64, generateCloudinaryUrl } from "utils/utils";
 import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -19,7 +19,6 @@ const Index = () => {
 
 	const { t } = useTranslation("common");
 
-	const { isLoading: isLoadingTowerOptions, data: towerOptions = [] } = useApi(`/towers?for_select=true`);
 
 
 	const { data: flat, isLoading, isValidating, mutate } = useApi(estimatedExpensesId ? `/estimated-expenses?id=${estimatedExpensesId}` : null);
@@ -27,7 +26,6 @@ const Index = () => {
 
 
 
-	const towerId = useSelect("", "select", null);
 
 	const electricity = useInput(0, "number", true);
 	const water = useInput(0, "number", true);
@@ -88,10 +86,8 @@ const Index = () => {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		const newTower = {
-			...(estimatedExpensesId ? { id: estimatedExpensesId } : {
-				towerId: towerId.value?.id || null,
-			}),
+		const newEstimatedExpenses = {
+			...(estimatedExpensesId ? { id: estimatedExpensesId } : {}),
 			electricity: +electricity?.value || 0,
 			water: +water?.value || 0,
 			waste: +waste?.value || 0,
@@ -103,7 +99,7 @@ const Index = () => {
 		}
 
 		try {
-			await executeMutation(estimatedExpensesId ? 'PUT' : "POST", newTower);
+			await executeMutation(estimatedExpensesId ? 'PUT' : "POST", newEstimatedExpenses);
 			estimatedExpensesId && mutate(`/estimated-expenses?id=${estimatedExpensesId}`)
 			router.back()
 		} catch (error) {
@@ -115,7 +111,6 @@ const Index = () => {
 
 	useEffect(() => {
 		if (!isLoading && !!flat) {
-			towerId.changeValue({ id: flat.tower?.id, name: flat.tower?.name });
 			electricity.changeValue(flat?.electricity || 0);
 			water.changeValue(flat?.water || 0);
 			waste.changeValue(flat?.waste || 0);
@@ -147,16 +142,6 @@ const Index = () => {
 					</div>
 						: <form onSubmit={onSubmit}>
 							<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 min-h-80">
-								<Select
-									mandatory
-									isDisabled={estimatedExpensesId}
-									label={t("tower_key")}
-									options={towerOptions}
-									getOptionValue={(option) => option?.id}
-									getOptionLabel={(option) => option?.name}
-									isLoading={isLoadingTowerOptions}
-									{...towerId.bind}
-								/>
 
 								<Input
 									mandatory
@@ -232,16 +217,7 @@ const Index = () => {
 							</div>
 							<div className="flex justify-start gap-8 items-center">
 								<Button
-									disabled={
-										isMutating ||
-										!towerId.value?.id
-										// !electricity.value ||
-										// !water.value ||
-										// !waste.value ||
-										// !guard.value ||
-										// !elevator.value ||
-										// !others.value
-									}
+									disabled={isMutating}
 									className="btn--primary w-32 flex items-center justify-center"
 									type="submit"
 								>

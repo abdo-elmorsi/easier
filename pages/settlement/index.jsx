@@ -29,7 +29,7 @@ const Index = () => {
 
     const { queryString } = useQueryString({});
     // Fetch data using the API
-    const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/settlement?${queryString}` : "");
+    const { data: tableData, isLoading, mutate } = useApi(`/settlement?${queryString}`);
 
     // ================== Delete Logic ==================
 
@@ -228,7 +228,6 @@ const Index = () => {
                     data={tableData || []}
                     loading={isLoading}
                     searchAble={false}
-                    noDataMsg="choose_a_tower_to_see_data_key"
                     paginationPerPage={25}
                     actions={
                         <Actions

@@ -23,7 +23,7 @@ function EstimatedExpenses() {
 
 
 
-	const { data, isLoading } = useApi(queryString.includes('tower_id') ? `/dashboard/estimated-expenses?${queryString}` : null, {
+	const { data, isLoading } = useApi(`/dashboard/estimated-expenses?${queryString}`, {
 		dedupingInterval: 10000,
 	});
 

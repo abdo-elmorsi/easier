@@ -42,14 +42,14 @@ export const validationRules = {
     pattern: new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~!@#$%^&*_\-+=`|\\(){}\[\]:;"'<>,.?\/]).{8,}$/),
     required: true,
     message: {
-      invalid: 'Password must be at least 8 characters long and contain at least one number, letter and special character'
+      invalid: 'Password must be at least 6 characters long and contain at least one number, letter and special character'
     }
   },
   password_optional: {
-    pattern: new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~!@#$%^&*_\-+=`|\\(){}\[\]:;"'<>,.?\/]).{8,}$/),
+    pattern: new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~!@#$%^&*_\-+=`|\\(){}\[\]:;"'<>,.?\/]).{6,}$/),
     required: false,
     message: {
-      invalid: 'Password must be at least 8 characters long and contain at least one number, letter and special character'
+      invalid: 'Password must be at least 6 characters long and contain at least one number, letter and special character'
     }
   },
   email: {

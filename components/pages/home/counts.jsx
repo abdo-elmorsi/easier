@@ -14,7 +14,7 @@ function Counts() {
 	const { queryString } = useQueryString();
 
 	// Fetch data using the API
-	const { data, isLoading } = useApi(queryString.includes('tower_id') ? `/dashboard/counts?${queryString}` : null, {
+	const { data, isLoading } = useApi(`/dashboard/counts?${queryString}`, {
 		dedupingInterval: 10000,
 	});
 

@@ -9,9 +9,9 @@ const Index = () => {
 
     return (
         <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
-            <MinimizedBox minimized={false}>
+            {/* <MinimizedBox minimized={false}>
                 <Filter />
-            </MinimizedBox>
+            </MinimizedBox> */}
             <Counts />
             <EstimatedExpenses />
             <Payments />

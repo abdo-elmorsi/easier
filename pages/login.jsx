@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { signIn } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 // Custom
-import { useCheckbox, useHandleMessage, useInput } from "hooks";
-import { Spinner, Button, Input, Checkbox } from "components/UI";
+import { useCheckbox, useHandleMessage, useInput, useSelect } from "hooks";
+import { Spinner, Button, Input, Checkbox, Select } from "components/UI";
 import { MainLogo } from "components/icons";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import { useApiMutation } from "hooks/useApi";
+import { useApi, useApiMutation } from "hooks/useApi";
 
 
 
@@ -18,8 +18,14 @@ const Login = () => {
   const router = useRouter();
   const handleMessage = useHandleMessage();
 
-  const user_name = useInput("", null);
-  const password = useInput("", null);
+
+
+  const email = useInput("", 'email', true);
+  const password = useInput("", "password_optional", true);
+  const tower_id = useSelect("", "select", null);
+
+
+
 
   const [showPass, setShowPass] = useState(false);
   const handleShowPass = () => setShowPass(!showPass);
@@ -31,6 +37,7 @@ const Login = () => {
   const floor = useInput("", 'number', true);
 
 
+  const { data: towers = [], isLoading } = useApi(email.value && email.isValid ? `/towers?for_select=true&user_email=${email.value}` : null);
   const { executeMutation, isMutating } = useApiMutation("/authentication/login");
 
   const onSubmit = async (e) => {
@@ -43,7 +50,8 @@ const Login = () => {
         number: number.value,
         floor: +floor.value,
       } : {
-        user_name: user_name.value,
+        email: email.value,
+        tower_id: tower_id.value?.id,
       })
     };
     try {
@@ -52,7 +60,7 @@ const Login = () => {
       const result = await signIn("credentials", {
         redirect: false,
         // callbackUrl: "/",
-        user: JSON.stringify({ ...user.user }),
+        user: JSON.stringify({ ...user.user, tower_id: tower_id.value?.id }),
       });
       // Check if signIn was successful
       if (result.error) {
@@ -64,6 +72,18 @@ const Login = () => {
       handleMessage(error);
     }
   };
+
+  useEffect(() => {
+    tower_id.reset();
+  }, [email.value]);
+  useEffect(() => {
+    email.reset();
+    password.reset();
+    tower_id.reset();
+    number.reset();
+    floor.reset();
+  }, [asFlat.checked]);
+
   return (
     <div className="flex items-center justify-center h-screen dark:bg-dark dark:bg-gray-800">
       <div className="hidden bg-center bg-cover login md:block md:w-1/2">
@@ -82,9 +102,9 @@ const Login = () => {
         <form onSubmit={onSubmit} className="flex flex-col">
           <div className="mb-4">
             {!asFlat.checked ? <Input
-              label={t("name_key")}
-              {...user_name.bind}
-              name="name"
+              label={t("email_key")}
+              {...email.bind}
+              name="email"
             /> : <>
               <Input
                 label={t("number_key")}
@@ -97,8 +117,7 @@ const Login = () => {
                 name="floor"
               />
             </>}
-          </div>
-          <div className="mb-2">
+
             <Input
               label={t("password_key")}
               name="password"
@@ -106,13 +125,27 @@ const Login = () => {
               append={showPass ? <EyeIcon onClick={handleShowPass} className="cursor-pointer text-primary" width={"25"} /> : <EyeSlashIcon onClick={handleShowPass} className="cursor-pointer text-primary" width={"25"} />}
               {...password.bind}
             />
+            {!asFlat.checked && <Select
+              isDisabled={!email.value}
+              label={t("tower_key")}
+              options={towers}
+              getOptionValue={(option) => option.id}
+              getOptionLabel={(option) => option.name}
+              {...tower_id.bind}
+              isLoading={isLoading}
+            />}
           </div>
 
 
 
           <Checkbox label={t("login_as_flat_owner_key")} {...asFlat.bind} />
           <Button
-            disabled={isMutating || (!user_name.value && (!number.value && !floor.value)) || !password.value}
+            disabled={
+              isMutating ||
+              !password.value ||
+              (!((email.value && tower_id?.value?.id) || (number.value && floor.value)))
+            }
+
             className="w-full mt-6 btn--primary"
             type="submit"
           >

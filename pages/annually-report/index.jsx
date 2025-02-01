@@ -29,7 +29,7 @@ const Index = () => {
     const { queryString } = useQueryString({});
 
     // Fetch data using the API
-    const { data: tableData, isLoading } = useApi(queryString.includes("tower_id") && queryString.includes("flat_id") ? `/reports/annually-report?${queryString}` : "");
+    const { data: tableData, isLoading } = useApi(queryString.includes("flat_id") ? `/reports/annually-report?${queryString}` : "");
 
 
 
@@ -153,7 +153,7 @@ const Index = () => {
                     data={tableData || []}
                     loading={isLoading}
                     searchAble={false}
-                    noDataMsg="choose_a_tower_to_see_data_key"
+                    noDataMsg="choose_a_flat_to_see_data_key"
                     actions={
                         <Actions
                             disableSearch={false}

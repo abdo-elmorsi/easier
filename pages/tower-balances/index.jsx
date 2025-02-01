@@ -7,7 +7,7 @@ import { Header } from "components/global";
 import { MinimizedBox, Spinner } from "components/UI";
 import { useQueryString } from "hooks";
 import { useApi } from "hooks/useApi";
-import { Filter } from "components/pages/tower-balances";
+// import { Filter } from "components/pages/tower-balances";
 import { formatComma, formatMinus } from "utils/utils";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 
@@ -19,7 +19,7 @@ const Index = () => {
     const { queryString } = useQueryString({});
 
     // Fetch data using the API
-    const { data: towerBalances = {}, isLoading } = useApi(queryString.includes("tower_id") ? `/reports/tower-balances?${queryString}` : "");
+    const { data: towerBalances = {}, isLoading } = useApi(`/reports/tower-balances?${queryString}`);
 
 
 
@@ -31,9 +31,9 @@ const Index = () => {
                     path="/tower-balances"
                     classes="bg-gray-100 dark:bg-gray-700 border-none"
                 />
-                <MinimizedBox minimized={false}>
+                {/* <MinimizedBox minimized={false}>
                     <Filter />
-                </MinimizedBox>
+                </MinimizedBox> */}
                 <div className="p-5 rounded-2xl bg-white dark:bg-gray-800">
 
                     {isLoading ? (

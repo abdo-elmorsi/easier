@@ -83,6 +83,12 @@ const Index = () => {
                 sortable: true,
                 width: "200px"
             },
+            {
+                name: t("email_key"),
+                selector: (row) => row?.email,
+                sortable: true,
+                width: "200px"
+            },
             // {
             //     name: t("role_key"),
             //     selector: (row) =>

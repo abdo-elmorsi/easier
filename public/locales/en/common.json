@@ -33,7 +33,7 @@
     "elevator_key": "Elevator",
     "others_key": "Others",
     "notes_key": "Notes",
-    "choose_a_tower_to_see_data_key": "Choose a tower to see data",
+    "choose_a_flat_to_see_data_key": "Choose a flat to see data",
     "balance_key": "Balance",
     "opening_balance_key": "Opening balance",
     "monthly_report_key": "Monthly report",
@@ -91,5 +91,8 @@
     "annually_report_key": "Annually Report",
     "tower_balances_key": "Tower Balance",
     "total_income_key": "Total income",
-    "total_outcome_key": "Total outcome"
+    "total_outcome_key": "Total outcome",
+    "email_key": "Email",
+    "count_key": "Count",
+    "settings_key": "Settings"
 }

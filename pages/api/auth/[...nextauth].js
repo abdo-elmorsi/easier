@@ -39,9 +39,11 @@ const options = {
       if (token) {
         session.user.id = token.id;
         session.user.user_name = token.user_name;
+        session.user.email = token.email;
         session.user.phone = token.phone;
         session.user.img = token.img;
         session.user.role = token.role;
+        session.user.tower_id = token.tower_id;
       }
       return session;
     },

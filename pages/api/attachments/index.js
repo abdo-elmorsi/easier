@@ -8,8 +8,8 @@ const handler = async (req, res) => {
   const user = await getToken({ req, secret: process.env.JWT_SECRET });
   if (!user?.id) return res.status(401).json({ message: "Unauthorized" });
 
-  req.user_id = user?.id;
-  req.role = user?.role;
+  req.user = user;
+
 
   try {
 
@@ -39,7 +39,7 @@ const handler = async (req, res) => {
       action,
       status: false,
       user_id: user?.id,
-      details: `statusCode:${error.statusCode || 500} message:${error?.message || "An unexpected error occurred."}`,
+      details: `tower_id:${user?.tower_id} - statusCode:${error.statusCode || 500} message:${error?.message || "An unexpected error occurred."}`,
     });
     return res.status(error.statusCode || 500).json({ ...error, message: error?.message || "An unexpected error occurred." });
   }

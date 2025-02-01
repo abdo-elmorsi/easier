@@ -12,7 +12,7 @@ import { useHandleMessage, useQueryString } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import moment from 'moment-timezone';
-import { Filter } from "components/pages/opening-balance";
+// import { Filter } from "components/pages/opening-balance";
 import { formatComma } from "utils/utils";
 
 const Index = () => {
@@ -29,7 +29,7 @@ const Index = () => {
     const { queryString } = useQueryString({});
 
     // Fetch data using the API
-    const { data: tableData, isLoading, mutate } = useApi(queryString.includes("tower") ? `/opening-balance?${queryString}` : "");
+    const { data: tableData, isLoading, mutate } = useApi(`/opening-balance?${queryString}`);
 
     // ================== Delete Logic ==================
 
@@ -66,13 +66,11 @@ const Index = () => {
                 sortable: true,
                 width: "150px"
             },
-
             {
-                name: t("year_key"),
-                selector: (row) => row?.created_at,
-                cell: (row) => moment(row?.created_at).format("yyyy"),
+                name: t("notes_key"),
+                selector: (row) => row?.notes,
                 sortable: true,
-                width: "130px"
+                width: "180px"
             },
             {
                 name: t("created_at_key"),
@@ -96,12 +94,14 @@ const Index = () => {
                 cell: (row) => (
                     <div className="flex gap-2">
                         <Button
+                            disabled={!moment(row.created_at).isSame(moment(), 'year')}
                             onClick={() => router.push(`/opening-balance/add-update?id=${row?.id}`)}
                             className="px-3 py-2 cursor-pointer btn--primary"
                         >
                             <PencilSquareIcon width={22} />
                         </Button>
                         <Button
+                            disabled
                             onClick={() =>
                                 setShowDeleteModal({ isOpen: true, id: row?.id })
                             }
@@ -140,15 +140,14 @@ const Index = () => {
                     path="/opening-balance"
                     classes="bg-gray-100 dark:bg-gray-700 border-none"
                 />
-                <MinimizedBox minimized={false}>
+                {/* <MinimizedBox minimized={false}>
                     <Filter />
-                </MinimizedBox>
+                </MinimizedBox> */}
                 <Table
                     columns={columns}
                     data={tableData || []}
                     loading={isLoading}
                     searchAble={false}
-                    noDataMsg="choose_a_tower_to_see_data_key"
                     actions={
                         <Actions
                             disableSearch={false}
