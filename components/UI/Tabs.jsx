@@ -14,8 +14,8 @@ export default function Tabs({ tabsData }) {
               aria-label={tab.label}
               key={tab.label}
               className={`flex flex-1 md:flex-initial items-center gap-1 capitalize p-2 rounded-t-md ${idx === activeTabIndex
-                ? "bg-gray-600 text-white  dark:bg-gray-900"
-                : "bg-gray-100 dark:bg-gray-800"
+                ? "bg-primary text-white"
+                : "bg-gray-200 dark:bg-gray-700"
                 }`}
               onClick={() => setActiveTabIndex(idx)}
             >
