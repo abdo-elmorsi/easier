@@ -60,7 +60,7 @@ const Login = () => {
       const result = await signIn("credentials", {
         redirect: false,
         // callbackUrl: "/",
-        user: JSON.stringify({ ...user.user, tower_id: tower_id.value?.id }),
+        user: JSON.stringify({ tower_id: tower_id.value?.id, ...user.user }),
       });
       // Check if signIn was successful
       if (result.error) {
