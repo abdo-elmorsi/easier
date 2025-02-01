@@ -52,25 +52,6 @@ function Counts() {
 							{t(card.desc)}
 						</span>
 					</h3>
-					<div className="flex mt-3">
-						<span
-							className={`p-1 text-sm ${card.percentage < 0 ? "text-red-600 font-bold bg-red-100" : "text-green-600 font-bold bg-green-100"} rounded-md`}
-							aria-live="polite" // Inform assistive technologies about status changes
-						>
-							{isLoading ? (
-								<Spinner
-									className={`w-10 h-5 ${card.percentage < 0 ? "text-red-600" : "text-green-600"}`}
-									aria-label="Loading percentage" // Add aria-label for accessibility
-								/>
-							) : (
-								<span dir="ltr" className="text-gray-800">{`${card.percentage}%`}</span> // Ensure text contrast
-							)}
-						</span>
-						<span dir="ltr" className="mx-2 font-thin text-gray-900 dark:text-gray-200">
-							{card.duration}
-						</span>
-					</div>
-
 				</div>
 			))}
 		</div>

@@ -12,8 +12,9 @@ const EditProfileForm = () => {
   const { data: session, update, status } = useSession()
   const handleMessage = useHandleMessage();
 
-  const { user_name: user_user_name, phone: user_phone, id, img: user_image, role } = session?.user || {};
+  const { user_name: user_user_name, phone: user_phone, email: user_email, id, img: user_image, role } = session?.user || {};
   const user_name = useInput(user_user_name, "");
+  const email = useInput(user_email, "email", true);
   const phone = useInput(user_phone, "");
 
   const [image, setImage] = useState("");
@@ -24,6 +25,7 @@ const EditProfileForm = () => {
     e.preventDefault();
     const user = {
       user_name: user_name.value,
+      email: email.value,
       phone: phone.value,
     }
 
@@ -38,8 +40,19 @@ const EditProfileForm = () => {
   };
 
   const updateImage = async (file) => {
+    const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+    const maxSizeMB = 2;
+
+
     if (file) {
       try {
+        if (!allowedTypes.includes(file.type)) {
+          throw new Error(`${t("image_allowed_key")} (PNG, JPG, JPEG)`);
+        }
+
+        if (file.size > maxSizeMB * 1024 * 1024) {
+          throw new Error(`${t("max_image_size_key")} 2MB`);
+        }
         const base64String = await convertImageToBase64(file);
         setImage(base64String)
       } catch (error) {
@@ -68,16 +81,28 @@ const EditProfileForm = () => {
           className={"mb-8 "}
           onChange={updateImage}
         />
-        <p className={`text-center text-xs text-gray-500 ${image?.size / 1000 / 1000 >= 3.1 ? `text-red-500` : ""} sm:text-sm`}>
-          {t("image_allowed_key")}{" "}
-          <br></br> {t("max_image_size_key")}
+        <p
+          className={`text-center text-xs sm:text-sm text-gray-500 ${image && image.size / (1024 * 1024) >= 3.1 ? "text-red-500" : ""
+            }`}
+        >
+          {t("image_allowed_key")} (PNG, JPG, JPEG)
+          <br />
+          {t("max_image_size_key")}: 2MB
         </p>
+
       </div>
 
       <div className="w-full lg:w-2/5">
         <Input
+          mandatory
           label={t("name_key")}
           {...user_name.bind}
+          className={"w-full"}
+        />
+        <Input
+          mandatory
+          label={t("email_key")}
+          {...email.bind}
           className={"w-full"}
         />
         <Input

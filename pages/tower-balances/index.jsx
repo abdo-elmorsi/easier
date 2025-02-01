@@ -25,7 +25,7 @@ const Index = () => {
 
     return (
         <>
-            <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
+            <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-800">
                 <Header
                     title={t("tower_balances_key")}
                     path="/tower-balances"

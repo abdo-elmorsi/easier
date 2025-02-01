@@ -85,7 +85,7 @@
     "confirm_password_key": "Confirm password",
     "updated_successfully_key": "Updated successfully",
     "change_your_image_key": "Change your image",
-    "image_allowed_key": "Image allowed",
+    "image_allowed_key": "Allowed formats",
     "max_image_size_key": "Max image size",
     "printed_on_key": "Printed on",
     "annually_report_key": "Annually Report",
@@ -94,5 +94,8 @@
     "total_outcome_key": "Total outcome",
     "email_key": "Email",
     "count_key": "Count",
-    "settings_key": "Settings"
+    "settings_key": "Settings",
+    "attachments_key": "Attachments",
+    "size_key": "Size",
+    "dimensions_key": "Dimensions"
 }

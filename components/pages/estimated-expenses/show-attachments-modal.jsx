@@ -43,8 +43,8 @@ export default function ShowAttachmentsModal({ showImagesModal, handleClose }) {
                 className="object-cover w-full h-28 md:h-48 rounded-lg" // Increased size
               />
               <div className="mt-2 text-center text-sm">
-                <p>{`Size: ${(attachment.bytes / 1024).toFixed(2)} KB`}</p>
-                <p>{`Dimensions: ${attachment.width} x ${attachment.height}`}</p>
+                <p>{`${t('size_key')}: ${(attachment.bytes / 1024).toFixed(2)} KB`}</p>
+                <p>{`${t('dimensions_key')}: ${attachment.width} x ${attachment.height}`}</p>
               </div>
               <div className="mt-4 flex items-center justify-start gap-2">
                 <Button

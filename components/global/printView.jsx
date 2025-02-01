@@ -6,11 +6,15 @@ import PropTypes from 'prop-types';
 // custom
 import PrintPageTableWrapper from "components/printPageTableWrapper";
 import { useTranslation } from "next-i18next";
+import { useTheme } from "context/ThemeContext";
+import { colorThemes } from "assets";
 
 
 const PrintView = forwardRef(({ title = 'title', columns = [], data = [], paperMode = false }, ref) => {
     const router = useRouter();
     const { t } = useTranslation("common");
+    const { themeColor } = useTheme();
+
     const componentRef = useRef(null);
     const language = router.locale.toLowerCase();
     const date_format = language === 'en' ? 'DD/MM/YYYY' : 'YYYY/MM/DD';
@@ -39,7 +43,9 @@ const PrintView = forwardRef(({ title = 'title', columns = [], data = [], paperM
                         dir={language == 'ar' ? 'rtl' : 'ltr'}
                         style={{ direction: language == 'ar' ? 'rtl' : 'ltr' }}
                     >
-                        <thead className="h-10 font-bold text-white bg-primary">
+                        <thead className="h-10 font-bold text-white" style={{
+                            backgroundColor: colorThemes[themeColor]["hoverPrimary"],
+                        }}>
                             <tr>
                                 {columns?.filter(c => !c.omit && !c.noPrint).map(c => <th key={c.name}>{c.name}</th>)}
                             </tr>
@@ -49,7 +55,10 @@ const PrintView = forwardRef(({ title = 'title', columns = [], data = [], paperM
                                 return (
                                     <tr
                                         key={`row-${i}`}
-                                        className={`break-inside-avoid ${row?.subtotal ? 'bg-secondary' : ''}`}
+                                        className={`break-inside-avoid`}
+                                        style={{
+                                            backgroundColor: row?.subtotal ? colorThemes[themeColor]["hoverPrimary"] : "white",
+                                        }}
                                     >
                                         {columns?.filter(c => !c.omit && !c.noPrint)
                                             .map(c =>

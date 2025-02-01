@@ -29,7 +29,7 @@ export default function Actions({
           aria-label={t('export_excel_key')}
           title={t('export_excel_key')}
           onClick={() => onClickExport()}
-          className={`${(isDisabledExport) ? "cursor-not-allowed" : "cursor-pointer"} dark:bg-gray-gray-900 rounded-full bg-gray-100 dark:bg-gray-500 dark:hover:bg-gray-400 p-3 hover:bg-gray-200`}
+          className={`${(isDisabledExport) ? "cursor-not-allowed" : "cursor-pointer"} rounded-full bg-primary p-3 hover:bg-hoverPrimary`}
         >
           <Excel />
         </button>}
@@ -38,7 +38,7 @@ export default function Actions({
           aria-label={t('print_pdf_key')}
           title={t('print_pdf_key')}
           onClick={() => onClickPrint()}
-          className={`${(isDisabledPrint) ? "cursor-not-allowed" : "cursor-pointer"} dark:bg-gray-gray-900 rounded-full bg-gray-100 dark:bg-gray-500 dark:hover:bg-gray-400 p-3 hover:bg-gray-200`}
+          className={`${(isDisabledPrint) ? "cursor-not-allowed" : "cursor-pointer"} rounded-full bg-primary p-3 hover:bg-hoverPrimary`}
         >
           <PrintPdf />
         </button>}

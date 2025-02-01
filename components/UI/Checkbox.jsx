@@ -21,7 +21,7 @@ const Checkbox = ({ label, description, validator, submitted, formGroup, classNa
                     className="peer h-6 w-6 cursor-pointer transition-all appearance-none rounded-full bg-secondary shadow hover:shadow-md border border-secondary checked:bg-primary checked:border-primary focus:outline-none"
                     {...props}
                 />
-                <span class="absolute text-primary  peer-checked:text-white top-[5px] left-[5px] rtl:left-auto rtl:right-[5px]">
+                <span className="absolute text-primary  peer-checked:text-white top-[5px] left-[5px] rtl:left-auto rtl:right-[5px]">
                     {props.checked ? <CheckIcon strokeWidth={4} className='w-[0.875rem] h-[0.875rem] size-10' /> : <XMarkIcon strokeWidth={4} className='w-[0.875rem] h-[0.875rem] size-10' />}
                 </span>
 

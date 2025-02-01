@@ -85,7 +85,7 @@
     "confirm_password_key": "تأكيد كلمة المرور",
     "updated_successfully_key": "تم التحديث بنجاح",
     "change_your_image_key": "تغيير صورتك",
-    "image_allowed_key": "الصورة مسموحة",
+    "image_allowed_key": "التنسيقات المسموح بها",
     "max_image_size_key": "الحد الأقصى لحجم الصورة",
     "printed_on_key": "تم الطباعه في",
     "annually_report_key": "التقرير السنوي",
@@ -94,5 +94,8 @@
     "total_outcome_key": "إجمالي المصروفات",
     "email_key": "البريد الألكتروني",
     "count_key": "عدد",
-    "settings_key": "الأعدادات"
+    "settings_key": "الأعدادات",
+    "attachments_key": "مرفقات",
+    "size_key": "الحجم",
+    "dimensions_key": "الأبعاد"
 }

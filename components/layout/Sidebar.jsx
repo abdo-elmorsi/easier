@@ -151,7 +151,7 @@ const Sidebar = React.memo(() => {
 
   return (
     // w-14 hover:w-64
-    <div className={`min-h-[calc(100vh_-_4rem)] group flex flex-col flex-shrink-0  transition-all duration-300 bg-white w-14 hover:w-64 ${fixedSideBar ? "md:w-64 opened" : ""} sidebar dark:bg-gray-900 `}>
+    <div className={`min-h-[calc(100vh_-_4rem)] group flex flex-col flex-shrink-0  transition-all duration-300 bg-white w-14 hover:w-64 ${fixedSideBar ? "md:w-64 opened" : ""} sidebar dark:bg-gray-800 `}>
       <div className="flex flex-col fixed">
         <ul className="flex flex-col py-4 space-y-1 overflow-y-auto no-scrollbar border-y-2 border-gray-100 dark:border-gray-700">
 
@@ -214,7 +214,7 @@ const Sidebar = React.memo(() => {
                   <Link href={tab.href} >
                     <a
                       className={`${tab.current
-                        ? 'text-primary border-primary'
+                        ? '!text-primary border-primary'
                         : 'border-transparent hover:text-primary'
                         } dark:text-white hover:border-primary dark:hover:text-primary text-white-600 relative flex h-11 flex-row items-center border-l-4 pr-6 focus:outline-none rtl:border-l-0 rtl:border-r-4 rtl:pr-4`}
                     >
