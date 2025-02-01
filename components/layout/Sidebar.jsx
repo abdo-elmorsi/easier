@@ -165,7 +165,7 @@ const Sidebar = React.memo(() => {
                           tab.submenuOpen ? null : index
                         )
                       }
-                      className={`w-full focus:outline-none relative flex h-11 flex-row items-center border-l-4 pr-6 rtl:pr-4 rtl:border-l-0 rtl:border-r-4 dark:text-white dark:hover:text-white hover:border-primary ${tab.submenuOpen ? 'border-primary' : 'border-transparent'
+                      className={`w-full focus:outline-none relative flex h-11 flex-row items-center border-l-4 pr-6 rtl:pr-4 rtl:border-l-0 rtl:border-r-4 dark:text-white hover:text-primary dark:hover:text-primary hover:border-primary ${tab.submenuOpen ? '!text-primary border-primary' : 'border-transparent'
                         }`}
                     >
                       <span className="inline-flex items-center justify-center ml-4">
@@ -188,9 +188,9 @@ const Sidebar = React.memo(() => {
                           <li key={subTab.href} className="tab_link cursor-pointer">
                             <Link href={subTab.href} >
                               <a className={`${subTab.current
-                                ? 'dark:text-gray-100 border-primary'
-                                : 'dark:text-white border-transparent hover:border-primary dark:hover:border-primary'
-                                } text-white-600 relative flex h-11 flex-row items-center border-l-4 focus:outline-none rtl:border-l-0 rtl:border-r-4 rtl:pr-2`}
+                                ? '!text-primary !border-primary'
+                                : 'border-transparent hover:text-primary'
+                                } dark:text-white hover:border-primary dark:hover:text-primary text-white-600 relative flex h-11 flex-row items-center border-l-4 focus:outline-none rtl:border-l-0 rtl:border-r-4 rtl:pr-2`}
                               >
                                 <span className="inline-flex items-center justify-center ml-4 duration-500 sub-menu-icon">
                                   <ArrowRightCircleIcon className="w-5 h-5 rtl:rotate-180" />
@@ -211,9 +211,9 @@ const Sidebar = React.memo(() => {
                   <Link href={tab.href} >
                     <a
                       className={`${tab.current
-                        ? 'dark:text-gray-100 border-primary'
-                        : 'dark:text-white border-transparent hover:border-primary dark:hover:border-primary'
-                        } text-white-600 relative flex h-11 flex-row items-center border-l-4 pr-6 focus:outline-none rtl:border-l-0 rtl:border-r-4 rtl:pr-4`}
+                        ? 'text-primary border-primary'
+                        : 'border-transparent hover:text-primary'
+                        } dark:text-white hover:border-primary dark:hover:text-primary text-white-600 relative flex h-11 flex-row items-center border-l-4 pr-6 focus:outline-none rtl:border-l-0 rtl:border-r-4 rtl:pr-4`}
                     >
                       <span className="inline-flex items-center justify-center ml-4">
                         {tab.icon}

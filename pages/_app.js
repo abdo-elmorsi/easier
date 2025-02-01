@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Easier</title>
+        <title>{router.locale === 'ar' ? "أسهل" : "Easier"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </Head>
 
@@ -80,7 +80,7 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider>
           {/* Progress Bar */}
           <NextNprogress
-            color="#336a86"
+            color="var(--primary)"
             startPosition={0.3}
             stopDelayMs={200}
             height={3}

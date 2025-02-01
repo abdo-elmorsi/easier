@@ -22,7 +22,7 @@ const Input = ({
 
   return (
     <div
-      className={`w-full ${formGroup ? "form-group" : ""} ${hasWarning ? "-mb-1" : ""
+      className={`w-full ${formGroup ? "mb-2" : ""} ${hasWarning ? "-mb-1" : ""
         }`}
     >
       {label && (

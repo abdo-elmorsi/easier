@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const CustomDatePicker = ({ minDate, maxDate, value, onChange, label = "", mandatory, formGroup = true, ...props }) => {
 	return (
-		<div className={`w-full ${formGroup ? "form-group" : ""} `}>
+		<div className={`w-full ${formGroup ? "mb-2" : ""} `}>
 			{label && (
 				<label
 					className="block text-sm text-gray-800 dark:text-white"

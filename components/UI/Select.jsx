@@ -9,7 +9,7 @@ import { useTheme } from "context/ThemeContext";
 const Select = React.forwardRef((props, ref) => {
   const { theme } = useTheme();
   const darkMode = theme === "dark";
-  const mainColor = "#336a86";
+  const mainColor = 'var(--primary)';
 
   const {
     label,
@@ -87,7 +87,7 @@ const Select = React.forwardRef((props, ref) => {
 
   return (
     <div
-      className={`w-full ${formGroup ? "form-group" : ""} ${hasWarning ? "-mb-1" : ""
+      className={`w-full ${formGroup ? "mb-2" : ""} ${hasWarning ? "-mb-1" : ""
         }`}
     >
       {label && (

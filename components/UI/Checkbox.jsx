@@ -1,25 +1,31 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import TextError from './TextError';
+import { CheckCircleIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Checkbox = ({ label, description, validator, submitted, formGroup, className, disabled, ...props }) => {
     const hasWarning = useMemo(() => submitted && validator && !validator.valid, [submitted, validator]);
 
-    const boxClasses = `${description ? "-mt-4" : ""} ${className ? className : ""}`;
+    const boxClasses = `${formGroup ? "mb-2" : ""} ${hasWarning ? "-mb-1" : ""} ${description ? "-mt-4" : ""} ${className ? className : ""}`;
 
     return (
-        <div className={`flex items-center ${boxClasses}`}>
-            <input
-                id={label}
-                type="checkbox"
-                disabled={disabled}
-                aria-label={label}
-                aria-invalid={hasWarning}
-                className="w-4 h-4 text-primary focus:ring-primary border-gray-300 rounded"
-                {...props}
-            />
-            <label htmlFor={label} className="ml-2 block text-sm font-medium text-gray-800 dark:text-gray-300 rtl:pr-2">
-                {label}
+        <div className={`w-full ${boxClasses}`}>
+            <label className="flex items-center cursor-pointer relative">
+                <input
+                    id={label}
+                    type="checkbox"
+                    disabled={disabled}
+                    aria-label={label}
+                    aria-labelledby="check-label"
+                    aria-invalid={hasWarning}
+                    className="peer h-6 w-6 cursor-pointer transition-all appearance-none rounded-full bg-secondary shadow hover:shadow-md border border-secondary checked:bg-primary checked:border-primary focus:outline-none"
+                    {...props}
+                />
+                <span class="absolute text-primary  peer-checked:text-white top-[5px] left-[5px] rtl:left-auto rtl:right-[5px]">
+                    {props.checked ? <CheckIcon strokeWidth={4} className='w-[0.875rem] h-[0.875rem] size-10' /> : <XMarkIcon strokeWidth={4} className='w-[0.875rem] h-[0.875rem] size-10' />}
+                </span>
+
+                <span id="check-label" className="ml-2 rtl:ml-0 rtl:mr-2">{label}</span>
             </label>
 
             <div className="ml-2">

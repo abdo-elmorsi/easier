@@ -105,7 +105,7 @@ const Index = () => {
 						<Spinner className="h-10 w-10" />
 					</div>
 						: <form onSubmit={onSubmit}>
-							<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 min-h-80">
+							<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 min-h-80 mb-4 md:mb-0">
 								<Input
 									mandatory
 									label={t("number_key")}
@@ -135,7 +135,7 @@ const Index = () => {
 									isClearable={false}
 									{...pay_percentage.bind}
 								/>
-								<div className="flex flex-wrap gap-4">
+								<div className="grid grid-cols-2">
 									<Checkbox
 										label={t("electricity_key")}
 										{...electricity.bind}
