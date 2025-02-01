@@ -57,6 +57,7 @@ const Sidebar = React.memo(() => {
       current: router.pathname === "/towers",
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
       submenuOpen: false,
+      omit: flat
     },
     {
       nameAR: "الشقق",
@@ -65,6 +66,7 @@ const Sidebar = React.memo(() => {
       current: router.pathname === "/flats",
       icon: <HomeIcon className="w-5 h-5" />,
       submenuOpen: false,
+      omit: flat
     },
     {
       nameAR: "ألاجرأت",
@@ -94,6 +96,7 @@ const Sidebar = React.memo(() => {
           current: router.pathname === "/settlement",
         },
       ],
+      omit: flat
     },
     {
       nameAR: "التقارير",
