@@ -97,5 +97,7 @@
     "settings_key": "Settings",
     "attachments_key": "Attachments",
     "size_key": "Size",
-    "dimensions_key": "Dimensions"
+    "dimensions_key": "Dimensions",
+    "color_key": "Color",
+    "Easier": "Easier"
 }

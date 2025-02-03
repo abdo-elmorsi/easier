@@ -1,3 +1,4 @@
+export const app_title = 'Easier';
 export const payPercentageOptions = [
 	{ label: "100%", value: 100 },
 	{ label: "50%", value: 50 },
@@ -28,4 +29,9 @@ export const colorThemes = {
 	sunset: { primary: "#ff6f61", hoverPrimary: "#e55b50", secondary: "#ffe0e0" },
 	forest: { primary: "#2a9d8f", hoverPrimary: "#21867a", secondary: "#e9f5f0" },
 	twilight: { primary: "#6a4c93", hoverPrimary: "#5a3e80", secondary: "#f0e5f5" },
+	desert: { primary: "#d6a76a", hoverPrimary: "#b58b52", secondary: "#fef7e1" },
+	berry: { primary: "#b83b5e", hoverPrimary: "#a0304b", secondary: "#f4d0d6" },
+	metallic: { primary: "#8c8c8c", hoverPrimary: "#757575", secondary: "#e7e7e7" },
+	peach: { primary: "#ff9a8b", hoverPrimary: "#e68a79", secondary: "#ffebd1" },
+	nightSky: { primary: "#1e1a78", hoverPrimary: "#17135c", secondary: "#d1d1e0" },
 };

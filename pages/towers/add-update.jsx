@@ -61,7 +61,7 @@ const Index = () => {
 
 	return (
 		<>
-			<div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
+			<div className="">
 				<Header
 					title={t("towers_key")}
 					path="/towers"

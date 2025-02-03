@@ -50,7 +50,7 @@ const Index = () => {
     const handleColorChange = (value) => setThemeColor(value.id);
 
     return (
-        <div className="min-h-full bg-gray-100 rounded-md dark:bg-gray-700">
+        <div className="">
             <Header title={t("settings_key")} path="/settings" classes="bg-gray-100 dark:bg-gray-700 border-none" />
             <div className="p-5 rounded-2xl bg-white dark:bg-gray-800">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 min-h-80">
@@ -70,7 +70,9 @@ const Index = () => {
                         label={t("color_key")}
                         options={colorOptions}
                         getOptionValue={(option) => option.id}
-                        getOptionLabel={(option) => option.name}
+                        getOptionLabel={(option) => <span style={{
+                            color: colorThemes[option.id]['primary']
+                        }}>{option.name}</span>}
                         value={colorOptions.find((c) => c.id === themeColor)}
                         onChange={handleColorChange}
                         isClearable={false}

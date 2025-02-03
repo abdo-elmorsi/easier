@@ -97,5 +97,7 @@
     "settings_key": "الأعدادات",
     "attachments_key": "مرفقات",
     "size_key": "الحجم",
-    "dimensions_key": "الأبعاد"
+    "dimensions_key": "الأبعاد",
+    "color_key": "اللون",
+    "Easier": "اسهل"
 }

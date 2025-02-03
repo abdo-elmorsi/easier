@@ -4,6 +4,7 @@ import clsx from 'clsx';
 
 export default function Header({ title = '', path = '', links = [], classes = '' }) {
 
+
   return (
     <div className={clsx("border-b", classes)}>
       <nav className="bg-transparent">

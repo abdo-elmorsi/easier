@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { appWithTranslation } from 'next-i18next';
+import { appWithTranslation, useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 
@@ -21,12 +21,39 @@ import { ThemeProvider } from 'context/ThemeContext';
 
 import 'styles/globals.scss';
 import Head from 'next/head';
+import { app_title } from 'assets';
 
 const FONT_SIZE_BASE = 16;
 const FONT_SIZE_RATIO = 0.04; // Ratio for responsive font size
 
+
+const titleMap = {
+  "/": { en: "Dashboard - Easier", ar: "لوحة التحكم - أسهل" },
+  "/users": { en: "Users - Easier", ar: "المستخدمون - أسهل" },
+  "/users/add-update": { en: "Add/Update User - Easier", ar: "إضافة/تعديل مستخدم - أسهل" },
+  "/towers": { en: "Towers - Easier", ar: "الأبراج - أسهل" },
+  "/towers/add-update": { en: "Add/Update Tower - Easier", ar: "إضافة/تعديل برج - أسهل" },
+  "/flats": { en: "Flats - Easier", ar: "الشقق - أسهل" },
+  "/flats/add-update": { en: "Add/Update Flat - Easier", ar: "إضافة/تعديل شقة - أسهل" },
+  "/opening-balance": { en: "Opening Balance - Easier", ar: "الرصيد الافتتاحي - أسهل" },
+  "/opening-balance/add-update": { en: "Add/Update Opening Balance - Easier", ar: "إضافة/تعديل الرصيد الافتتاحي - أسهل" },
+  "/estimated-expenses": { en: "Estimated Expenses - Easier", ar: "المصروفات التقديرية - أسهل" },
+  "/estimated-expenses/add-update": { en: "Add/Update Estimated Expenses - Easier", ar: "إضافة/تعديل المصروفات التقديرية - أسهل" },
+  "/settlement": { en: "Settlement - Easier", ar: "التسوية - أسهل" },
+  "/settlement/add-update": { en: "Add/Update Settlement - Easier", ar: "إضافة/تعديل التسوية - أسهل" },
+  "/monthly-report": { en: "Monthly Report - Easier", ar: "التقرير الشهري - أسهل" },
+  "/annually-report": { en: "Annually Report - Easier", ar: "التقرير السنوي - أسهل" },
+  "/tower-balances": { en: "Tower Balances - Easier", ar: "أرصدة الأبراج - أسهل" },
+  "/user-log": { en: "User Log - Easier", ar: "سجل المستخدم - أسهل" },
+  "/profile": { en: "Profile - Easier", ar: "الملف الشخصي - أسهل" },
+  "/settings": { en: "Settings - Easier", ar: "الإعدادات - أسهل" },
+  "/login": { en: "Login - Easier", ar: "تسجيل الدخول - أسهل" },
+};
+
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+  const { t } = useTranslation("common");
 
 
   // Handle dynamic font resizing based on window width
@@ -63,13 +90,15 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router.locale]);
 
+
+
   // Custom layout for each page (if provided)
   const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
 
   return (
     <>
       <Head>
-        <title>{router.locale === 'ar' ? "أسهل" : "Easier"}</title>
+        <title>{titleMap[router.pathname]?.[router.locale] || "أسهل"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </Head>
 

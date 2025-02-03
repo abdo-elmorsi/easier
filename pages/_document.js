@@ -1,3 +1,4 @@
+import { app_title } from "assets";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
@@ -19,7 +20,7 @@ class MyDocument extends Document {
           />
 
           {/* Primary Meta Tags */}
-          <meta name="application-name" content="Easier" />
+          <meta name="application-name" content={app_title} />
           <meta name="description" content="Easier is a web app designed to help tower managers efficiently manage towers, flats, and financial records. Track payments, monitor flat owners, and streamline operations with ease." />
           <meta name="keywords" content="Abdo Elmorsi, tower management, flats, financial records, flat owners, payments, Easier web app" />
           <meta name="author" content="Abdo Elmorsi" />
@@ -29,7 +30,7 @@ class MyDocument extends Document {
           {/* PWA and Apple Touch Meta */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <meta name="apple-mobile-web-app-title" content="Easier" />
+          <meta name="apple-mobile-web-app-title" content={app_title} />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="msapplication-TileColor" content="#336a86" />
           <meta name="msapplication-tap-highlight" content="no" />
@@ -59,7 +60,7 @@ class MyDocument extends Document {
           <meta property="og:type" content="website" />
           <meta property="og:title" content="Manage Towers and Flats with Ease - Easier Web App" />
           <meta property="og:description" content="Easier is a web app designed to help tower managers efficiently manage towers, flats, and financial records. Track payments, monitor flat owners, and streamline operations with ease." />
-          <meta property="og:site_name" content="Easier" />
+          <meta property="og:site_name" content={app_title} />
           <meta property="og:url" content="https://easier-2.vercel.app" />
           <meta property="og:image" content="https://easier-2.vercel.app/apple-touch-icon.png" />
 
