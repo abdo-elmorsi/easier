@@ -106,5 +106,6 @@
     "edit_message_error_key": "Failed to edit message",
     "confirm_delete_message_key": "Are you sure you want to delete this message?",
     "type_message_placeholder_key": "Type your message...",
-    "chat_key": "Chat"
+    "chat_key": "Chat",
+    "you_key": "You"
 }

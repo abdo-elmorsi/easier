@@ -106,5 +106,6 @@
     "edit_message_error_key": "فشل في تعديل الرسالة",
     "confirm_delete_message_key": "هل أنت متأكد أنك تريد حذف هذه الرسالة؟",
     "type_message_placeholder_key": "اكتب رسالتك...",
-    "chat_key": "دردشة"
+    "chat_key": "دردشة",
+    "you_key": "أنت"
 }

@@ -20,7 +20,7 @@ const ChatMessage = ({ msg, session, onEdit, onDelete }) => {
 				}`}>
 				<div className={`flex items-center gap-2 mb-1`}>
 					<span className={`font-semibold text-sm  dark:text-gray-100`}>
-						{msg.flat ? `Flat n: ${msg.flat?.number} / f: ${msg.flat?.floor}` : t("admin_key")}
+						{msg.flat ? `${msg.flat_id === session?.user?.id ? t("you_key") : `Flat n: ${msg.flat?.number} / f: ${msg.flat?.floor}`}` : t("admin_key")}
 					</span>
 					<span className={`text-xs ${isCurrentUser ? 'text-blue-200' : 'text-gray-400'} `}>
 						{moment(msg.created_at).format(dateFormat)}
