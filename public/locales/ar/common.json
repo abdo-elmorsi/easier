@@ -99,5 +99,12 @@
     "size_key": "الحجم",
     "dimensions_key": "الأبعاد",
     "color_key": "اللون",
-    "Easier": "اسهل"
+    "Easier": "اسهل",
+    "send_key": "أرسال",
+    "message_send_error_key": "فشل في إرسال الرسالة",
+    "delete_message_error_key": "فشل في حذف الرسالة",
+    "edit_message_error_key": "فشل في تعديل الرسالة",
+    "confirm_delete_message_key": "هل أنت متأكد أنك تريد حذف هذه الرسالة؟",
+    "type_message_placeholder_key": "اكتب رسالتك...",
+    "chat_key": "دردشة"
 }

@@ -20,6 +20,7 @@ export const PageType = {
 	6: "user_log",
 	7: "login",
 	8: "update_password",
+	9: "chat",
 };
 
 

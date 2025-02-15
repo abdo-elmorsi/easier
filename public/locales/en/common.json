@@ -99,5 +99,12 @@
     "size_key": "Size",
     "dimensions_key": "Dimensions",
     "color_key": "Color",
-    "Easier": "Easier"
+    "Easier": "Easier",
+    "send_key": "Send",
+    "message_send_error_key": "Failed to send message",
+    "delete_message_error_key": "Failed to delete message",
+    "edit_message_error_key": "Failed to edit message",
+    "confirm_delete_message_key": "Are you sure you want to delete this message?",
+    "type_message_placeholder_key": "Type your message...",
+    "chat_key": "Chat"
 }

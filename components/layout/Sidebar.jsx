@@ -4,6 +4,7 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
   BuildingOfficeIcon,
+  ChatBubbleLeftIcon,
   ChevronRightIcon,
   CogIcon,
   DocumentChartBarIcon,
@@ -135,6 +136,15 @@ const Sidebar = React.memo(() => {
         },
 
       ],
+    },
+    {
+      nameAR: "دردشة",
+      nameEN: "Chat",
+      icon: <ChatBubbleLeftIcon className="w-5 h-5" />,
+      href: "/chat",
+      current: router.pathname === "/chat",
+      submenuOpen: false,
+      // omit: !admin
     },
     {
       nameAR: "الإعدادات",

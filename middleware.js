@@ -12,7 +12,7 @@ const PROTECTED_ROUTES = new Set([
 	"/estimated-expenses", "/estimated-expenses/add-update",
 	"/settlement", "/settlement/add-update",
 	"/monthly-report", "/annually-report", "/tower-balances", "/user-log",
-	"/profile", "/settings"
+	"/profile", "/settings", "/chat"
 ]);
 
 const ADMIN_ROUTES = new Set([
@@ -72,6 +72,6 @@ export const config = {
 		"/estimated-expenses", "/estimated-expenses/add-update",
 		"/settlement", "/settlement/add-update",
 		"/monthly-report", "/annually-report", "/tower-balances", "/user-log",
-		"/profile", "/settings"
+		"/profile", "/settings", "/chat"
 	],
 };

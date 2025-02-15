@@ -46,6 +46,7 @@ model Tower {
   EstimatedExpenses EstimatedExpenses[]
   OpeningBalance    OpeningBalance[]
   Settlement        Settlement[]
+  ChatMessage       ChatMessage[]
 }
 
 model Flat {
@@ -64,9 +65,10 @@ model Flat {
   created_at     DateTime @default(now()) @db.Date
   updated_at     DateTime @updatedAt @db.Date
 
-  tower_id   String       @db.ObjectId
-  tower      Tower        @relation(fields: [tower_id], references: [id])
-  Settlement Settlement[]
+  tower_id    String        @db.ObjectId
+  tower       Tower         @relation(fields: [tower_id], references: [id])
+  Settlement  Settlement[]
+  ChatMessage ChatMessage[]
 }
 
 model OpeningBalance {
@@ -117,4 +119,14 @@ model Settlement {
   tower    Tower  @relation(fields: [tower_id], references: [id])
   flat_id  String @db.ObjectId
   flat     Flat   @relation(fields: [flat_id], references: [id])
+}
+
+model ChatMessage {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  content    String
+  created_at DateTime @default(now()) @db.Date
+  tower_id   String   @db.ObjectId
+  tower      Tower    @relation(fields: [tower_id], references: [id])
+  flat_id    String?  @db.ObjectId
+  flat       Flat?    @relation(fields: [flat_id], references: [id])
 }
