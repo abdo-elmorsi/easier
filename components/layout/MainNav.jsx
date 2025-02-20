@@ -19,6 +19,7 @@ import Image from "next/image";
 import { useOnlineStatus } from "hooks";
 import { useTheme } from "context/ThemeContext";
 import { generateCloudinaryUrl } from "utils/utils";
+import { useApi } from "hooks/useApi";
 
 
 
@@ -30,6 +31,8 @@ export default function MainNav() {
   const firstLetter = user?.user_name?.slice(0, 1) || "U";
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation("common");
+
+  const { data: signedInByTower } = useApi(user?.tower_id ? `/towers?id=${user?.tower_id}` : "")
 
   // Memoized language selection handler
   const selectLanguageHandler = useCallback(() => {
@@ -68,6 +71,12 @@ export default function MainNav() {
 
           <div className="items-center hidden gap-2 md:flex">
 
+            {signedInByTower?.id && <Link href="/settings">
+              <span className="text-white px-2 py-1 rounded-md font-bold cursor-pointer bg-primary opacity-75 hover:opacity-100 hidden md:flex">
+                {signedInByTower?.name}
+
+              </span>
+            </Link>}
             <Button
               onClick={selectLanguageHandler}
               className="flex items-center justify-center w-8 h-8 px-2 py-2 text-sm bg-gray-200 rounded-full cursor-pointer text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200"

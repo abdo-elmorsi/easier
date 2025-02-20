@@ -55,7 +55,7 @@ const Index = () => {
             <div className="p-5 rounded-2xl bg-white dark:bg-gray-800">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10 min-h-80">
                     {/* Tower Selector */}
-                    <Select
+                    {session?.user?.role !== "flat" && <Select
                         label={t("tower_key")}
                         options={towers}
                         getOptionValue={(option) => option.id}
@@ -63,7 +63,7 @@ const Index = () => {
                         value={selectedTowerOption}
                         isLoading={isLoading || status === "loading"}
                         onChange={handleTowerChange}
-                    />
+                    />}
 
                     {/* Color Selector */}
                     <Select
