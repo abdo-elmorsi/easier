@@ -13,7 +13,7 @@ const ChatMessage = ({ msg, session, onEdit, onDelete }) => {
 	const isCurrentUser = msg.flat_id === session?.user?.id || (session?.user.role != "flat" && !msg?.flat_id);
 
 	return (
-		<div className={`flex ${isCurrentUser ? 'justify-start' : 'justify-end'} mb-4`}>
+		<div className={`animate-flip-up flex ${isCurrentUser ? 'justify-start' : 'justify-end'} mb-4`}>
 			<div className={`relative group max-w-[95%] md:max-w-[85%] p-3 rounded-lg shadow-md ${isCurrentUser
 				? 'bg-primary text-white rounded-bl-none'
 				: 'bg-white dark:bg-gray-700 rounded-br-none'

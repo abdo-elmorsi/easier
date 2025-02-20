@@ -38,7 +38,7 @@ function EstimatedExpenses() {
 	};
 
 	return (
-		<div className="mb-8 flex-1 p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
+		<div className="animate-fade-up animate-delay-500 mb-8 flex-1 p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
 			<h2 className=" text-xl font-bold col-span-2">{t("estimated_expenses_key")}</h2>
 
 

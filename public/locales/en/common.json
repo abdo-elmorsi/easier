@@ -113,5 +113,7 @@
     "copied_key": "Message copied to clipboard!",
     "user_name_key": "User name",
     "flat_owner_key": "Flat owner",
-    "complete_profile_key": "Complete profile"
+    "complete_profile_key": "Complete profile",
+    "financial_overview_key": "Financial overview",
+    "expense_breakdown_key": "Expense breakdown"
 }

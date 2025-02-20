@@ -51,12 +51,12 @@ const Login = () => {
     };
     try {
       const user = await executeMutation("POST", submitData);
-      const tower_id = user?.user?.tower_id || tower_id.value?.id
+      const towerId = user?.user?.tower_id || tower_id?.value?.id
 
       const result = await signIn("credentials", {
         redirect: false,
         // callbackUrl: "/",
-        user: JSON.stringify({ ...user.user, tower_id }),
+        user: JSON.stringify({ ...user.user, tower_id: towerId }),
       });
       // Check if signIn was successful
       if (result.error) {
@@ -81,16 +81,17 @@ const Login = () => {
         </div>
       </div>
       <div className="w-full px-4 md:w-1/2 md:px-12 xl:px-48">
-        <h1 className="mb-4 text-3xl font-bold text-gray-800 dark:text-white">
+        <h1 className="animate-fade-left mb-4 text-3xl font-bold text-gray-800 dark:text-white">
           {t("sign_in_now_key")}
         </h1>
-        <p className="mb-2 text-sm text-gray-500 dark:text-white">
+        <p className="animate-fade-left mb-2 text-sm text-gray-500 dark:text-white">
           {t("enter_your_email_and_password_to_sign_in_key")}
         </p>
 
         <form onSubmit={onSubmit} className="flex flex-col">
           <div className="mb-4">
             <Input
+              // className="animate-fade-left animate-delay-100"
               label={t("email_key")}
               {...email.bind}
               name="email"
@@ -122,10 +123,10 @@ const Login = () => {
               isMutating ||
               !password.value ||
               !email.value ||
-              (!((asFlat.checked && !tower_id?.value?.id)))
+              (!asFlat.checked && !tower_id?.value?.id)
             }
 
-            className="w-full mt-6 btn--primary"
+            className="w-full mt-6 btn--primary animate-shake  "
             type="submit"
           >
             {isMutating ? (

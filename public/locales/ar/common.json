@@ -113,5 +113,7 @@
     "copied_key": "تم نسخ الرسالة إلى الحافظة!",
     "user_name_key": "اسم المستخدم",
     "flat_owner_key": "مالك شقة",
-    "complete_profile_key": "إكمال الملف الشخصي"
+    "complete_profile_key": "إكمال الملف الشخصي",
+    "financial_overview_key": "نظرة مالية",
+    "expense_breakdown_key": "تفاصيل المصروفات"
 }

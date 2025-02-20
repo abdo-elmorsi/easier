@@ -38,6 +38,7 @@
         "sass": "^1.60.0",
         "styled-components": "^5.3.5",
         "swr": "^2.2.5",
+        "tailwindcss-animated": "^2.0.0",
         "xlsx": "^0.18.5"
     },
     "devDependencies": {
