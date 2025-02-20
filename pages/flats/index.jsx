@@ -10,7 +10,7 @@ import { Actions, Button, MinimizedBox, Modal } from "components/UI";
 import { exportExcel } from "utils";
 import { useHandleMessage, useQueryString } from "hooks";
 import { useApi, useApiMutation } from "hooks/useApi";
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { ClipboardDocumentIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import moment from 'moment-timezone';
 import { payPercentageOptions } from "assets";
 import { Filter } from "components/pages/flats";
@@ -25,6 +25,15 @@ const Index = () => {
     const printViewRef = useRef(null);
 
 
+    const handleCopy = (id) => {
+        const profileUrl = `${window.location.origin}/invite/${id}`;
+
+        const message = t("welcome_message", { url: profileUrl });
+
+        navigator.clipboard.writeText(message);
+
+        handleMessage(t("copied_key"), "success");
+    }
 
     const { queryString } = useQueryString({});
 
@@ -60,12 +69,6 @@ const Index = () => {
     // ================== Table Columns ==================
     const columns = useMemo(
         () => [
-            // {
-            //     name: t("tower_key"),
-            //     selector: (row) => row?.tower?.name,
-            //     sortable: true,
-            //     width: "150px"
-            // },
             {
                 name: t("number_key"),
                 selector: (row) => row?.number,
@@ -83,6 +86,18 @@ const Index = () => {
                 selector: (row) => payPercentageOptions.find(item => item.value == row?.pay_percentage)?.label,
                 sortable: true,
                 width: "180px"
+            },
+            {
+                name: t("user_name_key"),
+                selector: (row) => row?.user_name,
+                sortable: true,
+                width: "150px"
+            },
+            {
+                name: t("email_key"),
+                selector: (row) => row?.email,
+                sortable: true,
+                width: "150px"
             },
             {
                 name: t("created_at_key"),
@@ -103,8 +118,16 @@ const Index = () => {
                 selector: (row) => row?.id,
                 noExport: true,
                 noPrint: true,
+                width: "250px",
                 cell: (row) => (
                     <div className="flex gap-2">
+                        <Button
+                            onClick={() => handleCopy(row?.id)}
+                            className="px-3 py-2 cursor-pointer btn--primary flex justify-between items-center gap-1"
+                        >
+                            <span>{t("invite_key")}</span>
+                            <ClipboardDocumentIcon width={22} />
+                        </Button>
                         <Button
                             onClick={() => router.push(`/flats/add-update?id=${row?.id}`)}
                             className="px-3 py-2 cursor-pointer btn--primary"

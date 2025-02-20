@@ -53,8 +53,10 @@ model Flat {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   number         String
   floor          Int
-  password       String
+  password       String?
   phone          String?
+  email          String?  @unique
+  user_name      String?
   electricity    Boolean  @default(false)
   water          Boolean  @default(false)
   waste          Boolean  @default(false)

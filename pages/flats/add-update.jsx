@@ -29,6 +29,8 @@ const Index = () => {
 	const floor = useInput("", null);
 	const pay_percentage = useSelect(payPercentageOptions[0], "select", null);
 	const phone = useInput("", null);
+	const user_name = useInput("", null);
+	const email = useInput("", "email", true);
 
 	const electricity = useCheckbox(true, false);
 	const water = useCheckbox(true, false);
@@ -49,6 +51,8 @@ const Index = () => {
 			number: number.value || null,
 			floor: +floor.value || null,
 			phone: phone.value || null,
+			user_name: user_name.value || null,
+			email: email.value || null,
 			password: password.value || null,
 			pay_percentage: pay_percentage.value?.value || 0,
 			electricity: electricity?.checked || false,
@@ -75,6 +79,8 @@ const Index = () => {
 			number.changeValue(flat.number || "");
 			floor.changeValue(flat.floor || "");
 			phone.changeValue(flat.phone || "");
+			user_name.changeValue(flat.user_name || "");
+			email.changeValue(flat.email || "");
 			floor.changeValue(flat.floor || "");
 			pay_percentage.changeValue(payPercentageOptions.find(item => item.value == flat.pay_percentage));
 			electricity.changeValue(flat?.electricity || false);
@@ -116,24 +122,35 @@ const Index = () => {
 									label={t("floor_key")}
 									{...floor.bind}
 								/>
-								<Input
-									label={t("phone_key")}
-									{...phone.bind}
-								/>
-								<Input
-									mandatory={!flatId}
-									label={t("password_key")}
-									type={showPass ? "text" : "password"}
-
-									{...password.bind}
-									append={showPass ? <EyeIcon onClick={handleShowPass} className="cursor-pointer text-primary" width={"25"} /> : <EyeSlashIcon onClick={handleShowPass} className="cursor-pointer text-primary" width={"25"} />}
-								/>
 								<Select
 									mandatory
 									label={t("pay_percentage_key")}
 									options={payPercentageOptions}
 									isClearable={false}
 									{...pay_percentage.bind}
+								/>
+								<h3 className="col-span-full text-lg font-bold my-1">{t("user_key")}</h3>
+
+								<Input
+									label={t("phone_key")}
+									{...phone.bind}
+								/>
+								<Input
+									label={t("user_name_key")}
+									{...user_name.bind}
+								/>
+								<Input
+									disabled
+									label={t("email_key")}
+									{...email.bind}
+								/>
+								<Input
+									// mandatory={!flatId}
+									label={t("password_key")}
+									type={showPass ? "text" : "password"}
+
+									{...password.bind}
+									append={showPass ? <EyeIcon onClick={handleShowPass} className="cursor-pointer text-primary" width={"25"} /> : <EyeSlashIcon onClick={handleShowPass} className="cursor-pointer text-primary" width={"25"} />}
 								/>
 								<div className="grid grid-cols-2">
 									<Checkbox
@@ -164,7 +181,7 @@ const Index = () => {
 							</div>
 							<div className="flex justify-start gap-8 items-center">
 								<Button
-									disabled={isMutating || !number.value || !+floor.value || (!flatId && password.value?.length < 6)}
+									disabled={isMutating || !number.value || !+floor.value}
 									className="btn--primary w-32 flex items-center justify-center"
 									type="submit"
 								>
