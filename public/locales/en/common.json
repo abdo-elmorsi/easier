@@ -111,5 +111,7 @@
     "invite_key": "Invite",
     "welcome_message": "Welcome to Easier! 🎉\n\nWe’re excited to have you on board. To get started, please complete your profile by clicking the link below:\n\n🔗 *{{url}}*\n\nOnce your profile is complete, you can log in and access all the features of Easier.\n\nThank you!",
     "copied_key": "Message copied to clipboard!",
-    "user_name_key": "User name"
+    "user_name_key": "User name",
+    "flat_owner_key": "Flat owner",
+    "complete_profile_key": "Complete profile"
 }

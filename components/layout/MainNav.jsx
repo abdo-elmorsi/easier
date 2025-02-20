@@ -48,6 +48,7 @@ export default function MainNav() {
     () => [
       { label: t("admin_key"), value: "admin", },
       { label: t("user_key"), value: "user", },
+      { label: t("flat_owner_key"), value: "flat", },
     ],
     [t]
   );

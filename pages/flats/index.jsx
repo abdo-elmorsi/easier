@@ -26,7 +26,7 @@ const Index = () => {
 
 
     const handleCopy = (id) => {
-        const profileUrl = `${window.location.origin}/invite/${id}`;
+        const profileUrl = `${window.location.origin}/invite?flatId=${id}`;
 
         const message = t("welcome_message", { url: profileUrl });
 
