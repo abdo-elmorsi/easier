@@ -115,5 +115,60 @@
     "flat_owner_key": "مالك شقة",
     "complete_profile_key": "إكمال الملف الشخصي",
     "financial_overview_key": "نظرة مالية",
-    "expense_breakdown_key": "تفاصيل المصروفات"
+    "expense_breakdown_key": "تفاصيل المصروفات",
+
+    "____________": "________________",
+    "tower_management_made_simple_key": "إدارة الأبراج أصبحت أسهل",
+    "hero_description_key": "قم بإدارة الأبراج، تحصيل المدفوعات، وتتبع الشؤون المالية - كل ذلك في مكان واحد.",
+    "get_started_key": "ابدأ الآن",
+
+    "key_features_key": "المميزات الرئيسية",
+    "features_description_key": "اكتشف لماذا يعد اسهل الخيار الأفضل.",
+    "feature1_title_key": "واجهة سهلة الاستخدام",
+    "feature1_description_key": "تنقل بسيط وإدارة سلسة.",
+    "feature2_title_key": "إشعارات فورية",
+    "feature2_description_key": "ابقَ على اطلاع دائم مع التنبيهات الفورية.",
+    "feature3_title_key": "إمكانية الوصول عبر الجوال",
+    "feature3_description_key": "قم بإدارة أبراجك من أي مكان.",
+
+    "how_it_works_key": "كيف يعمل اسهل",
+    "how_it_works_description_key": "بسط عملية إدارة الأبراج من خلال هذه الخطوات البسيطة.",
+    "step1_title_key": "التسجيل والإعداد",
+    "step1_description_key": "قم بالتسجيل وأضف أبراجك وشققك في دقائق.",
+    "step2_title_key": "إدارة المدفوعات",
+    "step2_description_key": "تتبع مدفوعات مالكي الشقق بسهولة.",
+    "step3_title_key": "مراقبة المالية",
+    "step3_description_key": "احصل على رؤية واضحة للنفقات، الأرصدة، والتقارير.",
+
+    "pricing_title_key": "خطط الأسعار",
+    "pricing_description_key": "اختر الخطة التي تناسب احتياجاتك.",
+
+    "pricing_basic_key": "الأساسية",
+    "pricing_basic_price_key": "1$ / شهريًا",
+    "pricing_basic_feature1_key": "برج واحد",
+    "pricing_basic_feature2_key": "تتبع المدفوعات",
+    "pricing_basic_feature3_key": "تقارير أساسية",
+
+    "pricing_pro_key": "الاحترافية",
+    "pricing_pro_price_key": "3$ / شهريًا",
+    "pricing_pro_feature1_key": "عدة أبراج",
+    "pricing_pro_feature2_key": "تحليلات متقدمة",
+    "pricing_pro_feature3_key": "دعم أولوية",
+
+    "pricing_enterprise_key": "المؤسسات",
+    "pricing_enterprise_price_key": "مخصص",
+    "pricing_enterprise_feature1_key": "عدد غير محدود من الأبراج",
+    "pricing_enterprise_feature2_key": "الوصول إلى API",
+    "pricing_enterprise_feature3_key": "دعم على مدار الساعة",
+
+    "contact_us_key": "تواصل معنا",
+    "contact_description_key": "لديك أسئلة؟ لا تتردد في التواصل معنا في أي وقت.",
+    "contact_button_key": "اتصل بنا",
+
+    "quick_links_key": "روابط سريعة",
+    "aboutUs_key": "من نحن",
+    "services_key": "الخدمات",
+    "faq_key": "الأسئلة الشائعة",
+    "contact_key": "اتصل بنا",
+    "follow_us_key": "تابعنا"
 }

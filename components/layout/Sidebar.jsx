@@ -37,16 +37,16 @@ const Sidebar = React.memo(() => {
     {
       nameAR: "ملخص",
       nameEN: "Overview",
-      href: "/",
-      current: router.pathname === "/",
+      href: "/dashboard",
+      current: router.pathname === "/dashboard",
       icon: <Overview className="w-5 h-5" />,
       submenuOpen: false,
     },
     {
       nameAR: "المستخدمين",
       nameEN: "Users",
-      href: "/users",
-      current: router.pathname === "/users",
+      href: "/dashboard/users",
+      current: router.pathname === "/dashboard/users",
       icon: <UsersIcon className="w-5 h-5" />,
       submenuOpen: false,
       omit: !admin
@@ -54,8 +54,8 @@ const Sidebar = React.memo(() => {
     {
       nameAR: "الابراج",
       nameEN: "Towers",
-      href: "/towers",
-      current: router.pathname === "/towers",
+      href: "/dashboard/towers",
+      current: router.pathname === "/dashboard/towers",
       icon: <BuildingOfficeIcon className="w-5 h-5" />,
       submenuOpen: false,
       omit: flat
@@ -63,8 +63,8 @@ const Sidebar = React.memo(() => {
     {
       nameAR: "الشقق",
       nameEN: "Flats",
-      href: "/flats",
-      current: router.pathname === "/flats",
+      href: "/dashboard/flats",
+      current: router.pathname === "/dashboard/flats",
       icon: <HomeIcon className="w-5 h-5" />,
       submenuOpen: false,
       omit: flat
@@ -78,23 +78,23 @@ const Sidebar = React.memo(() => {
         {
           nameAR: "الرصيد الافتتاحي",
           nameEN: "Opening Balance",
-          href: "/opening-balance",
+          href: "/dashboard/opening-balance",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/opening-balance",
+          current: router.pathname === "/dashboard/opening-balance",
         },
         {
           nameAR: "المصاريف التقديريه",
           nameEN: "Estimated expenses",
-          href: "/estimated-expenses",
+          href: "/dashboard/estimated-expenses",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/estimated-expenses",
+          current: router.pathname === "/dashboard/estimated-expenses",
         },
         {
           nameAR: "التسوية",
           nameEN: "Settlement",
-          href: "/settlement",
+          href: "/dashboard/settlement",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/settlement",
+          current: router.pathname === "/dashboard/settlement",
         },
       ],
       omit: flat
@@ -108,30 +108,30 @@ const Sidebar = React.memo(() => {
         {
           nameAR: "شهري",
           nameEN: "Monthly",
-          href: "/monthly-report",
+          href: "/dashboard/monthly-report",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/monthly-report",
+          current: router.pathname === "/dashboard/monthly-report",
         },
         {
           nameAR: "سنوي",
           nameEN: "Annually",
-          href: "/annually-report",
+          href: "/dashboard/annually-report",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/annually-report",
+          current: router.pathname === "/dashboard/annually-report",
         },
         {
           nameAR: "ارصدت البرج",
           nameEN: "Tower balances",
-          href: "/tower-balances",
+          href: "/dashboard/tower-balances",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/tower-balances",
+          current: router.pathname === "/dashboard/tower-balances",
         },
         {
           nameAR: "سجل المستخدم",
           nameEN: "User Log",
-          href: "/user-log",
+          href: "/dashboard/user-log",
           icon: <TruckIcon className="w-5 h-5" />,
-          current: router.pathname === "/user-log",
+          current: router.pathname === "/dashboard/user-log",
           omit: !admin
         },
 
@@ -141,8 +141,8 @@ const Sidebar = React.memo(() => {
       nameAR: "دردشة",
       nameEN: "Chat",
       icon: <ChatBubbleLeftIcon className="w-5 h-5" />,
-      href: "/chat",
-      current: router.pathname === "/chat",
+      href: "/dashboard/chat",
+      current: router.pathname === "/dashboard/chat",
       submenuOpen: false,
       // omit: !admin
     },
@@ -150,8 +150,8 @@ const Sidebar = React.memo(() => {
       nameAR: "الإعدادات",
       nameEN: "Settings",
       icon: <CogIcon className="w-5 h-5" />,
-      href: "/settings",
-      current: router.pathname === "/settings",
+      href: "/dashboard/settings",
+      current: router.pathname === "/dashboard/settings",
       submenuOpen: false,
       omit: !admin
     },

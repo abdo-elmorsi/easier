@@ -21,35 +21,40 @@ import { ThemeProvider } from 'context/ThemeContext';
 
 import 'styles/globals.scss';
 import Head from 'next/head';
-import { app_title } from 'assets';
+
+// for animation
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 const FONT_SIZE_BASE = 16;
 const FONT_SIZE_RATIO = 0.04; // Ratio for responsive font size
 
 
 const titleMap = {
-  "/": { en: "Dashboard - Easier", ar: "لوحة التحكم - أسهل" },
-  "/users": { en: "Users - Easier", ar: "المستخدمون - أسهل" },
-  "/users/add-update": { en: "Add/Update User - Easier", ar: "إضافة/تعديل مستخدم - أسهل" },
-  "/towers": { en: "Towers - Easier", ar: "الأبراج - أسهل" },
-  "/towers/add-update": { en: "Add/Update Tower - Easier", ar: "إضافة/تعديل برج - أسهل" },
-  "/flats": { en: "Flats - Easier", ar: "الشقق - أسهل" },
-  "/flats/add-update": { en: "Add/Update Flat - Easier", ar: "إضافة/تعديل شقة - أسهل" },
-  "/opening-balance": { en: "Opening Balance - Easier", ar: "الرصيد الافتتاحي - أسهل" },
-  "/opening-balance/add-update": { en: "Add/Update Opening Balance - Easier", ar: "إضافة/تعديل الرصيد الافتتاحي - أسهل" },
-  "/estimated-expenses": { en: "Estimated Expenses - Easier", ar: "المصروفات التقديرية - أسهل" },
-  "/estimated-expenses/add-update": { en: "Add/Update Estimated Expenses - Easier", ar: "إضافة/تعديل المصروفات التقديرية - أسهل" },
-  "/settlement": { en: "Settlement - Easier", ar: "التسوية - أسهل" },
-  "/settlement/add-update": { en: "Add/Update Settlement - Easier", ar: "إضافة/تعديل التسوية - أسهل" },
-  "/monthly-report": { en: "Monthly Report - Easier", ar: "التقرير الشهري - أسهل" },
-  "/annually-report": { en: "Annually Report - Easier", ar: "التقرير السنوي - أسهل" },
-  "/tower-balances": { en: "Tower Balances - Easier", ar: "أرصدة الأبراج - أسهل" },
-  "/user-log": { en: "User Log - Easier", ar: "سجل المستخدم - أسهل" },
-  "/profile": { en: "Profile - Easier", ar: "الملف الشخصي - أسهل" },
-  "/settings": { en: "Settings - Easier", ar: "الإعدادات - أسهل" },
+  "/dashboard": { en: "Dashboard - Easier", ar: "لوحة التحكم - أسهل" },
+  "/dashboard/users": { en: "Users - Easier", ar: "المستخدمون - أسهل" },
+  "/dashboard/users/add-update": { en: "Add/Update User - Easier", ar: "إضافة/تعديل مستخدم - أسهل" },
+  "/dashboard/towers": { en: "Towers - Easier", ar: "الأبراج - أسهل" },
+  "/dashboard/towers/add-update": { en: "Add/Update Tower - Easier", ar: "إضافة/تعديل برج - أسهل" },
+  "/dashboard/flats": { en: "Flats - Easier", ar: "الشقق - أسهل" },
+  "/dashboard/flats/add-update": { en: "Add/Update Flat - Easier", ar: "إضافة/تعديل شقة - أسهل" },
+  "/dashboard/opening-balance": { en: "Opening Balance - Easier", ar: "الرصيد الافتتاحي - أسهل" },
+  "/dashboard/opening-balance/add-update": { en: "Add/Update Opening Balance - Easier", ar: "إضافة/تعديل الرصيد الافتتاحي - أسهل" },
+  "/dashboard/estimated-expenses": { en: "Estimated Expenses - Easier", ar: "المصروفات التقديرية - أسهل" },
+  "/dashboard/estimated-expenses/add-update": { en: "Add/Update Estimated Expenses - Easier", ar: "إضافة/تعديل المصروفات التقديرية - أسهل" },
+  "/dashboard/settlement": { en: "Settlement - Easier", ar: "التسوية - أسهل" },
+  "/dashboard/settlement/add-update": { en: "Add/Update Settlement - Easier", ar: "إضافة/تعديل التسوية - أسهل" },
+  "/dashboard/monthly-report": { en: "Monthly Report - Easier", ar: "التقرير الشهري - أسهل" },
+  "/dashboard/annually-report": { en: "Annually Report - Easier", ar: "التقرير السنوي - أسهل" },
+  "/dashboard/tower-balances": { en: "Tower Balances - Easier", ar: "أرصدة الأبراج - أسهل" },
+  "/dashboard/user-log": { en: "User Log - Easier", ar: "سجل المستخدم - أسهل" },
+  "/dashboard/profile": { en: "Profile - Easier", ar: "الملف الشخصي - أسهل" },
+  "/dashboard/settings": { en: "Settings - Easier", ar: "الإعدادات - أسهل" },
+  "/dashboard/chat": { en: "chat - Easier", ar: "محادثة - أسهل" },
+  "/invite": { en: "Invite - Easier", ar: "دعوة - أسهل" },
   "/login": { en: "Login - Easier", ar: "تسجيل الدخول - أسهل" },
 };
-
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -91,6 +96,13 @@ function MyApp({ Component, pageProps }) {
   }, [router.locale]);
 
 
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in milliseconds
+      once: false, // Animation only happens once
+    });
+  }, []);
 
   // Custom layout for each page (if provided)
   const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);

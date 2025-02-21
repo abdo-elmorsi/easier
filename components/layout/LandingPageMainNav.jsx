@@ -4,9 +4,7 @@ import {
   MoonIcon,
   ArrowsUpDownIcon,
   LanguageIcon,
-  BellIcon,
   UserCircleIcon,
-  ArrowRightEndOnRectangleIcon,
   ArrowLeftEndOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
@@ -14,16 +12,17 @@ import { useTranslation } from "next-i18next";
 import { signOut, useSession } from "next-auth/react";
 import { MainLogo } from "components/icons";
 import Link from "next/link";
-import { Badge, Button, List, ListItem, ListItemPrefix, Popover, PopoverContent, PopoverHandler } from "@material-tailwind/react";
+import { Button, List, ListItem, ListItemPrefix, Popover, PopoverContent, PopoverHandler } from "@material-tailwind/react";
 import Image from "next/image";
 import { useOnlineStatus } from "hooks";
 import { useTheme } from "context/ThemeContext";
 import { generateCloudinaryUrl } from "utils/utils";
 import { useApi } from "hooks/useApi";
+import { MdDashboard } from "react-icons/md";
 
 
 
-export default function MainNav() {
+export default function LandingPageMainNav() {
   const router = useRouter();
   const { data } = useSession();
   const user = data?.user || {};
@@ -64,7 +63,7 @@ export default function MainNav() {
           </div>
           <div className="flex items-center justify-start flex-1 sm:items-stretch sm:justify-start">
             <div className="flex items-center flex-shrink-0 w-24 h-16 md:w-52 overflow-hidden">
-              <Link href="/dashboard">
+              <Link href="/">
                 <MainLogo className="cursor-pointer" />
               </Link>
             </div>
@@ -101,21 +100,9 @@ export default function MainNav() {
               />
             )}
           </div>
-          <Popover className="relative">
-            <PopoverHandler className="flex items-center justify-center">
-              <button aria-label="notification btn">
-                <Badge content={0}>
-                  <BellIcon className="flex items-center justify-center w-8 h-8 p-2 mx-2 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-400" />
-                </Badge>
-              </button>
-            </PopoverHandler>
-            <PopoverContent className="absolute right-0 z-50 w-64 mt-2 bg-white rounded-lg shadow-lg rtl:right-auto rtl:left-0 dark:bg-gray-700 dark:border-gray-400">
-              <p className="text-xs text-primary dark:text-white text-center">{t("no_notifications_key")}</p>
-            </PopoverContent>
-          </Popover>
           <span className="my-2 ml-5 mr-2 text-transparent border-l-2 border-gray-400 rtl:ml-2 rtl:mr-5 h-3/4">.</span>
 
-          <Popover placement="bottom">
+          {user?.id ? <Popover placement="bottom">
             <PopoverHandler>
               <Button className="flex items-center justify-between gap-4 px-2 text-black bg-transparent shadow-none dark:text-white hover:shadow-none">
 
@@ -169,42 +156,45 @@ export default function MainNav() {
 
 
 
-
-                {!user?.id ? (<Link href="/login">
+                <Link href="/dashboard">
                   <ListItem
+                    as={"a"}
                     className="gap-4 dark:text-gray-100 hover:text-black active:text-dark">
                     <ListItemPrefix>
-                      <ArrowRightEndOnRectangleIcon className="w-8" />
+                      <MdDashboard className="w-8" />
                     </ListItemPrefix>
-                    {t("sign_in_key")}
+                    {t("dashboard_key")}
                   </ListItem>
-                </Link>) : (
-                  <>
-                    {user.role !== 'flat' && <Link href="/dashboard/profile">
-                      <ListItem
-                        as={"a"}
-                        className="gap-4 dark:text-gray-100 hover:text-black active:text-dark">
-                        <ListItemPrefix>
-                          <UserCircleIcon className="w-8" />
-                        </ListItemPrefix>
-                        {t("profile_key")}
-                      </ListItem>
-                    </Link>}
-                    <ListItem
-                      onClick={logOut}
-                      className="gap-4 dark:text-gray-100 hover:text-black active:text-dark">
-                      <ListItemPrefix>
-                        <ArrowLeftEndOnRectangleIcon className="w-8" />
-                      </ListItemPrefix>
-                      {t("sign_out_key")}
-                    </ListItem>
-                  </>
-                )}
+                </Link>
+
+                {user.role !== 'flat' && <Link href="/dashboard/profile">
+                  <ListItem
+                    as={"a"}
+                    className="gap-4 dark:text-gray-100 hover:text-black active:text-dark">
+                    <ListItemPrefix>
+                      <UserCircleIcon className="w-8" />
+                    </ListItemPrefix>
+                    {t("profile_key")}
+                  </ListItem>
+                </Link>}
+
+                <ListItem
+                  onClick={logOut}
+                  className="gap-4 dark:text-gray-100 hover:text-black active:text-dark">
+                  <ListItemPrefix>
+                    <ArrowLeftEndOnRectangleIcon className="w-8" />
+                  </ListItemPrefix>
+                  {t("sign_out_key")}
+                </ListItem>
+
+
 
 
               </List>
             </PopoverContent>
-          </Popover>
+          </Popover> : <Link href={"/login"}>
+            <Button>{t("sign_in_key")}</Button>
+          </Link>}
 
         </div>
       </div>

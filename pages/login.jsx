@@ -81,17 +81,16 @@ const Login = () => {
         </div>
       </div>
       <div className="w-full px-4 md:w-1/2 md:px-12 xl:px-48">
-        <h1 className="animate-fade-left mb-4 text-3xl font-bold text-gray-800 dark:text-white">
+        <h1 className="mb-4 text-3xl font-bold text-gray-800 dark:text-white" data-aos="fade-left">
           {t("sign_in_now_key")}
         </h1>
-        <p className="animate-fade-left mb-2 text-sm text-gray-500 dark:text-white">
+        <p className="mb-2 text-sm text-gray-500 dark:text-white" data-aos="fade-left">
           {t("enter_your_email_and_password_to_sign_in_key")}
         </p>
 
         <form onSubmit={onSubmit} className="flex flex-col">
           <div className="mb-4">
             <Input
-              // className="animate-fade-left animate-delay-100"
               label={t("email_key")}
               {...email.bind}
               name="email"
@@ -117,7 +116,7 @@ const Login = () => {
 
 
 
-          <Checkbox label={t("login_as_flat_owner_key")} {...asFlat.bind} />
+          <Checkbox data-aos="zoom-in" label={t("login_as_flat_owner_key")} {...asFlat.bind} />
           <Button
             disabled={
               isMutating ||
@@ -126,7 +125,8 @@ const Login = () => {
               (!asFlat.checked && !tower_id?.value?.id)
             }
 
-            className="w-full mt-6 btn--primary animate-shake  "
+            className="w-full mt-6 btn--primary"
+            data-aos="fade-up"
             type="submit"
           >
             {isMutating ? (

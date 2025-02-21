@@ -115,5 +115,60 @@
     "flat_owner_key": "Flat owner",
     "complete_profile_key": "Complete profile",
     "financial_overview_key": "Financial overview",
-    "expense_breakdown_key": "Expense breakdown"
+    "expense_breakdown_key": "Expense breakdown",
+
+    "____________": "________________",
+    "tower_management_made_simple_key": "Tower Management Made Simple",
+    "hero_description_key": "Manage towers, collect payments, and track financials – all in one place.",
+    "get_started_key": "Get Started",
+
+    "key_features_key": "Key Features",
+    "features_description_key": "Discover what makes Easier the best choice.",
+    "feature1_title_key": "User-Friendly Interface",
+    "feature1_description_key": "Intuitive navigation for seamless management.",
+    "feature2_title_key": "Real-Time Notifications",
+    "feature2_description_key": "Stay updated with instant alerts.",
+    "feature3_title_key": "Mobile Access",
+    "feature3_description_key": "Manage your towers from anywhere.",
+
+    "how_it_works_key": "How Easier Works",
+    "how_it_works_description_key": "Simplify your tower management process with these easy steps.",
+    "step1_title_key": "Register & Set Up",
+    "step1_description_key": "Sign up and add your towers & flats in minutes.",
+    "step2_title_key": "Manage Payments",
+    "step2_description_key": "Track payments from flat owners with ease.",
+    "step3_title_key": "Monitor Financials",
+    "step3_description_key": "Get a clear view of expenses, balances, and reports.",
+
+    "pricing_title_key": "Pricing Plans",
+    "pricing_description_key": "Choose a plan that fits your needs.",
+
+    "pricing_basic_key": "Basic",
+    "pricing_basic_price_key": "$1/month",
+    "pricing_basic_feature1_key": "Single Tower",
+    "pricing_basic_feature2_key": "Payment Tracking",
+    "pricing_basic_feature3_key": "Basic Reports",
+
+    "pricing_pro_key": "Pro",
+    "pricing_pro_price_key": "$3/month",
+    "pricing_pro_feature1_key": "Multiple Towers",
+    "pricing_pro_feature2_key": "Advanced Analytics",
+    "pricing_pro_feature3_key": "Priority Support",
+
+    "pricing_enterprise_key": "Enterprise",
+    "pricing_enterprise_price_key": "Custom",
+    "pricing_enterprise_feature1_key": "Unlimited Towers",
+    "pricing_enterprise_feature2_key": "API Access",
+    "pricing_enterprise_feature3_key": "24/7 Support",
+
+    "contact_us_key": "Get in Touch",
+    "contact_description_key": "Have questions? Contact us anytime.",
+    "contact_button_key": "Contact Us",
+
+    "quick_links_key": "Quick Links",
+    "aboutUs_key": "About Us",
+    "services_key": "Services",
+    "faq_key": "FAQ",
+    "contact_key": "Contact",
+    "follow_us_key": "Follow Us"
 }
