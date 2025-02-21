@@ -46,13 +46,13 @@ function LandingPageFooter() {
 					</div>
 
 					{/* Social Media Links */}
-					<div className="flex flex-col items-center md:items-start" data-aos="fade-zoom-in" data-aos-delay="400">
+					<div className="flex flex-col items-center md:items-start">
 						<h4 className="font-semibold text-lg mb-3">{t("follow_us_key")}</h4>
 						<div className="flex space-x-4">
 							{[
-								{ href: "https://facebook.com", icon: FaFacebookF, label: "Facebook" },
-								{ href: "https://twitter.com", icon: FaTwitter, label: "Twitter" },
-								{ href: "https://linkedin.com", icon: FaLinkedinIn, label: "LinkedIn" },
+								{ href: "https://www.facebook.com/abdoelmorsii", icon: FaFacebookF, label: "Facebook" },
+								{ href: "https://x.com/abdo_elmorsii", icon: FaTwitter, label: "X" },
+								{ href: "https://www.linkedin.com/in/abdelrahman-a-morsi-163263205", icon: FaLinkedinIn, label: "LinkedIn" },
 							].map(({ href, icon: Icon, label }, idx) => (
 								<Link
 									key={idx}

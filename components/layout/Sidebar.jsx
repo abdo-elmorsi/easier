@@ -30,7 +30,7 @@ const Sidebar = React.memo(() => {
   const flat = getRole(session, "flat")
   const router = useRouter();
   const [activeAdminSubMenu, setActiveAdminSubMenu] = useState(null);
-  const [fixedSideBar, setFixedSideBar] = useSavedState(true, "easier-2-fixed-side-barr-cache")
+  const [fixedSideBar, setFixedSideBar] = useSavedState(true, "easier-fixed-side-barr-cache")
 
 
   const Links = useMemo(() => [

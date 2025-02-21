@@ -51,7 +51,7 @@ class MyDocument extends Document {
 
           {/* Social Media Meta Tags */}
           <meta name="twitter:card" content="summary" />
-          <meta name="twitter:url" content="https://easier-2.vercel.app" />
+          <meta name="twitter:url" content="https://easier.vercel.app" />
           <meta name="twitter:title" content="Manage Towers and Flats with Ease - Easier Web App" />
           <meta name="twitter:description" content="Easier is a web app designed to help tower managers efficiently manage towers, flats, and financial records. Track payments, monitor flat owners, and streamline operations with ease." />
           <meta name="twitter:image" content="/icon-192x192.png" />
@@ -61,8 +61,8 @@ class MyDocument extends Document {
           <meta property="og:title" content="Manage Towers and Flats with Ease - Easier Web App" />
           <meta property="og:description" content="Easier is a web app designed to help tower managers efficiently manage towers, flats, and financial records. Track payments, monitor flat owners, and streamline operations with ease." />
           <meta property="og:site_name" content={app_title} />
-          <meta property="og:url" content="https://easier-2.vercel.app" />
-          <meta property="og:image" content="https://easier-2.vercel.app/apple-touch-icon.png" />
+          <meta property="og:url" content="https://easier.vercel.app" />
+          <meta property="og:image" content="https://easier.vercel.app/apple-touch-icon.png" />
 
           {/* Language Support */}
           <meta httpEquiv="content-language" content="ar, en" />
