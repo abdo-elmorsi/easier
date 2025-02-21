@@ -101,7 +101,7 @@ const generateWelcomeEmailTemplate = (userName) => {
             </div>
             <div class="footer">
                 <p>Best regards,<br>The Easier Team</p>
-                <p><a href="https://easier.com">Visit our website</a> for more information.</p>
+                <p><a href="https://eassier.com">Visit our website</a> for more information.</p>
             </div>
         </div>
     </body>
