@@ -88,7 +88,7 @@ const Index = () => {
                         }
                     ].map((plan, idx) => (
                         <div key={idx} className="p-6 text-center border rounded-lg shadow-sm hover:shadow-md transition-all bg-white dark:bg-gray-900 dark:border-gray-700" data-aos="zoom-in" data-aos-delay={idx * 200}>
-                            <h3 className="text-xl font-semibold">{plan.title}</h3>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{plan.title}</h3>
                             <p className="mt-2 text-2xl font-bold text-primary">{plan.price}</p>
                             <ul className="mt-4 text-gray-600 dark:text-gray-400">
                                 {plan.features.map((feature, i) => (

@@ -62,7 +62,7 @@ class MyDocument extends Document {
           <meta property="og:description" content="Easier is a web app designed to help tower managers efficiently manage towers, flats, and financial records. Track payments, monitor flat owners, and streamline operations with ease." />
           <meta property="og:site_name" content={app_title} />
           <meta property="og:url" content="https://eassier.vercel.app" />
-          <meta property="og:image" content="https://eassier.vercel.app/apple-touch-icon.png" />
+          <meta property="og:image" content="/apple-touch-icon.png" />
 
           {/* Language Support */}
           <meta httpEquiv="content-language" content="ar, en" />
