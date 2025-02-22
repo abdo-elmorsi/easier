@@ -26,7 +26,7 @@ function EstimatedExpenses() {
 	});
 
 	return (
-		<div className="animate-fade-up animate-delay-1000 mb-8 flex-1 p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
+		<div data-aos="fade-up" data-aos-delay="600" className="mb-8 flex-1 p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
 			<h2 className="text-xl font-bold col-span-2">{t("payed_amount_key")}</h2>
 
 			{isLoading ? (

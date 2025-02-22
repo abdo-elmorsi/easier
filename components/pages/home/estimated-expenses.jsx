@@ -38,7 +38,7 @@ function EstimatedExpenses() {
 	};
 
 	return (
-		<div className="animate-fade-up animate-delay-500 mb-8 flex-1 p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
+		<div data-aos="fade-up" data-aos-delay="300" className="mb-8 flex-1 p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800">
 			<h2 className=" text-xl font-bold col-span-2">{t("estimated_expenses_key")}</h2>
 
 
@@ -94,7 +94,7 @@ export default EstimatedExpenses;
 
 
 const SkeletonLoader = () => (
-	<div className="animate-pulse flex flex-col">
+	<div className="flex flex-col">
 
 		<div className="h-32 bg-gray-300 dark:bg-gray-600 rounded mb-2" />
 		<div className="h-32 bg-gray-300 dark:bg-gray-600 rounded mb-2" />

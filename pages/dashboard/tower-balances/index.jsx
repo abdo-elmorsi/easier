@@ -108,28 +108,29 @@ const Index = () => {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         {/* Opening Balance */}
-                                        <div className="animate-flip-up animate-delay-300 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                                            <p className="text-gray-500 dark:text-gray-300">{t('opening_balance_key')}</p>
+                                        <div data-aos="flip-up" data-aos-delay="300" className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                            <p className="text-gray-600 dark:text-gray-200">{t('opening_balance_key')}</p>
                                             <p className="text-xl font-semibold">{formatComma(towerBalances?.openingBalance || 0)}</p>
                                         </div>
 
                                         {/* Total Income */}
-                                        <div className="animate-flip-up animate-delay-[600ms] p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                                            <p className="text-gray-500 dark:text-gray-300">{t('total_income_key')}</p>
+                                        <div data-aos="flip-up" data-aos-delay="600" className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                            <p className="text-gray-600 dark:text-gray-200">{t('total_income_key')}</p>
                                             <p className="text-xl font-semibold text-green-500">{formatComma(towerBalances?.totalIncome || 0)}</p>
                                         </div>
 
                                         {/* Total Outcome */}
-                                        <div className="animate-flip-up animate-delay-[900ms] p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                                            <p className="text-gray-500 dark:text-gray-300">{t('total_outcome_key')}</p>
+                                        <div data-aos="flip-up" data-aos-delay="900" className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                            <p className="text-gray-600 dark:text-gray-200">{t('total_outcome_key')}</p>
                                             <p className="text-xl font-semibold text-red-500">{formatMinus(-towerBalances?.totalOutComeTotal || 0)}</p>
                                         </div>
 
                                         {/* Final Balance */}
-                                        <div className="animate-flip-up animate-delay-[1200ms] p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                                            <p className="text-gray-500 dark:text-gray-300">{t('balance_key')}</p>
+                                        <div data-aos="flip-up" data-aos-delay="1200" className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                            <p className="text-gray-600 dark:text-gray-200">{t('balance_key')}</p>
                                             <p className="text-xl font-semibold">{formatMinus(towerBalances?.balance || 0)}</p>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div className="h-64">

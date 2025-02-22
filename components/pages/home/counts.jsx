@@ -38,7 +38,7 @@ function Counts() {
 	return (
 		<div className="grid gap-4 mb-8 sm:grid-cols-2">
 			{tableData.map((card, idx) => (
-				<div key={`${card?.count}-${idx}`} className={` ${idx % 2 === 0 ? "animate-fade-left" : "animate-fade-right"} p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800`}>
+				<div data-aos="fade-up" data-aos-delay="100" key={`${card?.count}-${idx}`} className={`  p-4 bg-white rounded-lg shadow-sm dark:bg-slate-800`}>
 					<div className="font-bold text-slate-600 dark:text-slate-200">
 						{t(card.title)}
 					</div>

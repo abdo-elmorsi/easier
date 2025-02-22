@@ -3,38 +3,37 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true, // Added for Node.js support since Prisma may require it
+    node: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-    'plugin:jsx-a11y/recommended',
-    'next/core-web-vitals', // Next.js core web vitals checks
-    'prettier', // Prettier for consistent code formatting
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:jsx-a11y/recommended",
+    "next/core-web-vitals",
+    "plugin:prettier/recommended", // ✅ Ensures Prettier runs correctly
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ["dist", ".eslintrc.cjs"],
   parserOptions: {
     ecmaVersion: 2021,
-    sourceType: 'module',
+    sourceType: "module",
   },
   settings: {
     react: {
-      version: 'detect', // Automatically detect the React version
+      version: "detect",
     },
   },
-  plugins: ['react', 'jsx-a11y', 'prettier'], // Added Prettier as a plugin
+  plugins: ["react", "jsx-a11y", "prettier"],
   rules: {
-    'react/prop-types': 'off', // Turn off PropTypes if using TypeScript
-    'react/jsx-uses-react': 'off', // Disable as React 17+ and Next.js manage this automatically
-    'react/jsx-uses-vars': 'error', // Ensure variables used in JSX are defined
-    'react/display-name': 'off', // Avoid display name warnings
-    'react-hooks/exhaustive-deps': 'warn', // Warn about missing dependencies in hooks
-    'jsx-a11y/anchor-is-valid': 'off', // Disabled due to Next.js Link component conflicts
-    'no-console': 'warn', // Warn about console logs
-    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Ignore underscore-prefixed unused variables
-    'no-undef': 'error', // Error on undefined variables
-    'prettier/prettier': ['warn', { singleQuote: true, trailingComma: 'all' }], // Prettier rules for consistent formatting
+    "react/prop-types": "warn",
+    "react/jsx-uses-react": "off",
+    "react/jsx-uses-vars": "error",
+    "react/display-name": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-console": "warn",
+    "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    "no-undef": "error",
+    "prettier/prettier": ["warn", { singleQuote: true, trailingComma: "all" }],
   },
 };

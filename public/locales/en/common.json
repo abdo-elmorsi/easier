@@ -170,5 +170,6 @@
     "services_key": "Services",
     "faq_key": "FAQ",
     "contact_key": "Contact",
-    "follow_us_key": "Follow Us"
+    "follow_us_key": "Follow Us",
+    "dashboard_key": "Dashboard"
 }
