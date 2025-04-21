@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { appWithTranslation, useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-
-
 import { SessionProvider } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
